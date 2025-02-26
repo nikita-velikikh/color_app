@@ -1,3 +1,5 @@
+import 'package:color_aap/src/widgets/custom_app_bar.dart';
+import 'package:color_aap/src/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 
 class ColorScreen extends StatefulWidget {
@@ -19,53 +21,60 @@ class _ColorScreenState extends State<ColorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60.0),
+        child: CustomAppBar(
+          appBarText: "Color App",
+          textColor: Colors.pink,
+          backgroundColor: Colors.white,
+          isCenterTirtle: true,
+        ),
+      ),
       backgroundColor: _backgroundColor,
       body: Center(
         child: Column(
-          mainAxisAlignment:
-              MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _buildColorButton("Синий", Colors.blue),
-            _buildColorButton("Жёлтый", Colors.yellow),
-            _buildColorTextButton("Красный", Colors.red),
-            _buildColorTextButton("Серый", Colors.grey),
-            _buildColorTextButton("Фиолетовый", Colors.purple),
-            _buildColorTextButton("Розовый", Colors.pink),
+            CustomElevatedButton(
+              buttonTitle: "Синий",
+              buttonStyle: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+                minimumSize: const Size(200, 50),
+              ),
+              onPressed: () => _changeColor(Colors.blue),
+              padding: EdgeInsets.symmetric(vertical: 5.0),
+              textStyle: const TextStyle(
+                color: Colors.white,
+                fontSize: 25,
+              ),
+            ),
+            CustomElevatedButton(
+              buttonTitle: "Зеленый",
+              buttonStyle: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                minimumSize: const Size(200, 50),
+              ),
+              onPressed: () => _changeColor(Colors.green),
+              padding: EdgeInsets.symmetric(vertical: 5.0),
+              textStyle: const TextStyle(
+                color: Colors.white,
+                fontSize: 25,
+              ),
+            ),
+            CustomElevatedButton(
+              buttonTitle: "Красный",
+              buttonStyle: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+                minimumSize: const Size(200, 50),
+              ),
+              onPressed: () => _changeColor(Colors.red),
+              padding: EdgeInsets.symmetric(vertical: 5.0),
+              textStyle: const TextStyle(
+                color: Colors.white,
+                fontSize: 25,
+              ),
+            ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildColorButton(String text, Color color) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5.0),
-      child: ElevatedButton(
-        onPressed: () =>
-            _changeColor(color),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: color,
-          minimumSize: const Size(200, 50),
-        ),
-        child: Text(
-          text,
-          style: const TextStyle(
-              color: Colors.white, fontSize: 25),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildColorTextButton(String text, Color color) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5.0),
-      child: TextButton(
-        onPressed: () =>
-            _changeColor(color),
-        child: Text(
-          text,
-          style: const TextStyle(
-              color: Colors.white, fontSize: 32),
         ),
       ),
     );
