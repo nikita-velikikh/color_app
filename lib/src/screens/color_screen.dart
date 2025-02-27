@@ -12,26 +12,16 @@ class ColorScreen extends StatefulWidget {
 class _ColorScreenState extends State<ColorScreen> {
   Color _backgroundColor = Colors.white;
   static int counter = 0;
-  void _changeColor(Color color) {
-    setState(() {
-      _backgroundColor = color;
-    });
-  }
+  void _changeColor(Color color) => setState(() => _backgroundColor = color);
 
   void buttonAction(Color color) {
     _changeColor(color);
     onTapCounterIncrement();
   }
 
-  void onTapCounterReset() {
-    setState(() {
-      counter = 0;
-    });
-  }
+  void onTapCounterReset() => setState(() => counter = 0);
 
-  void onTapCounterIncrement() {
-    counter++;
-  }
+  void onTapCounterIncrement() => counter++;
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +31,7 @@ class _ColorScreenState extends State<ColorScreen> {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60.0),
           child: GestureDetector(
-            onTap: () {
-              onTapCounterReset();
-            },
+            onTap: () => onTapCounterReset(),
             child: CustomAppBar(
               appBarText: "Color App",
               textColor: Colors.pink,
@@ -63,9 +51,7 @@ class _ColorScreenState extends State<ColorScreen> {
                   backgroundColor: Colors.blue,
                   minimumSize: const Size(200, 50),
                 ),
-                onPressed: () {
-                  buttonAction(Colors.blue);
-                },
+                onPressed: () => buttonAction(Colors.blue),
                 padding: EdgeInsets.symmetric(vertical: 5.0),
                 textStyle: const TextStyle(
                   color: Colors.white,
@@ -78,9 +64,7 @@ class _ColorScreenState extends State<ColorScreen> {
                   backgroundColor: Colors.green,
                   minimumSize: const Size(200, 50),
                 ),
-                onPressed: () {
-                  buttonAction(Colors.green);
-                },
+                onPressed: () => buttonAction(Colors.green),
                 padding: EdgeInsets.symmetric(vertical: 5.0),
                 textStyle: const TextStyle(
                   color: Colors.white,
@@ -93,9 +77,7 @@ class _ColorScreenState extends State<ColorScreen> {
                   backgroundColor: Colors.red,
                   minimumSize: const Size(200, 50),
                 ),
-                onPressed: () {
-                  buttonAction(Colors.red);
-                },
+                onPressed: () => buttonAction(Colors.red),
                 padding: EdgeInsets.symmetric(vertical: 5.0),
                 textStyle: const TextStyle(
                   color: Colors.white,
