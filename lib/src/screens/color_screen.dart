@@ -11,70 +11,98 @@ class ColorScreen extends StatefulWidget {
 
 class _ColorScreenState extends State<ColorScreen> {
   Color _backgroundColor = Colors.white;
-
+  static int counter = 0;
   void _changeColor(Color color) {
     setState(() {
       _backgroundColor = color;
     });
   }
 
+  void onTapCounterReset() {
+    setState(() {
+      counter = 0;
+    });
+  }
+
+  void onTapCounterIncrement() {
+    counter++;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60.0),
-        child: CustomAppBar(
-          appBarText: "Color App",
-          textColor: Colors.pink,
-          backgroundColor: Colors.white,
-          isCenterTirtle: true,
+    return GestureDetector(
+      onTap: () {},
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(60.0),
+          child: GestureDetector(
+            onTap: () {
+              onTapCounterReset();
+            },
+            child: CustomAppBar(
+              appBarText: "Color App",
+              textColor: Colors.pink,
+              backgroundColor: Colors.white,
+              isCenterTirtle: true,
+            ),
+          ),
         ),
-      ),
-      backgroundColor: _backgroundColor,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CustomElevatedButton(
-              buttonTitle: "Синий",
-              buttonStyle: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                minimumSize: const Size(200, 50),
+        backgroundColor: _backgroundColor,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomElevatedButton(
+                buttonTitle: "Синий",
+                buttonStyle: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  minimumSize: const Size(200, 50),
+                ),
+                onPressed: () {
+                  _changeColor(Colors.blue);
+                  onTapCounterIncrement();
+                },
+                padding: EdgeInsets.symmetric(vertical: 5.0),
+                textStyle: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                ),
               ),
-              onPressed: () => _changeColor(Colors.blue),
-              padding: EdgeInsets.symmetric(vertical: 5.0),
-              textStyle: const TextStyle(
-                color: Colors.white,
-                fontSize: 25,
+              CustomElevatedButton(
+                buttonTitle: "Зеленый",
+                buttonStyle: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  minimumSize: const Size(200, 50),
+                ),
+                onPressed: () {
+                  _changeColor(Colors.green);
+                  onTapCounterIncrement();
+                },
+                padding: EdgeInsets.symmetric(vertical: 5.0),
+                textStyle: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                ),
               ),
-            ),
-            CustomElevatedButton(
-              buttonTitle: "Зеленый",
-              buttonStyle: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-                minimumSize: const Size(200, 50),
+              CustomElevatedButton(
+                buttonTitle: "Красный",
+                buttonStyle: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  minimumSize: const Size(200, 50),
+                ),
+                onPressed: () {
+                  _changeColor(Colors.red);
+                  onTapCounterIncrement();
+                },
+                padding: EdgeInsets.symmetric(vertical: 5.0),
+                textStyle: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                ),
               ),
-              onPressed: () => _changeColor(Colors.green),
-              padding: EdgeInsets.symmetric(vertical: 5.0),
-              textStyle: const TextStyle(
-                color: Colors.white,
-                fontSize: 25,
-              ),
-            ),
-            CustomElevatedButton(
-              buttonTitle: "Красный",
-              buttonStyle: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                minimumSize: const Size(200, 50),
-              ),
-              onPressed: () => _changeColor(Colors.red),
-              padding: EdgeInsets.symmetric(vertical: 5.0),
-              textStyle: const TextStyle(
-                color: Colors.white,
-                fontSize: 25,
-              ),
-            ),
-          ],
+              Text("Counter: $counter"),
+            ],
+          ),
         ),
       ),
     );
