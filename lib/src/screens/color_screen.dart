@@ -18,6 +18,11 @@ class _ColorScreenState extends State<ColorScreen> {
     });
   }
 
+  void buttonAction(Color color) {
+    _changeColor(color);
+    onTapCounterIncrement();
+  }
+
   void onTapCounterReset() {
     setState(() {
       counter = 0;
@@ -59,8 +64,7 @@ class _ColorScreenState extends State<ColorScreen> {
                   minimumSize: const Size(200, 50),
                 ),
                 onPressed: () {
-                  _changeColor(Colors.blue);
-                  onTapCounterIncrement();
+                  buttonAction(Colors.blue);
                 },
                 padding: EdgeInsets.symmetric(vertical: 5.0),
                 textStyle: const TextStyle(
@@ -75,8 +79,7 @@ class _ColorScreenState extends State<ColorScreen> {
                   minimumSize: const Size(200, 50),
                 ),
                 onPressed: () {
-                  _changeColor(Colors.green);
-                  onTapCounterIncrement();
+                  buttonAction(Colors.green);
                 },
                 padding: EdgeInsets.symmetric(vertical: 5.0),
                 textStyle: const TextStyle(
@@ -91,8 +94,7 @@ class _ColorScreenState extends State<ColorScreen> {
                   minimumSize: const Size(200, 50),
                 ),
                 onPressed: () {
-                  _changeColor(Colors.red);
-                  onTapCounterIncrement();
+                  buttonAction(Colors.red);
                 },
                 padding: EdgeInsets.symmetric(vertical: 5.0),
                 textStyle: const TextStyle(
