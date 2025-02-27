@@ -11,6 +11,11 @@ class ColorScreen extends StatefulWidget {
 
 class _ColorScreenState extends State<ColorScreen> {
   Color _backgroundColor = Colors.white;
+  static const TextStyle buttonTextStyle = TextStyle(
+    color: Colors.white,
+    fontSize: 25,
+  );
+  static const Size buttonSize = Size(200, 50);
   static int counter = 0;
   void _changeColor(Color color) => setState(() => _backgroundColor = color);
 
@@ -49,40 +54,31 @@ class _ColorScreenState extends State<ColorScreen> {
                 buttonTitle: "Синий",
                 buttonStyle: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
-                  minimumSize: const Size(200, 50),
+                  minimumSize: buttonSize,
                 ),
                 onPressed: () => buttonAction(Colors.blue),
                 padding: EdgeInsets.symmetric(vertical: 5.0),
-                textStyle: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
-                ),
+                textStyle: buttonTextStyle,
               ),
               CustomElevatedButton(
                 buttonTitle: "Зеленый",
                 buttonStyle: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
-                  minimumSize: const Size(200, 50),
+                  minimumSize: buttonSize,
                 ),
                 onPressed: () => buttonAction(Colors.green),
                 padding: EdgeInsets.symmetric(vertical: 5.0),
-                textStyle: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
-                ),
+                textStyle: buttonTextStyle,
               ),
               CustomElevatedButton(
                 buttonTitle: "Красный",
                 buttonStyle: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red,
-                  minimumSize: const Size(200, 50),
+                  minimumSize: buttonSize,
                 ),
                 onPressed: () => buttonAction(Colors.red),
                 padding: EdgeInsets.symmetric(vertical: 5.0),
-                textStyle: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
-                ),
+                textStyle: buttonTextStyle,
               ),
               Text("Counter: $counter"),
             ],
