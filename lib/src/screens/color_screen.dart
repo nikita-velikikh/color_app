@@ -1,6 +1,7 @@
 import 'package:color_aap/src/widgets/custom_app_bar.dart';
 import 'package:color_aap/src/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class ColorScreen extends StatefulWidget {
   const ColorScreen({super.key});
@@ -19,6 +20,16 @@ class _ColorScreenState extends State<ColorScreen> {
   static int counter = 0;
   void _changeColor(Color color) => setState(() => _backgroundColor = color);
 
+  Color _changeColorRandom() {
+    final Random random = Random();
+    return Color.fromARGB(
+      255,
+      random.nextInt(256),
+      random.nextInt(256),
+      random.nextInt(256),
+    );
+  }
+
   void buttonAction(Color color) {
     _changeColor(color);
     onTapCounterIncrement();
@@ -31,7 +42,7 @@ class _ColorScreenState extends State<ColorScreen> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () => _changeColor(_changeColorRandom()),
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60.0),
@@ -80,7 +91,7 @@ class _ColorScreenState extends State<ColorScreen> {
                 padding: EdgeInsets.symmetric(vertical: 5.0),
                 textStyle: buttonTextStyle,
               ),
-              Text("Counter: $counter"),
+              Text("Color changed $counter times"),
             ],
           ),
         ),
