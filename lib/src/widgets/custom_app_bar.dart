@@ -7,6 +7,7 @@ class CustomAppBar extends StatelessWidget {
     required this.textColor,
     required this.backgroundColor,
     required this.isCenterTirtle,
+    required Icon actions,
   });
 
   final String appBarText;

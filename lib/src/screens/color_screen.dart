@@ -11,7 +11,9 @@ class ColorScreen extends StatefulWidget {
 }
 
 class _ColorScreenState extends State<ColorScreen> {
-  Color _backgroundColor = Colors.white;
+  Color _backgroundColor = Colors.black;
+  Color _AppBarColor = Colors.white;
+  Color _TextColor = Colors.white;
   static const TextStyle buttonTextStyle = TextStyle(
     color: Colors.white,
     fontSize: 25,
@@ -19,6 +21,9 @@ class _ColorScreenState extends State<ColorScreen> {
   static const Size buttonSize = Size(200, 50);
   static int counter = 0;
   void _changeColor(Color color) => setState(() => _backgroundColor = color);
+  void _changeColorAppBar(Color color) => setState(() => _AppBarColor = color);
+  void _changeColorText(Color color) => setState(() => _TextColor = color);
+  void _changeColorCounter(Color color) => setState(() => _TextColor = color);
 
   Color _changeColorRandom() {
     final Random random = Random();
@@ -30,10 +35,7 @@ class _ColorScreenState extends State<ColorScreen> {
     );
   }
 
-  void buttonAction(Color color) {
-    _changeColor(color);
-    onTapCounterIncrement();
-  }
+  void buttonAction(Color color) => _changeColor(color);
 
   void onTapCounterReset() => setState(() => counter = 0);
 
@@ -42,57 +44,92 @@ class _ColorScreenState extends State<ColorScreen> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _changeColor(_changeColorRandom()),
+      onTap: () {
+        _changeColor(_changeColorRandom());
+        onTapCounterIncrement();
+        _changeColorText(_changeColorRandom());
+        _changeColorCounter(_changeColorRandom());
+      },
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60.0),
           child: GestureDetector(
-            onTap: () => onTapCounterReset(),
+            onTap: () {
+              onTapCounterReset();
+              _changeColorAppBar(_changeColorRandom());
+            },
             child: CustomAppBar(
               appBarText: "Color App",
-              textColor: Colors.pink,
-              backgroundColor: Colors.white,
+              textColor: Colors.black,
+              backgroundColor: _AppBarColor,
               isCenterTirtle: true,
+              actions: Icon(Icons.info),
             ),
           ),
         ),
-        backgroundColor: _backgroundColor,
+        // backgroundColor: _backgroundColor,
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CustomElevatedButton(
-                buttonTitle: "Синий",
-                buttonStyle: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  minimumSize: buttonSize,
-                ),
-                onPressed: () => buttonAction(Colors.blue),
-                padding: EdgeInsets.symmetric(vertical: 5.0),
-                textStyle: buttonTextStyle,
+          child: AnimatedContainer(
+            duration: Duration(seconds: 1),
+            color: _backgroundColor,
+            child: Padding(
+              padding: const EdgeInsets.all(32.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    child: AnimatedDefaultTextStyle(
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.easeInOut,
+                      style: TextStyle(color: _TextColor, fontSize: 18),
+                      child: Text(
+                        "The application has 3 buttons in the middle of the screen, an application bar and a background.",
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 40),
+                  CustomElevatedButton(
+                    buttonTitle: "Blue",
+                    buttonStyle: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      minimumSize: buttonSize,
+                    ),
+                    onPressed: () => buttonAction(Colors.blue),
+                    padding: EdgeInsets.symmetric(vertical: 5.0),
+                    textStyle: buttonTextStyle,
+                  ),
+                  CustomElevatedButton(
+                    buttonTitle: "Green",
+                    buttonStyle: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      minimumSize: buttonSize,
+                    ),
+                    onPressed: () => buttonAction(Colors.green),
+                    padding: EdgeInsets.symmetric(vertical: 5.0),
+                    textStyle: buttonTextStyle,
+                  ),
+                  CustomElevatedButton(
+                    buttonTitle: "Red",
+                    buttonStyle: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      minimumSize: buttonSize,
+                    ),
+                    onPressed: () => buttonAction(Colors.red),
+                    padding: EdgeInsets.symmetric(vertical: 5.0),
+                    textStyle: buttonTextStyle,
+                  ),
+                  SizedBox(height: 40),
+                  GestureDetector(
+                    onTap: () => _changeColorCounter(_changeColorRandom()),
+                    child: Text(
+                      "Color changed $counter times",
+                      style: TextStyle(color: _TextColor, fontSize: 18),
+                    ),
+                  ),
+                ],
               ),
-              CustomElevatedButton(
-                buttonTitle: "Зеленый",
-                buttonStyle: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  minimumSize: buttonSize,
-                ),
-                onPressed: () => buttonAction(Colors.green),
-                padding: EdgeInsets.symmetric(vertical: 5.0),
-                textStyle: buttonTextStyle,
-              ),
-              CustomElevatedButton(
-                buttonTitle: "Красный",
-                buttonStyle: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  minimumSize: buttonSize,
-                ),
-                onPressed: () => buttonAction(Colors.red),
-                padding: EdgeInsets.symmetric(vertical: 5.0),
-                textStyle: buttonTextStyle,
-              ),
-              Text("Color changed $counter times"),
-            ],
+            ),
           ),
         ),
       ),
