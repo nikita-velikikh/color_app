@@ -11,28 +11,29 @@ class ColorScreen extends StatefulWidget {
 }
 
 class _ColorScreenState extends State<ColorScreen> {
-  Color _backgroundColor = Colors.black;
-  Color _AppBarColor = Colors.white;
-  Color _TextColor = Colors.white;
+  Color backgroundColor = Colors.black;
+  Color appBarColor = Colors.white;
+  Color textColor = Colors.white;
   static const TextStyle buttonTextStyle = TextStyle(
     color: Colors.white,
     fontSize: 25,
   );
   static const Size buttonSize = Size(200, 50);
-  static int counter = 0;
-  void _changeColor(Color color) => setState(() => _backgroundColor = color);
-  void _changeColorAppBar(Color color) => setState(() => _AppBarColor = color);
-  void _changeColorText(Color color) => setState(() => _TextColor = color);
-  void _changeColorCounter(Color color) => setState(() => _TextColor = color);
+  int counter = 0;
+  void _changeColor(Color color) => setState(() => backgroundColor = color);
+  void _changeColorAppBar(Color color) => setState(() => appBarColor = color);
+  void _changeColorText(Color color) => setState(() => textColor = color);
+  void _changeColorCounter(Color color) => setState(() => textColor = color);
 
-  Color _changeColorRandom() {
+  Color _generateColorRandom() {
     final Random random = Random();
-    return Color.fromARGB(
+    final color = Color.fromARGB(
       255,
       random.nextInt(256),
       random.nextInt(256),
       random.nextInt(256),
     );
+    return color;
   }
 
   void buttonAction(Color color) => _changeColor(color);
@@ -45,10 +46,10 @@ class _ColorScreenState extends State<ColorScreen> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _changeColor(_changeColorRandom());
+        _changeColor(_generateColorRandom());
         onTapCounterIncrement();
-        _changeColorText(_changeColorRandom());
-        _changeColorCounter(_changeColorRandom());
+        _changeColorText(_generateColorRandom());
+        _changeColorCounter(_generateColorRandom());
       },
       child: Scaffold(
         appBar: PreferredSize(
@@ -56,12 +57,12 @@ class _ColorScreenState extends State<ColorScreen> {
           child: GestureDetector(
             onTap: () {
               onTapCounterReset();
-              _changeColorAppBar(_changeColorRandom());
+              _changeColorAppBar(_generateColorRandom());
             },
             child: CustomAppBar(
               appBarText: "Color App",
               textColor: Colors.black,
-              backgroundColor: _AppBarColor,
+              backgroundColor: appBarColor,
               isCenterTirtle: true,
               actions: Icon(Icons.info),
             ),
@@ -71,7 +72,7 @@ class _ColorScreenState extends State<ColorScreen> {
         body: Center(
           child: AnimatedContainer(
             duration: Duration(seconds: 1),
-            color: _backgroundColor,
+            color: backgroundColor,
             child: Padding(
               padding: const EdgeInsets.all(32.0),
               child: Column(
@@ -81,7 +82,7 @@ class _ColorScreenState extends State<ColorScreen> {
                     child: AnimatedDefaultTextStyle(
                       duration: Duration(milliseconds: 500),
                       curve: Curves.easeInOut,
-                      style: TextStyle(color: _TextColor, fontSize: 18),
+                      style: TextStyle(color: textColor, fontSize: 18),
                       child: Text(
                         "The application has 3 buttons in the middle of the screen, an application bar and a background.",
                         textAlign: TextAlign.center,
@@ -121,10 +122,10 @@ class _ColorScreenState extends State<ColorScreen> {
                   ),
                   SizedBox(height: 40),
                   GestureDetector(
-                    onTap: () => _changeColorCounter(_changeColorRandom()),
+                    onTap: () => _changeColorCounter(_generateColorRandom()),
                     child: Text(
                       "Color changed $counter times",
-                      style: TextStyle(color: _TextColor, fontSize: 18),
+                      style: TextStyle(color: textColor, fontSize: 18),
                     ),
                   ),
                 ],
