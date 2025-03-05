@@ -12,7 +12,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final image = AssetImage('assets/images/groupimage.png');
     return Scaffold(
-        // appBar: AppBar(),
+        appBar: AppBar(toolbarHeight: 51, backgroundColor: Colors.white),
         backgroundColor: Colors.white,
         body: Column(
           children: [
