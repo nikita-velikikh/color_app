@@ -53,7 +53,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/images/groupimage.png 
-    - assets/images/bob.jpg
+    
 
 
   # The following line ensures that the Material Icons font is
