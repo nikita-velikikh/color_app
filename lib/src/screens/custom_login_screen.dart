@@ -47,15 +47,15 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           SizedBox(height: 32),
-          const LoginField(),
+          const EmailField(),
         ],
       ),
     );
   }
 }
 
-class LoginField extends StatelessWidget {
-  const LoginField({super.key});
+class EmailField extends StatelessWidget {
+  const EmailField({super.key});
   @override
   Widget build(BuildContext context) {
     return Container(
