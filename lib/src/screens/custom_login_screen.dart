@@ -59,6 +59,10 @@ class _LoginScreenState extends State<LoginScreen> {
             const ButtonsAndLines(),
             SizedBox(height: 32),
             const IconButtons(),
+            SizedBox(
+              height: 15,
+            ),
+            const Registration(),
           ],
         ),
       ),
@@ -279,6 +283,31 @@ class IconButtons extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class Registration extends StatelessWidget {
+  const Registration({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            "Dont have an account ?",
+            style: TextStyle(color: Colors.grey),
+          ),
+          TextButton(
+              onPressed: () {},
+              child: Text(
+                "Sign up",
+                style: TextStyle(color: Colors.deepPurple, fontSize: 14),
+              ))
+        ],
+      ),
     );
   }
 }
