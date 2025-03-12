@@ -16,7 +16,6 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SingleChildScrollView(
         // Дает прокрутку, если элементов слишком много
         child: Column(
-          mainAxisSize: MainAxisSize.min, //Занимает только нужную высоту
           children: [
             SizedBox(height: 28),
             Center(
@@ -107,8 +106,15 @@ class EmailField extends StatelessWidget {
   }
 }
 
-class PasswordField extends StatelessWidget {
+class PasswordField extends StatefulWidget {
   const PasswordField({super.key});
+
+  @override
+  _PasswordFieldState createState() => _PasswordFieldState();
+}
+
+class _PasswordFieldState extends State<PasswordField> {
+  bool _isObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -126,6 +132,7 @@ class PasswordField extends StatelessWidget {
           SizedBox(
             height: 41,
             child: TextField(
+              obscureText: _isObscure,
               decoration: InputDecoration(
                 labelText: "Enter Your Password",
                 labelStyle: TextStyle(color: Colors.grey, fontSize: 14),
@@ -134,6 +141,20 @@ class PasswordField extends StatelessWidget {
                   borderSide: BorderSide(
                     color: Colors.grey,
                     width: 1.0,
+                  ),
+                ),
+                suffixIcon: Padding(
+                  padding: EdgeInsets.only(right: 11),
+                  child: IconButton(
+                    icon: Icon(
+                      _isObscure ? Icons.visibility : Icons.visibility_off,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _isObscure = !_isObscure;
+                      });
+                    },
                   ),
                 ),
               ),
