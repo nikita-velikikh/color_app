@@ -53,6 +53,8 @@ dev_dependencies:
 flutter:
   assets:
     - assets/images/groupimage.png 
+    - assets/images/gitlab.png
+    - assets/images/github.png
     
 
 
