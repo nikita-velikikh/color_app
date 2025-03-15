@@ -19,55 +19,63 @@ class _LoginScreenState extends State<LoginScreen> {
     final image = AssetImage('assets/images/groupimage.png');
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        // Дает прокрутку, если элементов слишком много
+      body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 28),
-            Center(
-              child: Image(image: image),
+            Expanded(
+              flex: 2,
+              child: Center(
+                child: Image(
+                    image: image,
+                    width: MediaQuery.of(context).size.width * 0.7),
+              ),
             ),
-            SizedBox(height: 15),
-            Padding(
-              padding: EdgeInsets.only(left: 29),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Hi, Wecome Back! 👋",
-                  style: TextStyle(
-                    fontSize: 25,
-                  ),
+            Expanded(
+              flex: 1,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Hi, Welcome Back! 👋",
+                      style: TextStyle(fontSize: 25),
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      "Hello again, you've been missed!",
+                      style: TextStyle(fontSize: 14, color: Colors.grey),
+                    ),
+                  ],
                 ),
               ),
             ),
-            SizedBox(height: 2),
-            Padding(
-              padding: EdgeInsets.only(left: 31),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Hello again, youve been missed!",
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey,
-                  ),
-                ),
+            Spacer(),
+            Expanded(
+              flex: 3,
+              child: Column(
+                children: [
+                  const EmailField(),
+                  SizedBox(height: 12),
+                  const PasswordField(),
+                  SizedBox(height: 7),
+                  const PasswordInfo(),
+                ],
               ),
             ),
-            SizedBox(height: 32),
-            EmailField(),
-            SizedBox(height: 12),
-            PasswordField(),
-            SizedBox(height: 7),
-            PasswordInfo(),
-            SizedBox(height: 110),
-            ButtonsAndLines(),
-            SizedBox(height: 32),
-            IconButtons(),
-            SizedBox(
-              height: 15,
+            Spacer(),
+            Expanded(
+              flex: 3,
+              child: Column(
+                children: [
+                  const ButtonsAndLines(),
+                  Spacer(),
+                  const IconButtons(),
+                  Spacer(),
+                  const Registration(),
+                ],
+              ),
             ),
-            Registration(),
           ],
         ),
       ),
