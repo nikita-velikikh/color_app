@@ -16,7 +16,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    final image = AssetImage('assets/images/groupimage.png');
+    final image = AssetImage('assets/images/logo.png');
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
