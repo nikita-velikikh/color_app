@@ -18,6 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final image = AssetImage('assets/images/logo.png');
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
@@ -55,11 +56,11 @@ class _LoginScreenState extends State<LoginScreen> {
               flex: 3,
               child: Column(
                 children: [
-                  const EmailField(),
+                  EmailField(),
                   SizedBox(height: 12),
-                  const PasswordField(),
+                  PasswordField(),
                   SizedBox(height: 7),
-                  const PasswordInfo(),
+                  PasswordInfo(),
                 ],
               ),
             ),
@@ -68,11 +69,11 @@ class _LoginScreenState extends State<LoginScreen> {
               flex: 3,
               child: Column(
                 children: [
-                  const ButtonsAndLines(),
+                  ButtonsAndLines(),
                   Spacer(),
-                  const IconButtons(),
+                  IconButtons(),
                   Spacer(),
-                  const Registration(),
+                  Registration(),
                 ],
               ),
             ),
