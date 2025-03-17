@@ -16,25 +16,25 @@ class LogoText extends StatefulWidget {
 class _LogoTextState extends State<LogoText> {
   @override
   Widget build(BuildContext context) {
-    final image = AssetImage(
-      'assets/images/logo.png',
-    );
+    final image = AssetImage('assets/images/logo.png');
+    bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
-            Expanded(
-              flex: 2,
-              child: Center(
-                child: Image(
-                  image: image,
-                  width: MediaQuery.of(context).size.width * 144,
-                  height: 139,
+            if (!isKeyboardOpen)
+              Expanded(
+                flex: 2,
+                child: Center(
+                  child: Image(
+                    image: image,
+                    width: MediaQuery.of(context).size.width * 144,
+                    height: 139,
+                  ),
                 ),
               ),
-            ),
             Expanded(
               flex: 1,
               child: Padding(
