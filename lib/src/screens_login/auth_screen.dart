@@ -3,27 +3,20 @@ import 'package:color_aap/src/screens_login/login_form.dart';
 
 import 'package:flutter/material.dart';
 
-class AuthScreen extends StatefulWidget {
+class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
 
   @override
-  State<AuthScreen> createState() => _AuthScreenState();
-}
-
-class _AuthScreenState extends State<AuthScreen> {
-  @override
   Widget build(BuildContext context) {
-    final isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
-
-    return Scaffold(
+    return const Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const LoginForm(),
-            if (!isKeyboardOpen) const Spacer(),
-            const LoginButtons(),
+            LoginForm(),
+            LoginButtons(),
           ],
         ),
       ),
