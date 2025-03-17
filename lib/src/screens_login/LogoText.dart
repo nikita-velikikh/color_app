@@ -6,17 +6,19 @@ import 'package:color_aap/src/screens_login/password_info.dart';
 import 'package:color_aap/src/screens_login/registration.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class LogoText extends StatefulWidget {
+  const LogoText({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<LogoText> createState() => _LogoTextState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LogoTextState extends State<LogoText> {
   @override
   Widget build(BuildContext context) {
-    final image = AssetImage('assets/images/logo.png');
+    final image = AssetImage(
+      'assets/images/logo.png',
+    );
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -27,8 +29,10 @@ class _LoginScreenState extends State<LoginScreen> {
               flex: 2,
               child: Center(
                 child: Image(
-                    image: image,
-                    width: MediaQuery.of(context).size.width * 0.7),
+                  image: image,
+                  width: MediaQuery.of(context).size.width * 144,
+                  height: 139,
+                ),
               ),
             ),
             Expanded(
