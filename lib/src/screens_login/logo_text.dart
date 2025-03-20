@@ -1,6 +1,5 @@
 import 'package:color_aap/src/screens_login/logo_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class LogoText extends StatelessWidget {
   const LogoText({super.key});
