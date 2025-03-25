@@ -9,17 +9,20 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        LogoText(),
-        SizedBox(height: 16),
-        EmailField(),
-        SizedBox(height: 12),
-        PasswordField(),
-        SizedBox(height: 7),
-        PasswordInfo(),
-      ],
+    return const Padding(
+      padding: EdgeInsets.only(left: 31),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          LogoText(),
+          SizedBox(height: 16),
+          EmailField(),
+          SizedBox(height: 12),
+          PasswordField(),
+          SizedBox(height: 7),
+          PasswordInfo(),
+        ],
+      ),
     );
   }
 }

@@ -1,0 +1,2 @@
+C:/Developer/color_aap/android/app/.cxx/RelWithDebInfo/125z5vs5/x86/CMakeFiles/edit_cache.dir
+C:/Developer/color_aap/android/app/.cxx/RelWithDebInfo/125z5vs5/x86/CMakeFiles/rebuild_cache.dir

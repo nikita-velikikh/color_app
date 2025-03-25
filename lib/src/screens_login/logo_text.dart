@@ -18,22 +18,19 @@ class LogoText extends StatelessWidget {
             child: const LogoImage(),
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Hi, Welcome Back! 👋",
-                style: TextStyle(fontSize: 25),
-              ),
-              SizedBox(height: 5),
-              Text(
-                "Hello again, you've been missed!",
-                style: TextStyle(fontSize: 14, color: Colors.grey),
-              ),
-            ],
-          ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Hi, Welcome Back! 👋",
+              style: TextStyle(fontSize: 25),
+            ),
+            SizedBox(height: 5),
+            Text(
+              "Hello again, you've been missed!",
+              style: TextStyle(fontSize: 14, color: Colors.grey),
+            ),
+          ],
         ),
       ],
     );
