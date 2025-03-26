@@ -1,0 +1,34 @@
+import 'package:color_aap/src/screens_login/custom_field.dart';
+import 'package:color_aap/src/screens_login/logo_text.dart';
+import 'package:color_aap/src/screens_login/password_info.dart';
+import 'package:flutter/material.dart';
+
+class LoginForm extends StatelessWidget {
+  const LoginForm({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.only(left: 31),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          LogoText(),
+          SizedBox(height: 16),
+          CustomField(
+            label: "Email",
+            hintText: "Enter Your Email",
+          ),
+          SizedBox(height: 12),
+          CustomField(
+            label: "Password",
+            hintText: "Enter Your Password",
+            isPassword: true,
+          ),
+          SizedBox(height: 7),
+          PasswordInfo(),
+        ],
+      ),
+    );
+  }
+}
