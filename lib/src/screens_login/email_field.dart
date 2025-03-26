@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 class EmailField extends StatelessWidget {
   const EmailField({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 27, right: 28),
+      padding: EdgeInsets.only(right: 28),
       alignment: Alignment.centerLeft,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -12,7 +12,7 @@ class LoginButtons extends StatelessWidget {
       children: [
         ButtonsAndLines(),
         SizedBox(height: 16),
-        IconButtons(),
+        LoginWithButtonRow(),
         SizedBox(height: 10),
         Registration(),
       ],
