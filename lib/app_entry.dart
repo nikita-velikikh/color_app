@@ -1,4 +1,4 @@
-import 'package:color_aap/src/screens/color_screen.dart';
+import 'package:color_aap/src/screens_login/auth_screen.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ColorScreen(),
+      home: AuthScreen(),
     );
   }
 }
