@@ -54,7 +54,9 @@ class _CustomFieldState extends State<CustomField> {
                         padding: const EdgeInsets.only(right: 11),
                         child: IconButton(
                           icon: Icon(
-                            _isObscure ? Icons.visibility : Icons.visibility_off,
+                            _isObscure
+                                ? Icons.visibility
+                                : Icons.visibility_off,
                             color: Colors.black,
                           ),
                           onPressed: () {

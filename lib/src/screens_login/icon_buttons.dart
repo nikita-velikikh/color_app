@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class LoginWithButtonRow extends StatelessWidget {
-  const LoginWithButtonRow({super.key});
+class IconButtons extends StatelessWidget {
+  const IconButtons({super.key});
 
   @override
   Widget build(BuildContext context) {
