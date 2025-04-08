@@ -5,6 +5,7 @@ class CustomField extends StatefulWidget {
   final String hintText;
   final bool isPassword;
   final TextEditingController? controller;
+  final void Function(String) onChanged;
 
   const CustomField({
     super.key,
@@ -12,6 +13,7 @@ class CustomField extends StatefulWidget {
     required this.hintText,
     this.isPassword = false,
     this.controller,
+    required this.onChanged,
   });
 
   @override
@@ -37,6 +39,9 @@ class _CustomFieldState extends State<CustomField> {
           SizedBox(
             height: 41,
             child: TextField(
+              onChanged: (email) {
+                widget.onChanged(email);
+              },
               controller: widget.controller,
               obscureText: widget.isPassword && _isObscure,
               decoration: InputDecoration(
