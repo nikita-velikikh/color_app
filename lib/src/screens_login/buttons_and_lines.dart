@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ButtonsAndLines extends StatelessWidget {
-  const ButtonsAndLines({super.key});
+  const ButtonsAndLines({super.key, required this.onTap});
+
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +16,9 @@ class ButtonsAndLines extends StatelessWidget {
             children: [
               Expanded(
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    onTap();
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.deepPurple,
                     padding: EdgeInsets.symmetric(vertical: 13),
