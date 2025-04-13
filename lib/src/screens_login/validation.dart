@@ -1,7 +1,7 @@
 String? validateEmail(String? input) {
-  final emailRegex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*@).+$';
+  final emailRegex = (r'^[^@]+@[^@]+\.[^@]+$');
   if (input == null || input.trim().isEmpty) {
-    return "Please enter You email";
+    return "Please enter Your email";
   }
   final isValidEmail = RegExp(emailRegex).hasMatch(input);
 
@@ -14,6 +14,9 @@ String? validateEmail(String? input) {
 String? validatePassword(String? input) {
   if (input == null || input.isEmpty) {
     return 'Please enter Your password';
+  }
+  if (input.length < 8) {
+    return 'Password must be at least 8 characters long';
   }
   const pattern =
       r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%^&*()_+{}\[\]:;<>,.?~\\/-]).+$';
