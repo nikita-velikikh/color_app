@@ -1,23 +1,24 @@
 String? validateEmail(String? input) {
-  final emailRegex = r'^(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*\d).+$';
-  if (input == null) {
-    return "Email is null";
+  final emailRegex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*@).+$';
+  if (input == null || input.trim().isEmpty) {
+    return "Please enter You email";
   }
   final isValidEmail = RegExp(emailRegex).hasMatch(input);
 
   if (!isValidEmail) {
-    return "Invalid Email";
+    return "Please enter valid email”";
   }
   return null;
 }
 
 String? validatePassword(String? input) {
   if (input == null || input.isEmpty) {
-    return 'Invalid Password';
+    return 'Please enter Your password';
   }
-  const pattern = r'^(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*\d).+$';
+  const pattern =
+      r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%^&*()_+{}\[\]:;<>,.?~\\/-]).+$';
   if (!RegExp(pattern).hasMatch(input)) {
-    return 'Invalid Password';
+    return 'Password should contain at least 1 capital letter,\n 1 sign and 1 number';
   }
   return null;
 }
