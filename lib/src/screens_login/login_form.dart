@@ -1,34 +1,41 @@
 import 'package:color_aap/src/screens_login/custom_field.dart';
 import 'package:color_aap/src/screens_login/logo_text.dart';
 import 'package:color_aap/src/screens_login/password_info.dart';
+import 'package:color_aap/src/screens_login/validation.dart';
+
 import 'package:flutter/material.dart';
 
 class LoginForm extends StatelessWidget {
-  const LoginForm({super.key});
+  const LoginForm({super.key, required this.formKey});
+  final GlobalKey formKey;
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.only(left: 31),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          LogoText(),
-          SizedBox(height: 16),
-          CustomField(
-            label: "Email",
-            hintText: "Enter Your Email",
+    return Padding(
+        padding: EdgeInsets.only(left: 31),
+        child: Form(
+          key: formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              LogoText(),
+              SizedBox(height: 16),
+              CustomField(
+                hintText: "Enter Your Email",
+                onChanged: (email) {},
+                validator: validateEmail,
+              ),
+              SizedBox(height: 12),
+              CustomField(
+                onChanged: (password) {},
+                hintText: "Enter Your Password",
+                isPassword: true,
+                validator: validatePassword,
+              ),
+              SizedBox(height: 7),
+              PasswordInfo(),
+            ],
           ),
-          SizedBox(height: 12),
-          CustomField(
-            label: "Password",
-            hintText: "Enter Your Password",
-            isPassword: true,
-          ),
-          SizedBox(height: 7),
-          PasswordInfo(),
-        ],
-      ),
-    );
+        ));
   }
 }
