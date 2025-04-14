@@ -1,19 +1,19 @@
 String? validateEmail(String? input) {
   final emailRegex = (r'^[^@]+@[^@]+\.[^@]+$');
   if (input == null || input.trim().isEmpty) {
-    return "Please enter Your email";
+    return "Please enter your email";
   }
   final isValidEmail = RegExp(emailRegex).hasMatch(input);
 
   if (!isValidEmail) {
-    return "Please enter valid email”";
+    return "Please enter valid email";
   }
   return null;
 }
 
 String? validatePassword(String? input) {
   if (input == null || input.isEmpty) {
-    return 'Please enter Your password';
+    return 'Please enter your password';
   }
   if (input.length < 8) {
     return 'Password must be at least 8 characters long';
