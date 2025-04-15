@@ -15,9 +15,7 @@ class _AuthScreenState extends State<AuthScreen> {
   var passwordText = "";
   final formKey = GlobalKey<FormState>();
   void onLoginPressed() {
-    if (formKey.currentState!.validate()) {
-      print("ok");
-    }
+    if (formKey.currentState!.validate()) {}
   }
 
   @override
