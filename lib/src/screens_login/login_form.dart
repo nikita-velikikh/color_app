@@ -24,7 +24,33 @@ class LoginForm extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              LogoText(),
+              if (isLogin)
+                LogoText(
+                  title: "Hi, Welcome Back! 👋",
+                  subTitle: "Hello again, you've been missed!",
+                )
+              else
+                LogoText(
+                  title: "SomeOtherString",
+                  subTitle: "SomeANotherOthEr String",
+                ),
+//
+              //
+              // isLogin
+              //     ? LogoText(
+              //         title: "Hi, Welcome Back! 👋",
+              //         subTitle: "Hello again, you've been missed!",
+              //       )
+              //     : LogoText(
+              //         title: "SomeOtherString",
+              //         subTitle: "SomeANotherOthEr String",
+              //       ),
+              //
+              // LogoText(
+              //   title: isLogin ? "" : "",
+              //   subTitle: isLogin ? "" : "",
+              // ),
+
               SizedBox(height: 16),
               CustomField(
                 hintText: "Enter Your Email",
