@@ -11,11 +11,21 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  var emailText = "";
-  var passwordText = "";
+  var isLogin = true;
   final formKey = GlobalKey<FormState>();
   void onLoginPressed() {
     if (formKey.currentState!.validate()) {}
+  }
+
+  void onChangeLogin() {
+    // if (isLogin) {
+    //   isLogin = false;
+    // } else {
+    //   isLogin = true;
+    // }
+    setState(() {
+      isLogin = !isLogin;
+    });
   }
 
   @override
@@ -29,8 +39,10 @@ class _AuthScreenState extends State<AuthScreen> {
           children: [
             LoginForm(
               formKey: formKey,
+              isLogin: isLogin,
             ),
             LoginButtons(
+              isLogin: isLogin,
               onLoginPressed: onLoginPressed,
             ),
           ],
