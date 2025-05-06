@@ -5,34 +5,51 @@ import 'package:color_aap/src/screens_login/custom_field.dart';
 import 'package:color_aap/src/screens_login/logo_text.dart';
 import 'package:color_aap/src/screens_login/password_info.dart';
 import 'package:color_aap/src/screens_login/validation.dart';
+import 'package:color_aap/src/screens_login/sing_up_password_field.dart';
 
-class LoginForm extends StatelessWidget {
-  const LoginForm({
+class LoginForm extends StatefulWidget {
+  LoginForm({
     super.key,
     required this.formKey,
     required this.isLogin,
   });
-  final GlobalKey formKey;
+
+  final GlobalKey<FormState> formKey;
   final bool isLogin;
+
+  @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController repeatPasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+    passwordController.dispose();
+    repeatPasswordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: EdgeInsets.only(left: 31),
         child: Form(
-          key: formKey,
+          key: widget.formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (isLogin)
+              if (widget.isLogin)
                 LogoText(
                   title: "Hi, Welcome Back! 👋",
                   subTitle: "Hello again, you've been missed!",
                 )
               else
                 LogoText(
-                  title: "SomeOtherString",
-                  subTitle: "SomeANotherOthEr String",
+                  title: "Create an account",
+                  subTitle: "Connect with your friends today!",
                 ),
 //
               //
@@ -59,11 +76,26 @@ class LoginForm extends StatelessWidget {
               ),
               SizedBox(height: 12),
               CustomField(
+                controller: passwordController,
                 onChanged: (password) {},
                 hintText: "Enter Your Password",
                 isPassword: true,
                 validator: validatePassword,
               ),
+              if (!widget.isLogin) ...[
+                const SizedBox(height: 12),
+                SingUpPasswordField(
+                    controller: repeatPasswordController,
+                    hintText: "Repeat Your Password",
+                    isPassword: true,
+                    onChanged: (password) {},
+                    validator: (value) {
+                      if (value == null || value.isEmpty) return "Please repeat the password";
+                      if (value != passwordController.text) return "Passwords do not match";
+                      return null;
+                    })
+              ],
+
               SizedBox(height: 7),
               PasswordInfo(),
             ],
