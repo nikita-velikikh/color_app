@@ -16,6 +16,8 @@ class _AuthScreenState extends State<AuthScreen> {
   void onLoginPressed() {
     if (formKey.currentState!.validate()) {}
   }
+  final passwordController = TextEditingController(); 
+  final confirmPasswordController = TextEditingController();
 
   void onChangeLogin() {
     // if (isLogin) {
@@ -43,7 +45,7 @@ class _AuthScreenState extends State<AuthScreen> {
             ),
             LoginButtons(
               isLogin: isLogin,
-              onLoginPressed: onLoginPressed,
+              onLoginPressed: onLoginPressed, onToggle: onChangeLogin,
             ),
           ],
         ),
