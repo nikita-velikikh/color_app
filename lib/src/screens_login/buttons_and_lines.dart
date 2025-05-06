@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 
 class ButtonsAndLines extends StatelessWidget {
-  const ButtonsAndLines({super.key, required this.onTap});
+  const ButtonsAndLines({
+    super.key,
+    required this.onTap,
+    
+    required this.textLoginButton,
+  });
 
   final VoidCallback onTap;
+
+  final String textLoginButton;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +34,7 @@ class ButtonsAndLines extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    "Login",
+                    textLoginButton,
                     style: TextStyle(fontSize: 17, color: Colors.white),
                   ),
                 ),
