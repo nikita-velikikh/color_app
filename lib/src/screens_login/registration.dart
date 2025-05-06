@@ -20,13 +20,13 @@ class Registration extends StatelessWidget {
         children: [
           Text(
             subText,
-            style: TextStyle(color: Colors.grey),
+            style: const TextStyle(color: Colors.grey),
           ),
           TextButton(
               onPressed: onToggle,
               child: Text(
                 textButtonText,
-                style: TextStyle(color: Colors.deepPurple, fontSize: 14),
+                style: const TextStyle(color: Colors.deepPurple, fontSize: 14),
               ))
         ],
       ),

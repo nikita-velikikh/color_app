@@ -57,7 +57,7 @@ class _CustomFieldState extends State<CustomField> {
                   width: 1.0,
                 ),
               ),
-              errorStyle: TextStyle(color: Colors.red),
+              errorStyle: const TextStyle(color: Colors.red),
               suffixIcon: widget.isPassword
                   ? Padding(
                       padding: const EdgeInsets.only(right: 11),

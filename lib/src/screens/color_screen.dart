@@ -53,7 +53,7 @@ class _ColorScreenState extends State<ColorScreen> {
       },
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(60.0),
+          preferredSize: const Size.fromHeight(60.0),
           child: GestureDetector(
             onTap: () {
               onTapCounterReset();
@@ -64,14 +64,14 @@ class _ColorScreenState extends State<ColorScreen> {
               textColor: Colors.black,
               backgroundColor: appBarColor,
               isCenterTirtle: true,
-              actions: Icon(Icons.info),
+              actions: const Icon(Icons.info),
             ),
           ),
         ),
         // backgroundColor: _backgroundColor,
         body: Center(
           child: AnimatedContainer(
-            duration: Duration(seconds: 1),
+            duration: const Duration(seconds: 1),
             color: backgroundColor,
             child: Padding(
               padding: const EdgeInsets.all(32.0),
@@ -80,16 +80,16 @@ class _ColorScreenState extends State<ColorScreen> {
                 children: [
                   GestureDetector(
                     child: AnimatedDefaultTextStyle(
-                      duration: Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: 500),
                       curve: Curves.easeInOut,
                       style: TextStyle(color: textColor, fontSize: 18),
-                      child: Text(
+                      child: const Text(
                         "The application has 3 buttons in the middle of the screen, an application bar and a background.",
                         textAlign: TextAlign.center,
                       ),
                     ),
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   CustomElevatedButton(
                     buttonTitle: "Blue",
                     buttonStyle: ElevatedButton.styleFrom(
@@ -97,7 +97,7 @@ class _ColorScreenState extends State<ColorScreen> {
                       minimumSize: buttonSize,
                     ),
                     onPressed: () => buttonAction(Colors.blue),
-                    padding: EdgeInsets.symmetric(vertical: 5.0),
+                    padding: const EdgeInsets.symmetric(vertical: 5.0),
                     textStyle: buttonTextStyle,
                   ),
                   CustomElevatedButton(
@@ -107,7 +107,7 @@ class _ColorScreenState extends State<ColorScreen> {
                       minimumSize: buttonSize,
                     ),
                     onPressed: () => buttonAction(Colors.green),
-                    padding: EdgeInsets.symmetric(vertical: 5.0),
+                    padding: const EdgeInsets.symmetric(vertical: 5.0),
                     textStyle: buttonTextStyle,
                   ),
                   CustomElevatedButton(
@@ -117,10 +117,10 @@ class _ColorScreenState extends State<ColorScreen> {
                       minimumSize: buttonSize,
                     ),
                     onPressed: () => buttonAction(Colors.red),
-                    padding: EdgeInsets.symmetric(vertical: 5.0),
+                    padding: const EdgeInsets.symmetric(vertical: 5.0),
                     textStyle: buttonTextStyle,
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   GestureDetector(
                     onTap: () => _changeColorCounter(_generateColorRandom()),
                     child: Text(

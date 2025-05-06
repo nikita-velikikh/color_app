@@ -12,7 +12,7 @@ class PasswordInfoState extends State<PasswordInfo> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(right: 20),
+      padding: const EdgeInsets.only(right: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -31,8 +31,8 @@ class PasswordInfoState extends State<PasswordInfo> {
                   borderRadius: BorderRadius.circular(4),
                 ),
               ),
-              SizedBox(width: 7),
-              Text(
+              const SizedBox(width: 7),
+              const Text(
                 "Remember Me",
                 style: TextStyle(fontSize: 14),
               ),
@@ -40,7 +40,7 @@ class PasswordInfoState extends State<PasswordInfo> {
           ),
           TextButton(
             onPressed: () {},
-            child: Text(
+            child: const Text(
               "Forgot Password",
               style: TextStyle(fontSize: 14, color: Colors.grey),
             ),

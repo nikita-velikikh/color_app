@@ -8,7 +8,7 @@ import 'package:color_aap/src/screens_login/validation.dart';
 import 'package:color_aap/src/screens_login/sing_up_password_field.dart';
 
 class LoginForm extends StatefulWidget {
-  LoginForm({
+  const LoginForm({
     super.key,
     required this.formKey,
     required this.isLogin,
@@ -35,19 +35,19 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.only(left: 31),
+        padding: const EdgeInsets.only(left: 31),
         child: Form(
           key: widget.formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (widget.isLogin)
-                LogoText(
+                const LogoText(
                   title: "Hi, Welcome Back! 👋",
                   subTitle: "Hello again, you've been missed!",
                 )
               else
-                LogoText(
+                const LogoText(
                   title: "Create an account",
                   subTitle: "Connect with your friends today!",
                 ),
@@ -68,13 +68,13 @@ class _LoginFormState extends State<LoginForm> {
               //   subTitle: isLogin ? "" : "",
               // ),
 
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               CustomField(
                 hintText: "Enter Your Email",
                 onChanged: (email) {},
                 validator: validateEmail,
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               CustomField(
                 controller: passwordController,
                 onChanged: (password) {},
@@ -96,8 +96,8 @@ class _LoginFormState extends State<LoginForm> {
                     })
               ],
 
-              SizedBox(height: 7),
-              PasswordInfo(),
+              const SizedBox(height: 7),
+              const PasswordInfo(),
             ],
           ),
         ));

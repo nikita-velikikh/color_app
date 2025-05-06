@@ -14,7 +14,7 @@ class ButtonsAndLines extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 27),
+      padding: const EdgeInsets.symmetric(horizontal: 27),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -27,21 +27,21 @@ class ButtonsAndLines extends StatelessWidget {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.deepPurple,
-                    padding: EdgeInsets.symmetric(vertical: 13),
+                    padding: const EdgeInsets.symmetric(vertical: 13),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),
                     ),
                   ),
                   child: Text(
                     textLoginButton,
-                    style: TextStyle(fontSize: 17, color: Colors.white),
+                    style: const TextStyle(fontSize: 17, color: Colors.white),
                   ),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 22),
-          Row(
+          const Row(
             children: [
               Expanded(child: Divider(color: Colors.black, thickness: 0.5)),
               Padding(

@@ -31,12 +31,12 @@ class LogoText extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TextStyle(fontSize: 25),
+              style: const TextStyle(fontSize: 25),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Text(
               subTitle,
-              style: TextStyle(fontSize: 14, color: Colors.grey),
+              style: const TextStyle(fontSize: 14, color: Colors.grey),
             ),
           ],
         ),

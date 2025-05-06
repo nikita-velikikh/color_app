@@ -1,5 +1,5 @@
 String? validateEmail(String? input) {
-  final emailRegex = (r'^[^@]+@[^@]+\.[^@]+$');
+  const emailRegex = (r'^[^@]+@[^@]+\.[^@]+$');
   if (input == null || input.trim().isEmpty) {
     return "Please enter your email";
   }
