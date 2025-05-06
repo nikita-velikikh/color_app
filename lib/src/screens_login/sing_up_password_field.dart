@@ -20,6 +20,7 @@ class SingUpPasswordField extends StatefulWidget {
   @override
   State<SingUpPasswordField> createState() => _SingUpPasswordField();
 }
+
 class _SingUpPasswordField extends State<SingUpPasswordField> {
   bool _isObscure = true;
 

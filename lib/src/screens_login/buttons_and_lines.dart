@@ -4,7 +4,6 @@ class ButtonsAndLines extends StatelessWidget {
   const ButtonsAndLines({
     super.key,
     required this.onTap,
-    
     required this.textLoginButton,
   });
 

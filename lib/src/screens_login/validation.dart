@@ -18,8 +18,7 @@ String? validatePassword(String? input) {
   if (input.length < 8) {
     return 'Password must be at least 8 characters long';
   }
-  const pattern =
-      r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%^&*()_+{}\[\]:;<>,.?~\\/-]).+$';
+  const pattern = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%^&*()_+{}\[\]:;<>,.?~\\/-]).+$';
   if (!RegExp(pattern).hasMatch(input)) {
     return 'Password should contain at least 1 capital letter,\n 1 sign and 1 number';
   }

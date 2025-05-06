@@ -30,7 +30,7 @@ class LogoText extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-            title,
+              title,
               style: TextStyle(fontSize: 25),
             ),
             SizedBox(height: 5),
