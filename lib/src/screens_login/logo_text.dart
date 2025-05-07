@@ -1,8 +1,16 @@
-import 'package:color_aap/src/screens_login/logo_image.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
+import 'package:color_aap/src/screens_login/logo_image.dart';
+
 class LogoText extends StatelessWidget {
-  const LogoText({super.key});
+  const LogoText({
+    super.key,
+    required this.title,
+    required this.subTitle,
+  });
+  final String title;
+  final String subTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +30,13 @@ class LogoText extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Hi, Welcome Back! 👋",
-              style: TextStyle(fontSize: 25),
+              title,
+              style: const TextStyle(fontSize: 25),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Text(
-              "Hello again, you've been missed!",
-              style: TextStyle(fontSize: 14, color: Colors.grey),
+              subTitle,
+              style: const TextStyle(fontSize: 14, color: Colors.grey),
             ),
           ],
         ),

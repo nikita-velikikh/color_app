@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomField extends StatefulWidget {
+class SingUpPasswordField extends StatefulWidget {
   final String? label;
   final String hintText;
   final bool isPassword;
@@ -8,7 +8,7 @@ class CustomField extends StatefulWidget {
   final void Function(String) onChanged;
   final String? Function(String?)? validator;
 
-  const CustomField({
+  const SingUpPasswordField({
     super.key,
     this.label,
     required this.hintText,
@@ -17,12 +17,11 @@ class CustomField extends StatefulWidget {
     required this.onChanged,
     this.validator,
   });
-
   @override
-  State<CustomField> createState() => _CustomFieldState();
+  State<SingUpPasswordField> createState() => _SingUpPasswordField();
 }
 
-class _CustomFieldState extends State<CustomField> {
+class _SingUpPasswordField extends State<SingUpPasswordField> {
   bool _isObscure = true;
 
   @override

@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
 class Registration extends StatelessWidget {
-  const Registration({super.key});
+  const Registration({
+    super.key,
+    required this.subText,
+    required this.textButtonText,
+    required this.onToggle,
+  });
+
+  final String subText;
+  final String textButtonText;
+  final VoidCallback onToggle;
 
   @override
   Widget build(BuildContext context) {
@@ -10,14 +19,14 @@ class Registration extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "Dont have an account ?",
-            style: TextStyle(color: Colors.grey),
+            subText,
+            style: const TextStyle(color: Colors.grey),
           ),
           TextButton(
-              onPressed: () {},
+              onPressed: onToggle,
               child: Text(
-                "Sign up",
-                style: TextStyle(color: Colors.deepPurple, fontSize: 14),
+                textButtonText,
+                style: const TextStyle(color: Colors.deepPurple, fontSize: 14),
               ))
         ],
       ),
