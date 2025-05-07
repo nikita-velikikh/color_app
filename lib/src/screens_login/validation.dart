@@ -24,3 +24,12 @@ String? validatePassword(String? input) {
   }
   return null;
 }
+String? validateRepeatPassword(String? value, String originalPassword) {
+  if (value == null || value.isEmpty) {
+    return "Please repeat the password";
+  }
+  if (value != originalPassword) {
+    return "Passwords do not match";
+  }
+  return null;
+}

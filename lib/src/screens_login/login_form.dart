@@ -85,15 +85,12 @@ class _LoginFormState extends State<LoginForm> {
               if (!widget.isLogin) ...[
                 const SizedBox(height: 12),
                 SingUpPasswordField(
-                    controller: repeatPasswordController,
-                    hintText: "Repeat Your Password",
-                    isPassword: true,
-                    onChanged: (password) {},
-                    validator: (value) {
-                      if (value == null || value.isEmpty) return "Please repeat the password";
-                      if (value != passwordController.text) return "Passwords do not match";
-                      return null;
-                    })
+                  controller: repeatPasswordController,
+                  hintText: "Repeat Your Password",
+                  isPassword: true,
+                  onChanged: (password) {},
+                  validator: (value) => validateRepeatPassword(value, passwordController.text),
+                )
               ],
 
               const SizedBox(height: 7),
