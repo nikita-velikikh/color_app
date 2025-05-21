@@ -1,3 +1,4 @@
+import 'package:color_aap/generated/l10n.dart';
 import 'package:color_aap/src/screens_login/buttons_and_lines.dart';
 import 'package:color_aap/src/screens_login/icon_buttons.dart';
 import 'package:color_aap/src/screens_login/registration.dart';
@@ -19,14 +20,14 @@ class LoginButtons extends StatelessWidget {
       children: [
         ButtonsAndLines(
           onTap: onLoginPressed,
-          textLoginButton: isLogin ? "Login" : "Sign up",
+          textLoginButton: isLogin ? S.of(context).login : S.of(context).signUp,
         ),
         const SizedBox(height: 16),
         const IconButtons(),
         const SizedBox(height: 10),
         Registration(
-          subText: isLogin ? "Dont have an account ?" : "Already have an account ?",
-          textButtonText: isLogin ? "Sign " : "Login",
+          subText: isLogin ? S.of(context).dontHaveAccount : S.of(context).alreadyHaveAccount,
+          textButtonText: isLogin ? S.of(context).signUp : S.of(context).login,
           onToggle: onToggle,
         ),
       ],
