@@ -1,3 +1,4 @@
+import 'package:color_aap/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class ButtonsAndLines extends StatelessWidget {
@@ -41,14 +42,14 @@ class ButtonsAndLines extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 22),
-          const Row(
+          Row(
             children: [
-              Expanded(child: Divider(color: Colors.black, thickness: 0.5)),
+              const Expanded(child: Divider(color: Colors.black, thickness: 0.5)),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 19),
-                child: Text("Or With", style: TextStyle(fontSize: 14)),
+                padding: const EdgeInsets.symmetric(horizontal: 19),
+                child: Text(S.of(context).orWith, style: const TextStyle(fontSize: 14)),
               ),
-              Expanded(child: Divider(color: Colors.black, thickness: 0.5)),
+              const Expanded(child: Divider(color: Colors.black, thickness: 0.5)),
             ],
           ),
         ],
