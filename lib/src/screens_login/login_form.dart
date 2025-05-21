@@ -6,6 +6,7 @@ import 'package:color_aap/src/screens_login/logo_text.dart';
 import 'package:color_aap/src/screens_login/password_info.dart';
 import 'package:color_aap/src/screens_login/validation.dart';
 import 'package:color_aap/src/screens_login/sing_up_password_field.dart';
+import 'package:color_aap/generated/l10n.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({
@@ -42,14 +43,14 @@ class _LoginFormState extends State<LoginForm> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (widget.isLogin)
-                const LogoText(
-                  title: "Hi, Welcome Back! 👋",
-                  subTitle: "Hello again, you've been missed!",
+                LogoText(
+                  title: S.of(context).welcomeBack,
+                  subTitle: S.of(context).welcomeSub,
                 )
               else
-                const LogoText(
-                  title: "Create an account",
-                  subTitle: "Connect with your friends today!",
+                LogoText(
+                  title: S.of(context).createAccount,
+                  subTitle: S.of(context).connectFriends,
                 ),
 //
               //
@@ -70,7 +71,7 @@ class _LoginFormState extends State<LoginForm> {
 
               const SizedBox(height: 16),
               CustomField(
-                hintText: "Enter Your Email",
+                hintText: S.of(context).enterYourEmail,
                 onChanged: (email) {},
                 validator: validateEmail,
               ),
@@ -78,7 +79,7 @@ class _LoginFormState extends State<LoginForm> {
               CustomField(
                 controller: passwordController,
                 onChanged: (password) {},
-                hintText: "Enter Your Password",
+                hintText: S.of(context).enterYourPassword,
                 isPassword: true,
                 validator: validatePassword,
               ),
@@ -86,7 +87,7 @@ class _LoginFormState extends State<LoginForm> {
                 const SizedBox(height: 12),
                 SingUpPasswordField(
                   controller: repeatPasswordController,
-                  hintText: "Repeat Your Password",
+                  hintText: S.of(context).repeatYourPassword,
                   isPassword: true,
                   onChanged: (password) {},
                   validator: (value) => validateRepeatPassword(value, passwordController.text),
