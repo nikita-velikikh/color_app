@@ -6,5 +6,12 @@
     "connectFriends": "Connect with your friends today!",
     "enterYourEmail": "Enter Your Email",
     "enterYourPassword": "Enter Your Password",
-    "repeatYourPassword": "Repeat Your Password"
+    "repeatYourPassword": "Repeat Your Password",
+    "rememberMe": "Remember Me",
+    "forgotPassword": "Forgot Password",
+    "login": "Login",
+    "signUp": "Sign Up",
+    "dontHaveAccount": "Dont have an account?",
+    "alreadyHaveAccount": "Already have an account",
+    "orWith": "or With"
 }
