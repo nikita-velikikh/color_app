@@ -64,7 +64,7 @@ class _CustomFieldState extends State<CustomField> {
                       child: IconButton(
                         icon: Icon(
                           _isObscure ? Icons.visibility : Icons.visibility_off,
-                          color: Colors.black,
+                          color: Colors.red,
                         ),
                         onPressed: () {
                           setState(() {

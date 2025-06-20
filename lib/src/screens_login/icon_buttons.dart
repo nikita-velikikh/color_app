@@ -13,10 +13,10 @@ class IconButtons extends StatelessWidget {
           icon: Image.asset('assets/images/github.png', width: 24),
           label: const Text(
             "GitHub",
-            style: TextStyle(color: Color.fromARGB(255, 101, 72, 72)),
+            style: TextStyle(color: Colors.white),
           ),
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.red,
             padding: const EdgeInsets.symmetric(horizontal: 43, vertical: 13),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5),
@@ -29,10 +29,10 @@ class IconButtons extends StatelessWidget {
           icon: Image.asset('assets/images/gitlab.png', width: 24),
           label: const Text(
             "GitLab",
-            style: TextStyle(color: Color.fromARGB(255, 96, 58, 58)),
+            style: TextStyle(color: Colors.white),
           ),
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.red,
             padding: const EdgeInsets.symmetric(horizontal: 43, vertical: 13),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5),

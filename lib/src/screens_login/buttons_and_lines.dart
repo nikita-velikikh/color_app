@@ -27,7 +27,7 @@ class ButtonsAndLines extends StatelessWidget {
                     onTap();
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepPurple,
+                    backgroundColor: Colors.red,
                     padding: const EdgeInsets.symmetric(vertical: 13),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),

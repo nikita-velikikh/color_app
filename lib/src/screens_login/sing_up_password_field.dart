@@ -63,7 +63,7 @@ class _SingUpPasswordField extends State<SingUpPasswordField> {
                       child: IconButton(
                         icon: Icon(
                           _isObscure ? Icons.visibility : Icons.visibility_off,
-                          color: Colors.black,
+                          color: Colors.red,
                         ),
                         onPressed: () {
                           setState(() {

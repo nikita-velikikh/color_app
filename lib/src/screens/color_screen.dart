@@ -93,7 +93,7 @@ class _ColorScreenState extends State<ColorScreen> {
                   CustomElevatedButton(
                     buttonTitle: "Blue",
                     buttonStyle: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
+                      backgroundColor: Colors.red,
                       minimumSize: buttonSize,
                     ),
                     onPressed: () => buttonAction(Colors.blue),
@@ -103,7 +103,7 @@ class _ColorScreenState extends State<ColorScreen> {
                   CustomElevatedButton(
                     buttonTitle: "Green",
                     buttonStyle: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
+                      backgroundColor: Colors.red,
                       minimumSize: buttonSize,
                     ),
                     onPressed: () => buttonAction(Colors.green),

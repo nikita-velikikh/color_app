@@ -26,7 +26,7 @@ class Registration extends StatelessWidget {
               onPressed: onToggle,
               child: Text(
                 textButtonText,
-                style: const TextStyle(color: Colors.deepPurple, fontSize: 14),
+                style: const TextStyle(color: Colors.red, fontSize: 14),
               ))
         ],
       ),
