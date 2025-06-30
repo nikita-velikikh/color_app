@@ -1,3 +1,4 @@
+import 'package:color_aap/local_storage_service.dart';
 import 'package:color_aap/src/widgets/custom_app_bar.dart';
 import 'package:color_aap/src/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +43,36 @@ class _ColorScreenState extends State<ColorScreen> {
 
   void onTapCounterIncrement() => counter++;
 
+  void saveColor() async {
+    final localStorageService = LocalStorageService();
+
+    await localStorageService.saveUserColors(
+      backgroundColor,
+      appBarColor,
+      textColor,
+    );
+
+    // ignore: unused_local_variable
+    final colors = await localStorageService.getUserColors();
+    // print(
+    //   '''
+    // saveUserColors:
+    // print('saveColor');
+
+    //         backgroundColor: $backgroundColor
+    //         appBarColor: $appBarColor
+    //         textColor: $textColor
+
+    //         getUserColors:
+    //         backgroundColor: ${colors?['backgroundColor']}
+    //         appBarColor: ${colors?['appBarColor']}
+    //         textColor: ${colors?['textColor']}
+    //         \n\n\n
+    //         ''',
+    // );
+    return;
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -50,6 +81,7 @@ class _ColorScreenState extends State<ColorScreen> {
         onTapCounterIncrement();
         _changeColorText(_generateColorRandom());
         _changeColorCounter(_generateColorRandom());
+        saveColor();
       },
       child: Scaffold(
         appBar: PreferredSize(

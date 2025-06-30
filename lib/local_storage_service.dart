@@ -22,7 +22,15 @@ class LocalStorageService {
     Color textColor,
   ) async {
     final colorsMap = await _getColorsMapByEmail(_testEmail);
-    if (colorsMap == null) return;
+    if (colorsMap == null) {
+      final newColorsMap = {
+        _backgroundColorKey: _colorToHex(backgroundColor),
+        _appBarColorKey: _colorToHex(appBarColor),
+        _textColorKey: _colorToHex(textColor),
+      };
+      await _saveUserColorsByEmail(_testEmail, newColorsMap);
+      return;
+    }
 
     colorsMap[_backgroundColorKey] = _colorToHex(backgroundColor);
     colorsMap[_appBarColorKey] = _colorToHex(appBarColor);
@@ -67,15 +75,17 @@ class LocalStorageService {
     final prefs = await SharedPreferences.getInstance();
     final usersString = prefs.getString(_usersKey);
     if (usersString == null) return {};
-    final usersMap = jsonDecode(usersString) as JsonMap;
+    final usersMap = JsonMap.from(jsonDecode(usersString));
     return usersMap;
   }
 
   /// 1. Get shared prefs
   /// 2. Save users map to shared prefs
-  Future<void> _saveUsersMap(JsonMap usersMap) async {
+  Future<bool> _saveUsersMap(JsonMap usersMap) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_usersKey, jsonEncode(usersMap));
+    final usersString = jsonEncode(usersMap);
+    final result = await prefs.setString(_usersKey, usersString);
+    return result;
   }
 
   /// 1. Get users map
@@ -84,7 +94,7 @@ class LocalStorageService {
   Future<JsonMap?> _getUserDataByEmail(String email) async {
     final usersMap = await _getUsersMap();
     if (!usersMap.containsKey(email)) return null;
-    return usersMap[email] as JsonMap?;
+    return JsonMap.from(usersMap[email]);
   }
 
   /// 1. Get users map
@@ -104,15 +114,24 @@ class LocalStorageService {
   Future<EncodedColorMap?> _getColorsMapByEmail(String email) async {
     final userData = await _getUserDataByEmail(email);
     if (userData == null || userData[_colorsKey] == null) return null;
-    return userData[_colorsKey] as EncodedColorMap;
+    final colorsMap = userData[_colorsKey];
+
+    return EncodedColorMap.from(colorsMap);
   }
 
   /// 1. Get user data by email
   /// 2. Check if user data contains colors
   /// 3. Save colors map to user data
+  /// 4. If user data doesn't exist, create new user data
   Future<void> _saveUserColorsByEmail(String email, EncodedColorMap colors) async {
     final userData = await _getUserDataByEmail(email);
-    if (userData == null || userData[_colorsKey] == null) return;
+
+    if (userData == null) {
+      // Create new user data if it doesn't exist
+      final newUserData = {_colorsKey: colors};
+      await _saveUserDataByEmail(email, newUserData);
+      return;
+    }
     userData[_colorsKey] = colors;
     await _saveUserDataByEmail(email, userData);
   }
