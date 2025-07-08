@@ -29,12 +29,12 @@ class UserColors with _$UserColors {
 
 @freezed
 class UserData with _$UserData {
-   
   const factory UserData({
     required UserColors colors,
   }) = _UserData;
 
-  factory UserData.fromJson(Map<String, dynamic> json) => _$UserDataFromJson(json);
+  factory UserData.fromJson(Map<String, dynamic> json) =>
+      _$UserDataFromJson(json);
 }
 
 @freezed
@@ -43,5 +43,6 @@ class UsersMap with _$UsersMap {
     required Map<String, UserData> users,
   }) = _UsersMap;
 
-  factory UsersMap.fromJson(Map<String, dynamic> json) => _$UsersMapFromJson(json);
+  factory UsersMap.fromJson(Map<String, dynamic> json) =>
+      _$UsersMapFromJson(json);
 }

@@ -23,3 +23,25 @@ Map<String, dynamic> _$$UserColorsImplToJson(_$UserColorsImpl instance) =>
       'appBarColor': const ColorConverter().toJson(instance.appBarColor),
       'textColor': const ColorConverter().toJson(instance.textColor),
     };
+
+_$UserDataImpl _$$UserDataImplFromJson(Map<String, dynamic> json) =>
+    _$UserDataImpl(
+      colors: UserColors.fromJson(json['colors'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$UserDataImplToJson(_$UserDataImpl instance) =>
+    <String, dynamic>{
+      'colors': instance.colors,
+    };
+
+_$UsersMapImpl _$$UsersMapImplFromJson(Map<String, dynamic> json) =>
+    _$UsersMapImpl(
+      users: (json['users'] as Map<String, dynamic>).map(
+        (k, e) => MapEntry(k, UserData.fromJson(e as Map<String, dynamic>)),
+      ),
+    );
+
+Map<String, dynamic> _$$UsersMapImplToJson(_$UsersMapImpl instance) =>
+    <String, dynamic>{
+      'users': instance.users,
+    };
