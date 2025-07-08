@@ -33,13 +33,19 @@ void main() {
         }
 
         // Test with different hex values
+        // ignore: deprecated_member_use
         expect(colorFromHex('#f44336').value, equals(Colors.red.value));
+        // ignore: deprecated_member_use
         expect(colorFromHex('#2196f3').value, equals(Colors.blue.value));
+        // ignore: deprecated_member_use
         expect(colorFromHex('#4caf50').value, equals(Colors.green.value));
+        // ignore: deprecated_member_use
         expect(colorFromHex('#000000').value, equals(Colors.black.value));
 
         // Test with 6-character hex (no alpha)
+        // ignore: deprecated_member_use
         expect(colorFromHex('#f44336').value, equals(Colors.red.value));
+        // ignore: deprecated_member_use
         expect(colorFromHex('#2196f3').value, equals(Colors.blue.value));
       });
 
@@ -198,8 +204,11 @@ void main() {
         final retrievedTextColor = colorFromHex(userData['colors']!['textColor']!);
 
         // Verify colors match
+        // ignore: deprecated_member_use
         expect(retrievedBackgroundColor.value, equals(backgroundColor.value));
+        // ignore: deprecated_member_use
         expect(retrievedAppBarColor.value, equals(appBarColor.value));
+        // ignore: deprecated_member_use
         expect(retrievedTextColor.value, equals(textColor.value));
       });
 
@@ -249,10 +258,13 @@ void main() {
         }
 
         // Valid hex
+        // ignore: deprecated_member_use
         expect(colorFromHex('#f44336').value, equals(Colors.red.value));
 
         // Malformed hex should return default color
+        // ignore: deprecated_member_use
         expect(colorFromHex('invalid').value, equals(Colors.black.value));
+        // ignore: deprecated_member_use
         expect(colorFromHex('#GG0000').value, equals(Colors.black.value));
       });
 
