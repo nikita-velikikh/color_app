@@ -1,4 +1,5 @@
 import 'package:color_aap/local_storage_service.dart';
+import 'package:color_aap/models.dart';
 import 'package:color_aap/src/widgets/custom_app_bar.dart';
 import 'package:color_aap/src/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
@@ -15,16 +16,43 @@ class _ColorScreenState extends State<ColorScreen> {
   Color backgroundColor = Colors.black;
   Color appBarColor = Colors.white;
   Color textColor = Colors.white;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAndShowUserColors();
+  }
+
+  void _loadAndShowUserColors() async {
+    final localStorageService = LocalStorageService();
+    final userColors = await localStorageService.getUserColors(testEmail);
+    setState(() {
+      backgroundColor = userColors.backgroundColor;
+      appBarColor = userColors.appBarColor;
+      textColor = userColors.textColor;
+    });
+  }
+
   static const TextStyle buttonTextStyle = TextStyle(
     color: Colors.white,
     fontSize: 25,
   );
   static const Size buttonSize = Size(200, 50);
   int counter = 0;
-  void _changeColor(Color color) => setState(() => backgroundColor = color);
-  void _changeColorAppBar(Color color) => setState(() => appBarColor = color);
-  void _changeColorText(Color color) => setState(() => textColor = color);
-  void _changeColorCounter(Color color) => setState(() => textColor = color);
+  void _changeColor(Color color) {
+    setState(() => backgroundColor = color);
+    saveColor();
+  }
+
+  void _changeColorAppBar(Color color) {
+    setState(() => appBarColor = color);
+    saveColor();
+  }
+
+  void _changeColorText(Color color) {
+    setState(() => textColor = color);
+    saveColor();
+  }
 
   Color _generateColorRandom() {
     final Random random = Random();
@@ -46,31 +74,16 @@ class _ColorScreenState extends State<ColorScreen> {
   void saveColor() async {
     final localStorageService = LocalStorageService();
 
-    await localStorageService.saveUserColors(
-      backgroundColor,
-      appBarColor,
-      textColor,
+    final userColors = UserColors(
+      backgroundColor: backgroundColor,
+      appBarColor: appBarColor,
+      textColor: textColor,
     );
 
-    // ignore: unused_local_variable
-    final colors = await localStorageService.getUserColors();
-    // print(
-    //   '''
-    // saveUserColors:
-    // print('saveColor');
-
-    //         backgroundColor: $backgroundColor
-    //         appBarColor: $appBarColor
-    //         textColor: $textColor
-
-    //         getUserColors:
-    //         backgroundColor: ${colors?['backgroundColor']}
-    //         appBarColor: ${colors?['appBarColor']}
-    //         textColor: ${colors?['textColor']}
-    //         \n\n\n
-    //         ''',
-    // );
-    return;
+    await localStorageService.saveUserColors(
+      testEmail,
+      userColors,
+    );
   }
 
   @override
@@ -80,8 +93,7 @@ class _ColorScreenState extends State<ColorScreen> {
         _changeColor(_generateColorRandom());
         onTapCounterIncrement();
         _changeColorText(_generateColorRandom());
-        _changeColorCounter(_generateColorRandom());
-        saveColor();
+        _changeColorText(_generateColorRandom());
       },
       child: Scaffold(
         appBar: PreferredSize(
@@ -154,7 +166,7 @@ class _ColorScreenState extends State<ColorScreen> {
                   ),
                   const SizedBox(height: 40),
                   GestureDetector(
-                    onTap: () => _changeColorCounter(_generateColorRandom()),
+                    onTap: () => _changeColorText(_generateColorRandom()),
                     child: Text(
                       "Color changed $counter times",
                       style: TextStyle(color: textColor, fontSize: 18),

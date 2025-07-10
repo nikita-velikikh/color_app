@@ -23,8 +23,7 @@ class UserColors with _$UserColors {
     @ColorConverter() required Color textColor,
   }) = _UserColors;
 
-  factory UserColors.fromJson(Map<String, Object?> json) =>
-      _$UserColorsFromJson(json);
+  factory UserColors.fromJson(Map<String, Object?> json) => _$UserColorsFromJson(json);
 }
 
 @freezed
@@ -33,8 +32,7 @@ class UserData with _$UserData {
     required UserColors colors,
   }) = _UserData;
 
-  factory UserData.fromJson(Map<String, dynamic> json) =>
-      _$UserDataFromJson(json);
+  factory UserData.fromJson(Map<String, dynamic> json) => _$UserDataFromJson(json);
 }
 
 @freezed
@@ -43,6 +41,5 @@ class UsersMap with _$UsersMap {
     required Map<String, UserData> users,
   }) = _UsersMap;
 
-  factory UsersMap.fromJson(Map<String, dynamic> json) =>
-      _$UsersMapFromJson(json);
+  factory UsersMap.fromJson(Map<String, dynamic> json) => _$UsersMapFromJson(json);
 }
