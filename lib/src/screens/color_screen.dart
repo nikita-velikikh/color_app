@@ -74,6 +74,24 @@ class _ColorScreenState extends State<ColorScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _loadUserColors();
+  }
+
+  Future<void> _loadUserColors() async {
+    final localStorageService = LocalStorageService();
+    final colors = await localStorageService.getUserColors();
+    if (colors != null) {
+      setState(() {
+        backgroundColor = colors['backgroundColor'] ?? Colors.black;
+        appBarColor = colors['appBarColor'] ?? Colors.white;
+        textColor = colors['textColor'] ?? Colors.white;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
@@ -158,6 +176,22 @@ class _ColorScreenState extends State<ColorScreen> {
                     child: Text(
                       "Color changed $counter times",
                       style: TextStyle(color: textColor, fontSize: 18),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      await LocalStorageService().logout();
+                      if (context.mounted) {
+                        Navigator.of(context).pushReplacementNamed('/login');
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      minimumSize: const Size(150, 40),
+                    ),
+                    child: const Text(
+                      'EXIT',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),
                 ],

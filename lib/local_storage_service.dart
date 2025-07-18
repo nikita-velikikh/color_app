@@ -13,33 +13,34 @@ class LocalStorageService {
   static const String _appBarColorKey = 'appBarColor';
   static const String _textColorKey = 'textColor';
 
-  // TODO: remove this after testing
-  static const String _testEmail = 'test@gmail.com';
-
   Future<void> saveUserColors(
     Color backgroundColor,
     Color appBarColor,
     Color textColor,
   ) async {
-    final colorsMap = await _getColorsMapByEmail(_testEmail);
+    final currentUser = await getCurrentUser();
+    
+
+    final colorsMap = await _getColorsMapByEmail(currentUser!);
     if (colorsMap == null) {
       final newColorsMap = {
         _backgroundColorKey: _colorToHex(backgroundColor),
         _appBarColorKey: _colorToHex(appBarColor),
         _textColorKey: _colorToHex(textColor),
       };
-      await _saveUserColorsByEmail(_testEmail, newColorsMap);
+      await _saveUserColorsByEmail(currentUser, newColorsMap);
       return;
     }
 
     colorsMap[_backgroundColorKey] = _colorToHex(backgroundColor);
     colorsMap[_appBarColorKey] = _colorToHex(appBarColor);
     colorsMap[_textColorKey] = _colorToHex(textColor);
-    await _saveUserColorsByEmail(_testEmail, colorsMap);
+    await _saveUserColorsByEmail(currentUser, colorsMap);
   }
 
   Future<ColorMap?> getUserColors() async {
-    final colorsMap = await _getColorsMapByEmail(_testEmail);
+    final currentUser = await getCurrentUser();
+    final colorsMap = await _getColorsMapByEmail(currentUser!);
     if (colorsMap == null) return null;
 
     final backgroundColorString = colorsMap[_backgroundColorKey];
@@ -123,7 +124,8 @@ class LocalStorageService {
   /// 2. Check if user data contains colors
   /// 3. Save colors map to user data
   /// 4. If user data doesn't exist, create new user data
-  Future<void> _saveUserColorsByEmail(String email, EncodedColorMap colors) async {
+  Future<void> _saveUserColorsByEmail(
+      String email, EncodedColorMap colors) async {
     final userData = await _getUserDataByEmail(email);
 
     if (userData == null) {
@@ -134,5 +136,44 @@ class LocalStorageService {
     }
     userData[_colorsKey] = colors;
     await _saveUserDataByEmail(email, userData);
+  }
+
+  Future<void> registerUser(
+    String email,
+    String password, {
+    String backgroundColor = '#ffffff',
+    String appBarColor = '#000000',
+    String textColor = '#333333',
+  }) async {
+    final userData = {
+      'password': password,
+      'colors': {
+        'backgroundColor': backgroundColor,
+        'appBarColor': appBarColor,
+        'textColor': textColor,
+      }
+    };
+    await _saveUserDataByEmail(email, userData);
+  }
+
+  Future<Map<String, dynamic>?> getUserDataByEmail(String email) {
+    return _getUserDataByEmail(email);
+  }
+
+  static const String _currentUserKey = 'current_user';
+
+  Future<void> setCurrentUser(String email) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_currentUserKey, email);
+  }
+
+  Future<String?> getCurrentUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_currentUserKey);
+  }
+
+  Future<void> logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('current_user');
   }
 }

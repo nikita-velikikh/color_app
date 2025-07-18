@@ -13,23 +13,24 @@ class LoginForm extends StatefulWidget {
     super.key,
     required this.formKey,
     required this.isLogin,
+    required this.emailController,
+    required this.passwordController,
+    required this.repeatPasswordController,
   });
 
   final GlobalKey<FormState> formKey;
   final bool isLogin;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+  final TextEditingController repeatPasswordController;
 
   @override
   State<LoginForm> createState() => _LoginFormState();
 }
 
 class _LoginFormState extends State<LoginForm> {
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController repeatPasswordController = TextEditingController();
-
   @override
   void dispose() {
-    passwordController.dispose();
-    repeatPasswordController.dispose();
     super.dispose();
   }
 
@@ -71,13 +72,14 @@ class _LoginFormState extends State<LoginForm> {
 
               const SizedBox(height: 16),
               CustomField(
+                controller: widget.emailController,
                 hintText: S.of(context).enterYourEmail,
                 onChanged: (email) {},
                 validator: validateEmail,
               ),
               const SizedBox(height: 12),
               CustomField(
-                controller: passwordController,
+                controller: widget.passwordController,
                 onChanged: (password) {},
                 hintText: S.of(context).enterYourPassword,
                 isPassword: true,
@@ -86,11 +88,12 @@ class _LoginFormState extends State<LoginForm> {
               if (!widget.isLogin) ...[
                 const SizedBox(height: 12),
                 SingUpPasswordField(
-                  controller: repeatPasswordController,
+                  controller: widget.repeatPasswordController,
                   hintText: S.of(context).repeatYourPassword,
                   isPassword: true,
                   onChanged: (password) {},
-                  validator: (value) => validateRepeatPassword(value, passwordController.text),
+                  validator: (value) => validateRepeatPassword(
+                      value, widget.passwordController.text),
                 )
               ],
 

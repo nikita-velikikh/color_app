@@ -1,0 +1,18 @@
+{
+    "nikita.velikih@gmail.com": {
+        "password": "Qwerty_12",
+        "colors": {
+            "backgroundColor": "#aab68d",
+            "appBarColor": "#891d49",
+            "textColor": "#dc94f5"
+        }
+    },
+    "nikita.velikih+1@gmail.com": {
+        "password": "Qwerty_12",
+        "colors": {
+            "backgroundColor": "#7165a8",
+            "appBarColor": "#000000",
+            "textColor": "#e3852d"
+        }
+    }
+}
