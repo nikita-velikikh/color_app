@@ -1,10 +1,35 @@
 import 'package:color_aap/generated/l10n.dart';
+import 'package:color_aap/local_storage_service.dart';
+import 'package:color_aap/src/screens/color_screen.dart';
 import 'package:color_aap/src/screens_login/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-class AppEntry extends StatelessWidget {
+class AppEntry extends StatefulWidget {
   const AppEntry({super.key});
+
+  @override
+  State<AppEntry> createState() => _AppEntryState();
+}
+
+class _AppEntryState extends State<AppEntry> {
+  String? lastEmail;
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkLastEmail();
+  }
+
+  Future<void> _checkLastEmail() async {
+    final service = LocalStorageService();
+    final email = await service.getLastEmail();
+    setState(() {
+      lastEmail = email;
+      isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +42,13 @@ class AppEntry extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      home: const AuthScreen(),
+      home: isLoading
+          ? const Scaffold(
+              body: Center(child: CircularProgressIndicator()),
+            )
+          : (lastEmail != null
+              ? ColorScreen(email: lastEmail!)
+              : const AuthScreen()),
     );
   }
 }

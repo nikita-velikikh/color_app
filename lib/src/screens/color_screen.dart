@@ -4,9 +4,11 @@ import 'package:color_aap/src/widgets/custom_app_bar.dart';
 import 'package:color_aap/src/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:color_aap/src/screens_login/auth_screen.dart';
 
 class ColorScreen extends StatefulWidget {
-  const ColorScreen({super.key});
+  final String email;
+  const ColorScreen({super.key, required this.email});
 
   @override
   State<ColorScreen> createState() => _ColorScreenState();
@@ -25,7 +27,7 @@ class _ColorScreenState extends State<ColorScreen> {
 
   void _loadAndShowUserColors() async {
     final localStorageService = LocalStorageService();
-    final userColors = await localStorageService.getUserColors(testEmail);
+    final userColors = await localStorageService.getUserColors(widget.email);
     setState(() {
       backgroundColor = userColors.backgroundColor;
       appBarColor = userColors.appBarColor;
@@ -81,8 +83,18 @@ class _ColorScreenState extends State<ColorScreen> {
     );
 
     await localStorageService.saveUserColors(
-      testEmail,
+      widget.email,
       userColors,
+    );
+  }
+
+  void _logout() async {
+    final service = LocalStorageService();
+    await service.saveLastEmail(""); 
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const AuthScreen()),
     );
   }
 
@@ -170,6 +182,17 @@ class _ColorScreenState extends State<ColorScreen> {
                     child: Text(
                       "Color changed $counter times",
                       style: TextStyle(color: textColor, fontSize: 18),
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  ElevatedButton(
+                    onPressed: _logout,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      foregroundColor: Colors.white,
+                    ),
+                    child: const Text(
+                      'EXIT',
                     ),
                   ),
                 ],

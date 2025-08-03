@@ -30,6 +30,8 @@ class UserColors with _$UserColors {
 class UserData with _$UserData {
   const factory UserData({
     required UserColors colors,
+    required String email,
+    required String password,
   }) = _UserData;
 
   factory UserData.fromJson(Map<String, dynamic> json) => _$UserDataFromJson(json);

@@ -27,11 +27,15 @@ Map<String, dynamic> _$$UserColorsImplToJson(_$UserColorsImpl instance) =>
 _$UserDataImpl _$$UserDataImplFromJson(Map<String, dynamic> json) =>
     _$UserDataImpl(
       colors: UserColors.fromJson(json['colors'] as Map<String, dynamic>),
+      email: json['email'] as String,
+      password: json['password'] as String,
     );
 
 Map<String, dynamic> _$$UserDataImplToJson(_$UserDataImpl instance) =>
     <String, dynamic>{
       'colors': instance.colors,
+      'email': instance.email,
+      'password': instance.password,
     };
 
 _$UsersMapImpl _$$UsersMapImplFromJson(Map<String, dynamic> json) =>
