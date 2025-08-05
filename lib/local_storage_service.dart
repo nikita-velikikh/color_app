@@ -17,7 +17,7 @@ class LocalStorageService {
     return prefs.getString(_lastEmailKey);
   }
 
-  Future<bool> loginUser(String email) async {
+  Future<bool> checkUserExists(String email) async {
     final usersMap = await getUsersMap();
     return usersMap.users.containsKey(email);
   }

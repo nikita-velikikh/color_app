@@ -1,4 +1,3 @@
-
 import 'package:color_aap/local_storage_service.dart';
 import 'package:color_aap/src/screens/color_screen.dart';
 import 'package:color_aap/src/screens_login/login_buttons.dart';
@@ -18,49 +17,55 @@ class _AuthScreenState extends State<AuthScreen> {
   String password = "";
   var isLogin = true;
   final formKey = GlobalKey<FormState>();
+  final service = LocalStorageService();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+
   void onLoginPressed() async {
     if (formKey.currentState!.validate()) {
-      final service = LocalStorageService();
       if (isLogin) {
-        final exists = await service.loginUser(email);
-        if (exists) {
-          await service.saveLastEmail(email);
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => ColorScreen(email: email)),
-          );
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("User not found")),
-          );
-        }
+        _handleLogin();
       } else {
-        final success = await service.createUser(email, password);
-        if (success) {
-          await service.saveLastEmail(email);
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => ColorScreen(email: email)),
-          );
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-                content: Text("User with this email already exists")),
-          );
-        }
+        _handleCreateUser();
       }
     }
   }
 
-  final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
+  void _handleLogin() async {
+    final exists = await service.checkUserExists(email);
+    if (exists) {
+      saveLastEmailAndNavigate(email);
+    } else {
+      handleError("User not found");
+    }
+  }
+
+  void _handleCreateUser() async {
+    final success = await service.createUser(email, password);
+    if (success) {
+      saveLastEmailAndNavigate(email);
+    } else {
+      handleError("User with this email already exists");
+    }
+  }
+
+  void saveLastEmailAndNavigate(String email) async {
+    await service.saveLastEmail(email);
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => ColorScreen(email: email)),
+    );
+  }
+
+  void handleError(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
+  }
 
   void onChangeLogin() {
-    // if (isLogin) {
-    //   isLogin = false;
-    // } else {
-    //   isLogin = true;
-    // }
     setState(() {
       isLogin = !isLogin;
     });
