@@ -3,21 +3,42 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'models.dart';
 
-// TODO: delete after connecting account creation
-const testEmail = 'test@gmail.com';
-
 class LocalStorageService {
   static const String _usersKey = 'users';
+  static const String _lastEmailKey = "last_email";
 
-  Future<bool> createUser(String email) async {
+  Future<void> saveLastEmail(String email) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_lastEmailKey, email);
+  }
+
+  Future<void> deleteLastEmail() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_lastEmailKey);
+  }
+
+  Future<String?> getLastEmail() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_lastEmailKey);
+  }
+
+  Future<bool> checkUserExists(String email) async {
+    final usersMap = await getUsersMap();
+    return usersMap.users.containsKey(email);
+  }
+
+  Future<bool> createUser(String email, String password) async {
+    final usersMap = await getUsersMap();
+    if (usersMap.users.containsKey(email)) {
+      return false;
+    }
     const defaultColors = UserColors(
       backgroundColor: Colors.white,
       appBarColor: Colors.white,
       textColor: Colors.black,
     );
-    const userData = UserData(colors: defaultColors);
+    final userData = UserData(password: password, email: email, colors: defaultColors);
 
-    final usersMap = await getUsersMap();
     final updatedUsersMap = usersMap.copyWith(
       users: Map.from(usersMap.users)..[email] = userData,
     );

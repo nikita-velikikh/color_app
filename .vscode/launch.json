@@ -4,11 +4,21 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
         {
             "name": "color_aap",
             "request": "launch",
             "type": "dart"
+        },
+        {
+            "name": "Flutter Web (Chrome, port 8080)",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "chrome",
+            "args": [
+                "-d",
+                "chrome",
+                "--web-port=8080"
+            ]
         },
         {
             "name": "color_aap (profile mode)",

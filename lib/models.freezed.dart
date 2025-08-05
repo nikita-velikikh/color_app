@@ -227,6 +227,8 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserData {
   UserColors get colors => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
+  String get password => throw _privateConstructorUsedError;
 
   /// Serializes this UserData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -243,7 +245,7 @@ abstract class $UserDataCopyWith<$Res> {
   factory $UserDataCopyWith(UserData value, $Res Function(UserData) then) =
       _$UserDataCopyWithImpl<$Res, UserData>;
   @useResult
-  $Res call({UserColors colors});
+  $Res call({UserColors colors, String email, String password});
 
   $UserColorsCopyWith<$Res> get colors;
 }
@@ -264,12 +266,22 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
   @override
   $Res call({
     Object? colors = null,
+    Object? email = null,
+    Object? password = null,
   }) {
     return _then(_value.copyWith(
       colors: null == colors
           ? _value.colors
           : colors // ignore: cast_nullable_to_non_nullable
               as UserColors,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -292,7 +304,7 @@ abstract class _$$UserDataImplCopyWith<$Res>
       __$$UserDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({UserColors colors});
+  $Res call({UserColors colors, String email, String password});
 
   @override
   $UserColorsCopyWith<$Res> get colors;
@@ -312,12 +324,22 @@ class __$$UserDataImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? colors = null,
+    Object? email = null,
+    Object? password = null,
   }) {
     return _then(_$UserDataImpl(
       colors: null == colors
           ? _value.colors
           : colors // ignore: cast_nullable_to_non_nullable
               as UserColors,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -325,17 +347,22 @@ class __$$UserDataImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$UserDataImpl implements _UserData {
-  const _$UserDataImpl({required this.colors});
+  const _$UserDataImpl(
+      {required this.colors, required this.email, required this.password});
 
   factory _$UserDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserDataImplFromJson(json);
 
   @override
   final UserColors colors;
+  @override
+  final String email;
+  @override
+  final String password;
 
   @override
   String toString() {
-    return 'UserData(colors: $colors)';
+    return 'UserData(colors: $colors, email: $email, password: $password)';
   }
 
   @override
@@ -343,12 +370,15 @@ class _$UserDataImpl implements _UserData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserDataImpl &&
-            (identical(other.colors, colors) || other.colors == colors));
+            (identical(other.colors, colors) || other.colors == colors) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.password, password) ||
+                other.password == password));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, colors);
+  int get hashCode => Object.hash(runtimeType, colors, email, password);
 
   /// Create a copy of UserData
   /// with the given fields replaced by the non-null parameter values.
@@ -367,13 +397,20 @@ class _$UserDataImpl implements _UserData {
 }
 
 abstract class _UserData implements UserData {
-  const factory _UserData({required final UserColors colors}) = _$UserDataImpl;
+  const factory _UserData(
+      {required final UserColors colors,
+      required final String email,
+      required final String password}) = _$UserDataImpl;
 
   factory _UserData.fromJson(Map<String, dynamic> json) =
       _$UserDataImpl.fromJson;
 
   @override
   UserColors get colors;
+  @override
+  String get email;
+  @override
+  String get password;
 
   /// Create a copy of UserData
   /// with the given fields replaced by the non-null parameter values.

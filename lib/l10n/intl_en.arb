@@ -13,5 +13,20 @@
     "signUp": "Sign Up",
     "dontHaveAccount": "Dont have an account?",
     "alreadyHaveAccount": "Already have an account",
-    "orWith": "or With"
+    "orWith": "or With",
+    "exit": "EXIT",
+    "infoColorScreen": "The application has 3 buttons in the middle of the screen, an application bar and a background.",
+    "blueColorColorScreen": "Blue",
+    "redColorColorScreen": "Red",
+    "greenColorColorScreen": "Green",
+    "colorChangedTimes": "Color changed {count} times",
+    "@colorChangedTimes": {
+        "description": "Shows how many times the color was changed",
+        "placeholders": {
+            "count": {
+                "type": "int"
+                
+            }
+        }
+    }
 }

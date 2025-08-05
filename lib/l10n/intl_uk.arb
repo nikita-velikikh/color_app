@@ -13,5 +13,19 @@
   "signUp": "Зареєструватися",
   "dontHaveAccount": "Немає облікового запису",
   "alreadyHaveAccount": "Вже є акаунт?",
-  "orWith": "aбо З"
+  "orWith": "aбо З",
+  "exit": "Вихід",
+  "infoColorScreen": "У додатку є 3 кнопки посередині екрана, панель додатків та фон.",
+  "blueColorColorScreen": "Блакитний",
+  "redColorColorScreen": "Червоний",
+  "greenColorColorScreen": "Зелений",
+  "colorChangedTimes": "Колір змінювався {count} разів",
+  "@colorChangedTimes": {
+    "description": "Shows how many times the color was changed",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

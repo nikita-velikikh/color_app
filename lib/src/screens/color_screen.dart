@@ -1,12 +1,15 @@
+import 'package:color_aap/generated/l10n.dart';
 import 'package:color_aap/local_storage_service.dart';
 import 'package:color_aap/models.dart';
 import 'package:color_aap/src/widgets/custom_app_bar.dart';
 import 'package:color_aap/src/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:color_aap/src/screens_login/auth_screen.dart';
 
 class ColorScreen extends StatefulWidget {
-  const ColorScreen({super.key});
+  final String email;
+  const ColorScreen({super.key, required this.email});
 
   @override
   State<ColorScreen> createState() => _ColorScreenState();
@@ -25,7 +28,7 @@ class _ColorScreenState extends State<ColorScreen> {
 
   void _loadAndShowUserColors() async {
     final localStorageService = LocalStorageService();
-    final userColors = await localStorageService.getUserColors(testEmail);
+    final userColors = await localStorageService.getUserColors(widget.email);
     setState(() {
       backgroundColor = userColors.backgroundColor;
       appBarColor = userColors.appBarColor;
@@ -81,8 +84,18 @@ class _ColorScreenState extends State<ColorScreen> {
     );
 
     await localStorageService.saveUserColors(
-      testEmail,
+      widget.email,
       userColors,
+    );
+  }
+
+  void handleExit() async {
+    final service = LocalStorageService();
+    await service.deleteLastEmail();
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const AuthScreen()),
     );
   }
 
@@ -127,15 +140,15 @@ class _ColorScreenState extends State<ColorScreen> {
                       duration: const Duration(milliseconds: 500),
                       curve: Curves.easeInOut,
                       style: TextStyle(color: textColor, fontSize: 18),
-                      child: const Text(
-                        "The application has 3 buttons in the middle of the screen, an application bar and a background.",
+                      child: Text(
+                        S.of(context).infoColorScreen,
                         textAlign: TextAlign.center,
                       ),
                     ),
                   ),
                   const SizedBox(height: 40),
                   CustomElevatedButton(
-                    buttonTitle: "Blue",
+                    buttonTitle: S.of(context).blueColorColorScreen,
                     buttonStyle: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
                       minimumSize: buttonSize,
@@ -145,7 +158,7 @@ class _ColorScreenState extends State<ColorScreen> {
                     textStyle: buttonTextStyle,
                   ),
                   CustomElevatedButton(
-                    buttonTitle: "Green",
+                    buttonTitle: S.of(context).greenColorColorScreen,
                     buttonStyle: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
                       minimumSize: buttonSize,
@@ -155,7 +168,7 @@ class _ColorScreenState extends State<ColorScreen> {
                     textStyle: buttonTextStyle,
                   ),
                   CustomElevatedButton(
-                    buttonTitle: "Red",
+                    buttonTitle: S.of(context).redColorColorScreen,
                     buttonStyle: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
                       minimumSize: buttonSize,
@@ -168,8 +181,19 @@ class _ColorScreenState extends State<ColorScreen> {
                   GestureDetector(
                     onTap: () => _changeColorText(_generateColorRandom()),
                     child: Text(
-                      "Color changed $counter times",
+                      S.of(context).colorChangedTimes(counter),
                       style: TextStyle(color: textColor, fontSize: 18),
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  ElevatedButton(
+                    onPressed: handleExit,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      foregroundColor: Colors.white,
+                    ),
+                    child: Text(
+                      S.of(context).exit,
                     ),
                   ),
                 ],
