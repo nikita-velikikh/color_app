@@ -70,7 +70,7 @@ class LocalStorageService {
   /// Throws an [ArgumentError] if the user data is not found.
   Future<UserData> getUserData(String email) async {
     final usersMap = await getUsersMap();
-    final userData = usersMap.users['email'];
+    final userData = usersMap.users[email];
 
     if (userData == null) {
       throw ArgumentError('User data not found for email: $email');
