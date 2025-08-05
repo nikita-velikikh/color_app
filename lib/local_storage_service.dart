@@ -3,8 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'models.dart';
 
-// TODO: delete after connecting account creation
-
 class LocalStorageService {
   static const String _usersKey = 'users';
   static const String _lastEmailKey = "last_email";

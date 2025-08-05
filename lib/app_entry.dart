@@ -33,6 +33,22 @@ class _AppEntryState extends State<AppEntry> {
 
   @override
   Widget build(BuildContext context) {
+    late final Widget home;
+
+    if (isLoading) {
+      home = const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    } else {
+      if (lastEmail == null || lastEmail!.isEmpty) {
+        home = const AuthScreen();
+      } else {
+        home = ColorScreen(email: lastEmail!);
+      }
+    }
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
@@ -42,13 +58,7 @@ class _AppEntryState extends State<AppEntry> {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      home: isLoading
-          ? const Scaffold(
-              body: Center(child: CircularProgressIndicator()),
-            )
-          : (lastEmail != null
-              ? ColorScreen(email: lastEmail!)
-              : const AuthScreen()),
+      home: home,
     );
   }
 }

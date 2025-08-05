@@ -1,3 +1,4 @@
+import 'package:color_aap/generated/l10n.dart';
 import 'package:color_aap/local_storage_service.dart';
 import 'package:color_aap/models.dart';
 import 'package:color_aap/src/widgets/custom_app_bar.dart';
@@ -88,9 +89,9 @@ class _ColorScreenState extends State<ColorScreen> {
     );
   }
 
-  void _logout() async {
+  void _deleteLastEmail() async {
     final service = LocalStorageService();
-    await service.saveLastEmail(""); 
+    await service.saveLastEmail("");
 
     Navigator.pushReplacement(
       context,
@@ -139,15 +140,15 @@ class _ColorScreenState extends State<ColorScreen> {
                       duration: const Duration(milliseconds: 500),
                       curve: Curves.easeInOut,
                       style: TextStyle(color: textColor, fontSize: 18),
-                      child: const Text(
-                        "The application has 3 buttons in the middle of the screen, an application bar and a background.",
+                      child: Text(
+                        S.of(context).infoColorScreen,
                         textAlign: TextAlign.center,
                       ),
                     ),
                   ),
                   const SizedBox(height: 40),
                   CustomElevatedButton(
-                    buttonTitle: "Blue",
+                    buttonTitle: S.of(context).blueColorColorScreen,
                     buttonStyle: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
                       minimumSize: buttonSize,
@@ -157,7 +158,7 @@ class _ColorScreenState extends State<ColorScreen> {
                     textStyle: buttonTextStyle,
                   ),
                   CustomElevatedButton(
-                    buttonTitle: "Green",
+                    buttonTitle: S.of(context).greenColorColorScreen,
                     buttonStyle: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
                       minimumSize: buttonSize,
@@ -167,7 +168,7 @@ class _ColorScreenState extends State<ColorScreen> {
                     textStyle: buttonTextStyle,
                   ),
                   CustomElevatedButton(
-                    buttonTitle: "Red",
+                    buttonTitle: S.of(context).redColorColorScreen,
                     buttonStyle: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
                       minimumSize: buttonSize,
@@ -180,19 +181,19 @@ class _ColorScreenState extends State<ColorScreen> {
                   GestureDetector(
                     onTap: () => _changeColorText(_generateColorRandom()),
                     child: Text(
-                      "Color changed $counter times",
+                      S.of(context).colorChangedTimes(counter),
                       style: TextStyle(color: textColor, fontSize: 18),
                     ),
                   ),
                   const SizedBox(height: 40),
                   ElevatedButton(
-                    onPressed: _logout,
+                    onPressed: _deleteLastEmail,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.black,
                       foregroundColor: Colors.white,
                     ),
-                    child: const Text(
-                      'EXIT',
+                    child: Text(
+                      S.of(context).exit,
                     ),
                   ),
                 ],
