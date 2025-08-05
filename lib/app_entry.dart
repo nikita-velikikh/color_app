@@ -42,7 +42,7 @@ class _AppEntryState extends State<AppEntry> {
         ),
       );
     } else {
-      if (lastEmail == null || lastEmail!.isEmpty) {
+      if (lastEmail == null) {
         home = const AuthScreen();
       } else {
         home = ColorScreen(email: lastEmail!);

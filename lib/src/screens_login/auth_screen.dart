@@ -13,11 +13,11 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  String email = "";
-  String password = "";
   var isLogin = true;
   final formKey = GlobalKey<FormState>();
   final service = LocalStorageService();
+
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
@@ -32,18 +32,18 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   void _handleLogin() async {
-    final exists = await service.checkUserExists(email);
+    final exists = await service.checkUserExists(emailController.text);
     if (exists) {
-      saveLastEmailAndNavigate(email);
+      saveLastEmailAndNavigate(emailController.text);
     } else {
       handleError("User not found");
     }
   }
 
   void _handleCreateUser() async {
-    final success = await service.createUser(email, password);
+    final success = await service.createUser(emailController.text, passwordController.text);
     if (success) {
-      saveLastEmailAndNavigate(email);
+      saveLastEmailAndNavigate(emailController.text);
     } else {
       handleError("User with this email already exists");
     }
@@ -68,6 +68,10 @@ class _AuthScreenState extends State<AuthScreen> {
   void onChangeLogin() {
     setState(() {
       isLogin = !isLogin;
+
+      passwordController.clear();
+      confirmPasswordController.clear();
+      emailController.clear();
     });
   }
 
@@ -83,8 +87,9 @@ class _AuthScreenState extends State<AuthScreen> {
             LoginForm(
               formKey: formKey,
               isLogin: isLogin,
-              onEmailChanged: (value) => setState(() => email = value),
-              onPasswordChanged: (value) => setState(() => password = value),
+              emailController: emailController,
+              passwordController: passwordController,
+              repeatPasswordController: confirmPasswordController,
             ),
             LoginButtons(
               isLogin: isLogin,
