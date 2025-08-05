@@ -30,24 +30,13 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController repeatPasswordController =
-      TextEditingController();
+  final TextEditingController repeatPasswordController = TextEditingController();
 
   @override
   void dispose() {
     passwordController.dispose();
     repeatPasswordController.dispose();
     super.dispose();
-  }
-
-  void logout() async {
-    final service = LocalStorageService();
-    await service.saveLastEmail('');
-
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const AuthScreen()),
-    );
   }
 
   @override
@@ -107,8 +96,7 @@ class _LoginFormState extends State<LoginForm> {
                   hintText: S.of(context).repeatYourPassword,
                   isPassword: true,
                   onChanged: (password) {},
-                  validator: (value) =>
-                      validateRepeatPassword(value, passwordController.text),
+                  validator: (value) => validateRepeatPassword(value, passwordController.text),
                 )
               ],
 

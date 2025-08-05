@@ -12,6 +12,11 @@ class LocalStorageService {
     await prefs.setString(_lastEmailKey, email);
   }
 
+  Future<void> deleteLastEmail() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_lastEmailKey);
+  }
+
   Future<String?> getLastEmail() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString(_lastEmailKey);
@@ -32,8 +37,7 @@ class LocalStorageService {
       appBarColor: Colors.white,
       textColor: Colors.black,
     );
-    final userData =
-        UserData(password: password, email: email, colors: defaultColors);
+    final userData = UserData(password: password, email: email, colors: defaultColors);
 
     final updatedUsersMap = usersMap.copyWith(
       users: Map.from(usersMap.users)..[email] = userData,
