@@ -89,9 +89,9 @@ class _ColorScreenState extends State<ColorScreen> {
     );
   }
 
-  void _deleteLastEmail() async {
+  void handleExit() async {
     final service = LocalStorageService();
-    await service.saveLastEmail("");
+    await service.deleteLastEmail();
 
     Navigator.pushReplacement(
       context,
@@ -187,7 +187,7 @@ class _ColorScreenState extends State<ColorScreen> {
                   ),
                   const SizedBox(height: 40),
                   ElevatedButton(
-                    onPressed: _deleteLastEmail,
+                    onPressed: handleExit,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.black,
                       foregroundColor: Colors.white,
