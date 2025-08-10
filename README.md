@@ -1,39 +1,33 @@
- Color App
+# Color App
 
- Screenshots
+1. Implemented Auth UI according to Figma
+2. Covered Auth Form with validation
+3. Implemented logic for changing colors depending on user's actions
+4. Added logic for saving user's data in local storage and restoring on app restart
+5. Used local storage in order to handle multiaccount 
+6. Implemented localisation 
+7. Refactored models with Freezed library in order to optimise data handling
+8. Added animation for color changing
+9. Added Splash screen and app icon
+10. Used Chrome Dev tool for debugging app logic in Web
+11. Covered app logic with Unit tests
+12. Used Github to cooperate with team
+13. Used Jira to plan and track tasks
+14. Worked within Sprints
+15. Estimated tasks according to Agile methodologies 
+16. Used Secure storage and password hashing to improve app security
+17. Used interfaces in order to handle multiple data sources
+18. Refactored application using layered architecture to improve modularity
+
+ # Screenshots
 
 
-[Color Screen](assets/images/color_screen.html)
+<img src="assets/images/example/colors_screen.png" alt="Color Screen" width="300"/>
 
+<img src="assets/images/example/sign_up.png" alt="Sign Up" width="300"/>
 
- Login Screen
-[Login Screen](assets/images/login_screen.html)
+<img src="assets/images/example/sign_in.png" alt="Sign In" width="300"/>
 
-
- Registration Screen
-[Registration Screen](assets/images/registration_screen.html)
-
-
- Features
-
-Implemented Auth UI according to Figma
-Covered Auth Form with validation
-Implemented logic for changing colors depending on user's actions
-Added logic for saving user's data in local storage and restoring on app restart
-Used local storage in order to handle multiaccount 
-Implemented localisation 
-Refactored models with Freezed library in order to optimise data handling
-Added animation for color changing
-Added Splash screen and app icon
-Used Chrome Dev tool for debugging app logic in Web
-Covered app logic with Unit tests
-Used Github to cooperate with team
-Used Jira to plan and track tasks
-Worked within Sprints
-Estimated tasks according to Agile methodologies 
-Used Secure storage and password hashing to improve app security
-Used interfaces in order to handle multiple data sources
-Refactored application using layered architecture to improve modularity
 
 
 
