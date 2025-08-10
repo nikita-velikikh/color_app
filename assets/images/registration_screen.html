@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Color App - Registration Screen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: white;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .logo-u {
+            color: #9C27B0;
+        }
+
+        .logo-ix {
+            color: #E91E63;
+        }
+
+        .logo-class {
+            color: #9C27B0;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header-title {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .header-subtitle {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .form {
+            max-width: 300px;
+            margin: 0 auto 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #F44336;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .password-field {
+            position: relative;
+        }
+
+        .eye-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #666;
+        }
+
+        .error-message {
+            color: #F44336;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .forgot-password {
+            color: #999;
+            text-decoration: none;
+        }
+
+        .signup-button {
+            width: 100%;
+            background-color: #9C27B0;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 30px;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: #ddd;
+        }
+
+        .divider-text {
+            background-color: white;
+            padding: 0 20px;
+            color: #666;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .social-button {
+            flex: 1;
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 12px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .login-link {
+            text-align: center;
+            color: #666;
+        }
+
+        .login-link a {
+            color: #9C27B0;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="logo">
+        <div class="logo-text">
+            <span class="logo-u">U</span><span class="logo-ix">IX</span> <span class="logo-class">Class</span>
+        </div>
+    </div>
+
+    <div class="header">
+        <div class="header-title">Create an account</div>
+        <div class="header-subtitle">Connect with your friends today!</div>
+    </div>
+
+    <div class="form">
+        <div class="input-group">
+            <input type="email" class="input-field" placeholder="Enter Your Email">
+            <div class="error-message">Please enter your email</div>
+        </div>
+
+        <div class="input-group">
+            <div class="password-field">
+                <input type="password" class="input-field" placeholder="Enter Your Password">
+                <span class="eye-icon">👁️</span>
+            </div>
+            <div class="error-message">Please enter your password</div>
+        </div>
+
+        <div class="input-group">
+            <div class="password-field">
+                <input type="password" class="input-field" placeholder="Repeat Your Password">
+                <span class="eye-icon">👁️</span>
+            </div>
+            <div class="error-message">Please repeat the password</div>
+        </div>
+
+        <div class="options">
+            <div class="checkbox">
+                <input type="checkbox" id="remember">
+                <label for="remember">Remember Me</label>
+            </div>
+            <a href="#" class="forgot-password">Forgot Password</a>
+        </div>
+
+        <button class="signup-button">Sign Up</button>
+    </div>
+
+    <div class="divider">
+        <span class="divider-text">or With</span>
+    </div>
+
+    <div class="social-buttons">
+        <button class="social-button">
+            <span>🐙</span> GitHub
+        </button>
+        <button class="social-button">
+            <span>🦊</span> GitLab
+        </button>
+    </div>
+
+    <div class="login-link">
+        Already have an account <a href="#">Login</a>
+    </div>
+</body>
+
+</html>
