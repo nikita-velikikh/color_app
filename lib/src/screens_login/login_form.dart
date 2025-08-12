@@ -1,14 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:color_aap/local_storage_service.dart';
 import 'package:flutter/material.dart';
-
 import 'package:color_aap/src/screens_login/custom_field.dart';
 import 'package:color_aap/src/screens_login/logo_text.dart';
 import 'package:color_aap/src/screens_login/password_info.dart';
 import 'package:color_aap/src/screens_login/validation.dart';
 import 'package:color_aap/src/screens_login/sing_up_password_field.dart';
 import 'package:color_aap/generated/l10n.dart';
-import 'package:color_aap/src/screens_login/auth_screen.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({
@@ -30,7 +27,8 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController repeatPasswordController = TextEditingController();
+  final TextEditingController repeatPasswordController =
+      TextEditingController();
 
   @override
   void dispose() {
@@ -96,7 +94,8 @@ class _LoginFormState extends State<LoginForm> {
                   hintText: S.of(context).repeatYourPassword,
                   isPassword: true,
                   onChanged: (password) {},
-                  validator: (value) => validateRepeatPassword(value, passwordController.text),
+                  validator: (value) =>
+                      validateRepeatPassword(value, passwordController.text),
                 )
               ],
 
