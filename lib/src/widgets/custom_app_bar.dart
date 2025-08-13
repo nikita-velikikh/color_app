@@ -26,7 +26,10 @@ class CustomAppBar extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          content: Text(titleSnowDialog,textAlign: TextAlign.center,),
+          content: Text(
+            titleSnowDialog,
+            textAlign: TextAlign.center,
+          ),
           actions: [
             TextButton(
               onPressed: () {
@@ -38,9 +41,7 @@ class CustomAppBar extends StatelessWidget {
               onPressed: () async {
                 Navigator.of(context).pop();
                 final service = LocalStorageService();
-                await service
-                    .deleteUserData(userEmail);
-                await service.handleExit();
+                await service.deleteUserData(userEmail);
 
                 if (context.mounted) {
                   Navigator.pushReplacement(
@@ -79,7 +80,7 @@ class CustomAppBar extends StatelessWidget {
           icon: const Icon(Icons.logout, color: Colors.black),
           onPressed: () async {
             final service = LocalStorageService();
-            await service.handleExit();
+            await service.deleteLastEmail();
 
             Navigator.pushReplacement(
               context,

@@ -98,9 +98,7 @@ class LocalStorageService {
     return result;
   }
 
-  Future<void> handleExit() async {
-    await deleteLastEmail();
-  }
+  
 
   Future<void> deleteUserData(String email) async {
     final usersMap = await getUsersMap();
