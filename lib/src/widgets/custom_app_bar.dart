@@ -1,3 +1,4 @@
+import 'package:color_aap/generated/l10n.dart';
 import 'package:color_aap/src/screens_login/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:color_aap/local_storage_service.dart';
@@ -17,41 +18,50 @@ class CustomAppBar extends StatelessWidget {
   final Color backgroundColor;
   final bool isCenterTirtle;
   final String userEmail;
-  final String titleSnowDialog = "Your data will be deleted!";
+  final String titleSnowDialog = "Your data will be deleted";
   final String cancelDialog = "Cancel";
   final String yesDialog = "Yes";
+
+  void navigateToAuthScreen(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const AuthScreen()),
+    );
+  }
+
+  void navigatePop(BuildContext context) {
+    Navigator.pop(context);
+  }
 
   void showDeleteDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (BuildContext context) {
+      builder: (BuildContext context) {  
         return AlertDialog(
-          content: Text(
-            titleSnowDialog,
-            textAlign: TextAlign.center,
-          ),
+          title: Text(
+              S.of(context).titleSnowDialog,
+              textAlign: TextAlign.center,
+            ),
+          
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                navigatePop(context);
               },
-              child: Text(cancelDialog),
+              child: Text(S.of(context).cancelDialog),
             ),
             TextButton(
               onPressed: () async {
-                Navigator.of(context).pop();
+                navigatePop(context);
                 final service = LocalStorageService();
                 await service.deleteUserData(userEmail);
 
                 if (context.mounted) {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const AuthScreen()),
-                  );
+                  navigateToAuthScreen(context);
                 }
               },
               style: TextButton.styleFrom(foregroundColor: Colors.red),
-              child: Text(yesDialog),
+              child: Text(S.of(context).yesDialog),
             ),
           ],
           actionsAlignment: MainAxisAlignment.center,

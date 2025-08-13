@@ -98,19 +98,14 @@ class LocalStorageService {
     return result;
   }
 
-  
-
   Future<void> deleteUserData(String email) async {
     final usersMap = await getUsersMap();
 
-    final newUsers = <String, UserData>{};
-    for (final entry in usersMap.users.entries) {
-      if (entry.key != email) {
-        newUsers[entry.key] = entry.value;
-      }
+    if (usersMap.users.containsKey(email)) {
+      final newUsersMap = usersMap.copyWith(
+        users: Map.from(usersMap.users)..remove(email),
+      );
+      await saveUsersMap(newUsersMap);
     }
-
-    final newUsersMap = UsersMap(users: newUsers);
-    await saveUsersMap(newUsersMap);
   }
 }
