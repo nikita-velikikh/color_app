@@ -37,7 +37,8 @@ class LocalStorageService {
       appBarColor: Colors.white,
       textColor: Colors.black,
     );
-    final userData = UserData(password: password, email: email, colors: defaultColors);
+    final userData =
+        UserData(password: password, email: email, colors: defaultColors);
 
     final updatedUsersMap = usersMap.copyWith(
       users: Map.from(usersMap.users)..[email] = userData,
@@ -95,5 +96,16 @@ class LocalStorageService {
     final usersMapJsonEncoded = jsonEncode(usersMapJson);
     final result = await prefs.setString(_usersKey, usersMapJsonEncoded);
     return result;
+  }
+
+  Future<void> deleteUserData(String email) async {
+    final usersMap = await getUsersMap();
+
+    if (usersMap.users.containsKey(email)) {
+      final newUsersMap = usersMap.copyWith(
+        users: Map.from(usersMap.users)..remove(email),
+      );
+      await saveUsersMap(newUsersMap);
+    }
   }
 }

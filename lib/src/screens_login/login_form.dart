@@ -1,7 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:color_aap/local_storage_service.dart';
 import 'package:flutter/material.dart';
-
 import 'package:color_aap/src/screens_login/custom_field.dart';
 import 'package:color_aap/src/screens_login/logo_text.dart';
 import 'package:color_aap/src/screens_login/password_info.dart';
@@ -57,23 +55,6 @@ class _LoginFormState extends State<LoginForm> {
                   title: S.of(context).createAccount,
                   subTitle: S.of(context).connectFriends,
                 ),
-//
-              //
-              // isLogin
-              //     ? LogoText(
-              //         title: "Hi, Welcome Back! 👋",
-              //         subTitle: "Hello again, you've been missed!",
-              //       )
-              //     : LogoText(
-              //         title: "SomeOtherString",
-              //         subTitle: "SomeANotherOthEr String",
-              //       ),
-              //
-              // LogoText(
-              //   title: isLogin ? "" : "",
-              //   subTitle: isLogin ? "" : "",
-              // ),
-
               const SizedBox(height: 16),
               CustomField(
                 hintText: S.of(context).enterYourEmail,
@@ -96,11 +77,10 @@ class _LoginFormState extends State<LoginForm> {
                   isPassword: true,
                   controller: widget.repeatPasswordController,
                   onChanged: (password) {},
-                  validator: (value) =>
-                      validateRepeatPassword(value, widget.passwordController.text),
+                  validator: (value) => validateRepeatPassword(
+                      value, widget.passwordController.text),
                 )
               ],
-
               const SizedBox(height: 7),
               const PasswordInfo(),
             ],

@@ -27,5 +27,9 @@
         "type": "int"
       }
     }
-  }
+  },
+  "titleSnowDialog": "Ваші дані будуть видалені",
+  "cancelDialog": "Скасувати",
+  "yesDialog": "Так",
+  "descriptionSnowDialog": "Ваші дані будуть видалені"
 }

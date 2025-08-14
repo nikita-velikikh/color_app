@@ -1,11 +1,11 @@
 import 'package:color_aap/generated/l10n.dart';
 import 'package:color_aap/local_storage_service.dart';
 import 'package:color_aap/models.dart';
+import 'package:color_aap/src/screens_login/auth_screen.dart';
 import 'package:color_aap/src/widgets/custom_app_bar.dart';
 import 'package:color_aap/src/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
-import 'package:color_aap/src/screens_login/auth_screen.dart';
 
 class ColorScreen extends StatefulWidget {
   final String email;
@@ -27,13 +27,23 @@ class _ColorScreenState extends State<ColorScreen> {
   }
 
   void _loadAndShowUserColors() async {
+    try{
     final localStorageService = LocalStorageService();
     final userColors = await localStorageService.getUserColors(widget.email);
     setState(() {
       backgroundColor = userColors.backgroundColor;
       appBarColor = userColors.appBarColor;
-      textColor = userColors.textColor;
-    });
+        textColor = userColors.textColor;
+      });
+    } catch (e) {
+      debugPrint('Error in _loadAndShowUserColors: $e');
+      if (context.mounted) {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const AuthScreen()),
+        );
+      }
+    }
   }
 
   static const TextStyle buttonTextStyle = TextStyle(
@@ -89,16 +99,6 @@ class _ColorScreenState extends State<ColorScreen> {
     );
   }
 
-  void handleExit() async {
-    final service = LocalStorageService();
-    await service.deleteLastEmail();
-
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const AuthScreen()),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -121,7 +121,7 @@ class _ColorScreenState extends State<ColorScreen> {
               textColor: Colors.black,
               backgroundColor: appBarColor,
               isCenterTirtle: true,
-              actions: const Icon(Icons.info),
+              userEmail: widget.email,
             ),
           ),
         ),
@@ -183,17 +183,6 @@ class _ColorScreenState extends State<ColorScreen> {
                     child: Text(
                       S.of(context).colorChangedTimes(counter),
                       style: TextStyle(color: textColor, fontSize: 18),
-                    ),
-                  ),
-                  const SizedBox(height: 40),
-                  ElevatedButton(
-                    onPressed: handleExit,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black,
-                      foregroundColor: Colors.white,
-                    ),
-                    child: Text(
-                      S.of(context).exit,
                     ),
                   ),
                 ],
