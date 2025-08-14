@@ -30,5 +30,6 @@
   },
   "titleSnowDialog": "Ваші дані будуть видалені",
   "cancelDialog": "Скасувати",
-  "yesDialog": "Так"
+  "yesDialog": "Так",
+  "descriptionSnowDialog": "Ваші дані будуть видалені"
 }

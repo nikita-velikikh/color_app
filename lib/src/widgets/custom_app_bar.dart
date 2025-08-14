@@ -18,31 +18,30 @@ class CustomAppBar extends StatelessWidget {
   final Color backgroundColor;
   final bool isCenterTirtle;
   final String userEmail;
-  final String titleSnowDialog = "Your data will be deleted";
-  final String cancelDialog = "Cancel";
-  final String yesDialog = "Yes";
+  final TextAlign textAlignCenter = TextAlign.center;
 
-  void navigateToAuthScreen(BuildContext context) {
+  Future<void> navigateToAuthScreen(BuildContext context) async {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => const AuthScreen()),
     );
   }
 
-  void navigatePop(BuildContext context) {
+  Future<void> navigatePop(BuildContext context) async {
     Navigator.pop(context);
   }
 
   void showDeleteDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (BuildContext context) {  
+      builder: (BuildContext context) {
         return AlertDialog(
           title: Text(
-              S.of(context).titleSnowDialog,
-              textAlign: TextAlign.center,
-            ),
-          
+            S.of(context).titleSnowDialog,
+            textAlign: textAlignCenter,
+          ),
+          content: Text(S.of(context).descriptionSnowDialog,
+              textAlign: textAlignCenter),
           actions: [
             TextButton(
               onPressed: () {
@@ -92,10 +91,9 @@ class CustomAppBar extends StatelessWidget {
             final service = LocalStorageService();
             await service.deleteLastEmail();
 
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const AuthScreen()),
-            );
+            if (context.mounted) {
+              navigateToAuthScreen(context);
+            }
           },
         ),
       ],

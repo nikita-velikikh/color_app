@@ -28,10 +28,6 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController repeatPasswordController =
-      TextEditingController();
-
   @override
   void dispose() {
     widget.passwordController.dispose();
@@ -81,8 +77,8 @@ class _LoginFormState extends State<LoginForm> {
                   isPassword: true,
                   controller: widget.repeatPasswordController,
                   onChanged: (password) {},
-                  validator: (value) =>
-                      validateRepeatPassword(value, passwordController.text),
+                  validator: (value) => validateRepeatPassword(
+                      value, widget.passwordController.text),
                 )
               ],
               const SizedBox(height: 7),

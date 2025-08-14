@@ -29,7 +29,8 @@
             }
         }
     },
-    "titleSnowDialog": "Your data will be deleted",
+    "descriptionSnowDialog": "Your data will be deleted",
     "cancelDialog": "Cancel",
-    "yesDialog": "Yes"
+    "yesDialog": "Yes",
+    "titleSnowDialog": "Are you sure?"
 }
