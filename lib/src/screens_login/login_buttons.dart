@@ -26,7 +26,9 @@ class LoginButtons extends StatelessWidget {
         const IconButtons(),
         const SizedBox(height: 10),
         Registration(
-          subText: isLogin ? S.of(context).dontHaveAccount : S.of(context).alreadyHaveAccount,
+          subText: isLogin
+              ? S.of(context).dontHaveAccount
+              : S.of(context).alreadyHaveAccount,
           textButtonText: isLogin ? S.of(context).signUp : S.of(context).login,
           onToggle: onToggle,
         ),

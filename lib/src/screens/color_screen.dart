@@ -19,6 +19,7 @@ class _ColorScreenState extends State<ColorScreen> {
   Color backgroundColor = Colors.black;
   Color appBarColor = Colors.white;
   Color textColor = Colors.white;
+  int counter = 0;
 
   @override
   void initState() {
@@ -27,18 +28,18 @@ class _ColorScreenState extends State<ColorScreen> {
   }
 
   void _loadAndShowUserColors() async {
-    try{
-    final localStorageService = LocalStorageService();
-    final userColors = await localStorageService.getUserColors(widget.email);
-    setState(() {
-      backgroundColor = userColors.backgroundColor;
-      appBarColor = userColors.appBarColor;
+    try {
+      final localStorageService = LocalStorageService();
+      final userColors = await localStorageService.getUserColors(widget.email);
+      setState(() {
+        backgroundColor = userColors.backgroundColor;
+        appBarColor = userColors.appBarColor;
         textColor = userColors.textColor;
       });
     } catch (e) {
       debugPrint('Error in _loadAndShowUserColors: $e');
       if (context.mounted) {
-      Navigator.pushReplacement(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const AuthScreen()),
         );
@@ -51,7 +52,7 @@ class _ColorScreenState extends State<ColorScreen> {
     fontSize: 25,
   );
   static const Size buttonSize = Size(200, 50);
-  int counter = 0;
+
   void _changeColor(Color color) {
     setState(() => backgroundColor = color);
     saveColor();
@@ -82,7 +83,7 @@ class _ColorScreenState extends State<ColorScreen> {
 
   void onTapCounterReset() => setState(() => counter = 0);
 
-  void onTapCounterIncrement() => counter++;
+  void onTapCounterIncrement() => setState(() => counter++);
 
   void saveColor() async {
     final localStorageService = LocalStorageService();
@@ -125,7 +126,6 @@ class _ColorScreenState extends State<ColorScreen> {
             ),
           ),
         ),
-        // backgroundColor: _backgroundColor,
         body: Center(
           child: AnimatedContainer(
             duration: const Duration(seconds: 1),
@@ -136,6 +136,7 @@ class _ColorScreenState extends State<ColorScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GestureDetector(
+                    onTap: null,
                     child: AnimatedDefaultTextStyle(
                       duration: const Duration(milliseconds: 500),
                       curve: Curves.easeInOut,

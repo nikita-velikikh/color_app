@@ -41,7 +41,8 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   void _handleCreateUser() async {
-    final success = await service.createUser(emailController.text, passwordController.text);
+    final success =
+        await service.createUser(emailController.text, passwordController.text);
     if (success) {
       saveLastEmailAndNavigate(emailController.text);
     } else {

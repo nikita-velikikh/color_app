@@ -1,9 +1,8 @@
 import 'dart:convert';
 
+import 'package:color_aap/models.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'models.dart';
 
 class LocalStorageService {
   static const String _usersKey = 'users';
@@ -89,8 +88,9 @@ class LocalStorageService {
     if (usersMapJson == null) {
       return const UsersMap(users: {});
     }
-    final usersMapJsonDecoded = jsonDecode(usersMapJson) as Map<String, dynamic>;
-    return UsersMap.fromJson(usersMapJsonDecoded);
+    final usersMapJsonDecoded = jsonDecode(usersMapJson);
+
+    return UsersMap.fromJson(usersMapJsonDecoded as Map<String, dynamic>);
   }
 
   Future<bool> saveUsersMap(UsersMap usersMap) async {
