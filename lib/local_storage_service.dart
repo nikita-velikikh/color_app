@@ -1,12 +1,15 @@
 import 'dart:convert';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'models.dart';
 
 class LocalStorageService {
   static const String _usersKey = 'users';
   static const String _lastEmailKey = "last_email";
 
+  /// Saves the last email used to login.
   Future<void> saveLastEmail(String email) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_lastEmailKey, email);
@@ -86,7 +89,7 @@ class LocalStorageService {
     if (usersMapJson == null) {
       return const UsersMap(users: {});
     }
-    final usersMapJsonDecoded = jsonDecode(usersMapJson);
+    final usersMapJsonDecoded = jsonDecode(usersMapJson) as Map<String, dynamic>;
     return UsersMap.fromJson(usersMapJsonDecoded);
   }
 
