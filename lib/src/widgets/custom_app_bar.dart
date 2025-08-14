@@ -21,13 +21,13 @@ class CustomAppBar extends StatelessWidget {
   final TextAlign textAlignCenter = TextAlign.center;
 
   Future<void> navigateToAuthScreen(BuildContext context) async {
-    Navigator.pushReplacement(
+    await Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => const AuthScreen()),
     );
   }
 
-  Future<void> navigatePop(BuildContext context) async {
+  void navigatePop(BuildContext context) {
     Navigator.pop(context);
   }
 
@@ -56,7 +56,7 @@ class CustomAppBar extends StatelessWidget {
                 await service.deleteUserData(userEmail);
 
                 if (context.mounted) {
-                  navigateToAuthScreen(context);
+                  await navigateToAuthScreen(context);
                 }
               },
               style: TextButton.styleFrom(foregroundColor: Colors.red),
@@ -92,7 +92,7 @@ class CustomAppBar extends StatelessWidget {
             await service.deleteLastEmail();
 
             if (context.mounted) {
-              navigateToAuthScreen(context);
+              await navigateToAuthScreen(context);
             }
           },
         ),
