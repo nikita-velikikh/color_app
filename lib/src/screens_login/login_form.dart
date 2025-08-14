@@ -12,28 +12,33 @@ class LoginForm extends StatefulWidget {
     super.key,
     required this.formKey,
     required this.isLogin,
-    required this.onEmailChanged,
-    required this.onPasswordChanged,
+    required this.emailController,
+    required this.passwordController,
+    required this.repeatPasswordController,
   });
 
   final GlobalKey<FormState> formKey;
   final bool isLogin;
-  final Function(String) onEmailChanged;
-  final Function(String) onPasswordChanged;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+  final TextEditingController repeatPasswordController;
 
   @override
   State<LoginForm> createState() => _LoginFormState();
 }
 
 class _LoginFormState extends State<LoginForm> {
+
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController repeatPasswordController =
       TextEditingController();
 
+
   @override
   void dispose() {
-    passwordController.dispose();
-    repeatPasswordController.dispose();
+    widget.passwordController.dispose();
+    widget.repeatPasswordController.dispose();
+    widget.emailController.dispose();
     super.dispose();
   }
 
@@ -76,26 +81,31 @@ class _LoginFormState extends State<LoginForm> {
               const SizedBox(height: 16),
               CustomField(
                 hintText: S.of(context).enterYourEmail,
-                onChanged: widget.onEmailChanged,
+                controller: widget.emailController,
                 validator: validateEmail,
+                onChanged: (email) {},
               ),
               const SizedBox(height: 12),
               CustomField(
-                controller: passwordController,
-                onChanged: widget.onPasswordChanged,
+                controller: widget.passwordController,
                 hintText: S.of(context).enterYourPassword,
                 isPassword: true,
                 validator: validatePassword,
+                onChanged: (password) {},
               ),
               if (!widget.isLogin) ...[
                 const SizedBox(height: 12),
                 SingUpPasswordField(
-                  controller: repeatPasswordController,
                   hintText: S.of(context).repeatYourPassword,
                   isPassword: true,
+                  controller: widget.repeatPasswordController,
                   onChanged: (password) {},
                   validator: (value) =>
+
                       validateRepeatPassword(value, passwordController.text),
+
+                      validateRepeatPassword(value, widget.passwordController.text),
+
                 )
               ],
 
