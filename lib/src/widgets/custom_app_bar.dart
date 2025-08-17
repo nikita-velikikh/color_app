@@ -1,16 +1,16 @@
 import 'package:color_aap/generated/l10n.dart';
+import 'package:color_aap/local_storage_service.dart';
 import 'package:color_aap/src/screens_login/auth_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:color_aap/local_storage_service.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
-    super.key,
     required this.appBarText,
     required this.textColor,
     required this.backgroundColor,
     required this.isCenterTirtle,
     required this.userEmail,
+    super.key,
   });
 
   final String appBarText;
@@ -18,7 +18,6 @@ class CustomAppBar extends StatelessWidget {
   final Color backgroundColor;
   final bool isCenterTirtle;
   final String userEmail;
-  final TextAlign textAlignCenter = TextAlign.center;
 
   Future<void> navigateToAuthScreen(BuildContext context) async {
     await Navigator.pushReplacement(
@@ -38,10 +37,12 @@ class CustomAppBar extends StatelessWidget {
         return AlertDialog(
           title: Text(
             S.of(context).titleSnowDialog,
-            textAlign: textAlignCenter,
+            textAlign: TextAlign.center,
           ),
-          content: Text(S.of(context).descriptionSnowDialog,
-              textAlign: textAlignCenter),
+          content: Text(
+            S.of(context).descriptionSnowDialog,
+            textAlign: TextAlign.center,
+          ),
           actions: [
             TextButton(
               onPressed: () {

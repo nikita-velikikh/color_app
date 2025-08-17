@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 
 class LoginButtons extends StatelessWidget {
   const LoginButtons({
-    super.key,
     required this.onLoginPressed,
     required this.isLogin,
     required this.onToggle,
+    super.key,
   });
   final VoidCallback onToggle;
   final VoidCallback onLoginPressed;

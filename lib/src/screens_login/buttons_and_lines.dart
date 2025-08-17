@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 class ButtonsAndLines extends StatelessWidget {
   const ButtonsAndLines({
-    super.key,
     required this.onTap,
     required this.textLoginButton,
+    super.key,
   });
 
   final VoidCallback onTap;
@@ -17,15 +17,12 @@ class ButtonsAndLines extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 27),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
             children: [
               Expanded(
                 child: ElevatedButton(
-                  onPressed: () {
-                    onTap();
-                  },
+                  onPressed: onTap,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.deepPurple,
                     padding: const EdgeInsets.symmetric(vertical: 13),
@@ -45,14 +42,14 @@ class ButtonsAndLines extends StatelessWidget {
           Row(
             children: [
               const Expanded(
-                  child: Divider(color: Colors.black, thickness: 0.5)),
+                  child: Divider(color: Colors.black, thickness: 0.5),),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 19),
                 child: Text(S.of(context).orWith,
-                    style: const TextStyle(fontSize: 14)),
+                    style: const TextStyle(fontSize: 14),),
               ),
               const Expanded(
-                  child: Divider(color: Colors.black, thickness: 0.5)),
+                  child: Divider(color: Colors.black, thickness: 0.5),),
             ],
           ),
         ],

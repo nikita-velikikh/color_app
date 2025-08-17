@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:color_aap/generated/l10n.dart';
+import 'package:flutter/material.dart';
 
 class PasswordInfo extends StatefulWidget {
   const PasswordInfo({super.key});

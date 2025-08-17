@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:color_aap/generated/l10n.dart';
 import 'package:color_aap/local_storage_service.dart';
 import 'package:color_aap/models.dart';
@@ -5,11 +7,10 @@ import 'package:color_aap/src/screens_login/auth_screen.dart';
 import 'package:color_aap/src/widgets/custom_app_bar.dart';
 import 'package:color_aap/src/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
 
 class ColorScreen extends StatefulWidget {
   final String email;
-  const ColorScreen({super.key, required this.email});
+  const ColorScreen({required this.email, super.key});
 
   @override
   State<ColorScreen> createState() => _ColorScreenState();
@@ -27,7 +28,7 @@ class _ColorScreenState extends State<ColorScreen> {
     _loadAndShowUserColors();
   }
 
-  void _loadAndShowUserColors() async {
+  Future<void> _loadAndShowUserColors() async {
     try {
       final localStorageService = LocalStorageService();
       final userColors = await localStorageService.getUserColors(widget.email);
@@ -38,8 +39,8 @@ class _ColorScreenState extends State<ColorScreen> {
       });
     } catch (e) {
       debugPrint('Error in _loadAndShowUserColors: $e');
-      if (context.mounted) {
-        Navigator.pushReplacement(
+      if (mounted) {
+        await Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const AuthScreen()),
         );
@@ -85,7 +86,7 @@ class _ColorScreenState extends State<ColorScreen> {
 
   void onTapCounterIncrement() => setState(() => counter++);
 
-  void saveColor() async {
+  Future<void> saveColor() async {
     final localStorageService = LocalStorageService();
 
     final userColors = UserColors(
@@ -136,7 +137,6 @@ class _ColorScreenState extends State<ColorScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GestureDetector(
-                    onTap: null,
                     child: AnimatedDefaultTextStyle(
                       duration: const Duration(milliseconds: 500),
                       curve: Curves.easeInOut,
