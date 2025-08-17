@@ -15,6 +15,7 @@ class LoginForm extends StatefulWidget {
     required this.emailController,
     required this.passwordController,
     required this.repeatPasswordController,
+    this.currentError,
     super.key,
   });
 
@@ -23,6 +24,7 @@ class LoginForm extends StatefulWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final TextEditingController repeatPasswordController;
+  final String? currentError;
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -40,52 +42,56 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.only(left: 31),
-        child: Form(
-          key: widget.formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (widget.isLogin)
-                LogoText(
-                  title: S.of(context).welcomeBack,
-                  subTitle: S.of(context).welcomeSub,
-                )
-              else
-                LogoText(
-                  title: S.of(context).createAccount,
-                  subTitle: S.of(context).connectFriends,
-                ),
-              const SizedBox(height: 16),
-              CustomField(
-                hintText: S.of(context).enterYourEmail,
-                controller: widget.emailController,
-                validator: validateEmail,
-                onChanged: (email) {},
+      padding: const EdgeInsets.only(left: 31),
+      child: Form(
+        key: widget.formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (widget.isLogin)
+              LogoText(
+                title: S.of(context).welcomeBack,
+                subTitle: S.of(context).welcomeSub,
+              )
+            else
+              LogoText(
+                title: S.of(context).createAccount,
+                subTitle: S.of(context).connectFriends,
               ),
+            const SizedBox(height: 16),
+            CustomField(
+              hintText: S.of(context).enterYourEmail,
+              controller: widget.emailController,
+              validator: validateEmail,
+              onChanged: (email) {},
+              currentError: widget.currentError,
+            ),
+            const SizedBox(height: 12),
+            CustomField(
+              controller: widget.passwordController,
+              hintText: S.of(context).enterYourPassword,
+              isPassword: true,
+              validator: validatePassword,
+              onChanged: (password) {},
+            ),
+            if (!widget.isLogin) ...[
               const SizedBox(height: 12),
-              CustomField(
-                controller: widget.passwordController,
-                hintText: S.of(context).enterYourPassword,
+              SingUpPasswordField(
+                hintText: S.of(context).repeatYourPassword,
                 isPassword: true,
-                validator: validatePassword,
+                controller: widget.repeatPasswordController,
                 onChanged: (password) {},
-              ),
-              if (!widget.isLogin) ...[
-                const SizedBox(height: 12),
-                SingUpPasswordField(
-                  hintText: S.of(context).repeatYourPassword,
-                  isPassword: true,
-                  controller: widget.repeatPasswordController,
-                  onChanged: (password) {},
-                  validator: (value) => validateRepeatPassword(
-                      value, widget.passwordController.text,),
+                validator: (value) => validateRepeatPassword(
+                  value,
+                  widget.passwordController.text,
                 ),
-              ],
-              const SizedBox(height: 7),
-              const PasswordInfo(),
+              ),
             ],
-          ),
-        ),);
+            const SizedBox(height: 7),
+            const PasswordInfo(),
+          ],
+        ),
+      ),
+    );
   }
 }

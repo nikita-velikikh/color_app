@@ -39,13 +39,6 @@ class PasswordInfoState extends State<PasswordInfo> {
               ),
             ],
           ),
-          TextButton(
-            onPressed: () {},
-            child: Text(
-              S.of(context).forgotPassword,
-              style: const TextStyle(fontSize: 14, color: Colors.grey),
-            ),
-          ),
         ],
       ),
     );

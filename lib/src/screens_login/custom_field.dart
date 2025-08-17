@@ -7,13 +7,17 @@ class CustomField extends StatefulWidget {
   final TextEditingController? controller;
   final void Function(String) onChanged;
   final String? Function(String?)? validator;
+  final String? currentError;
 
   const CustomField({
-    required this.hintText, required this.onChanged, super.key,
+    required this.hintText,
+    required this.onChanged,
+    super.key,
     this.label,
     this.isPassword = false,
     this.controller,
     this.validator,
+    this.currentError,
   });
 
   @override
@@ -55,6 +59,7 @@ class _CustomFieldState extends State<CustomField> {
                 ),
               ),
               errorStyle: const TextStyle(color: Colors.red),
+              errorText: widget.currentError,
               suffixIcon: widget.isPassword
                   ? Padding(
                       padding: const EdgeInsets.only(right: 11),
