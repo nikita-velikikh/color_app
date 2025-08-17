@@ -1,6 +1,7 @@
 import 'dart:convert';
-import 'package:flutter_test/flutter_test.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -14,8 +15,13 @@ void main() {
         const greenColor = Colors.green;
         const transparentColor = Colors.transparent;
 
-        // Test color to hex conversion (matches LocalStorageService implementation)
-        colorToHex(color) => '#${color.value.toRadixString(16).padLeft(8, '0').substring(2)}';
+        // Test color to hex conversion
+        //(matches LocalStorageService implementation)
+        String colorToHex(Color color) {
+          final hexValue = color.toARGB32().toRadixString(16);
+          final paddedHex = hexValue.padLeft(8, '0');
+          return '#${paddedHex.substring(2)}';
+        }
 
         expect(colorToHex(redColor), equals('#f44336'));
         expect(colorToHex(blueColor), equals('#2196f3'));
@@ -24,10 +30,13 @@ void main() {
       });
 
       test('should convert hex string to Color correctly', () {
-        // Test hex to color conversion (matches LocalStorageService implementation)
+        // Test hex to color conversion
+        //(matches LocalStorageService implementation)
         Color colorFromHex(String hex) {
           final buffer = StringBuffer();
-          if (hex.length == 7) buffer.write('ff'); // if no alpha provided, set to ff
+          if (hex.length == 7) {
+            buffer.write('ff'); // if no alpha provided, set to ff
+          }
           buffer.write(hex.replaceFirst('#', ''));
           return Color(int.parse(buffer.toString(), radix: 16));
         }
@@ -73,12 +82,12 @@ void main() {
             'backgroundColor': '#FFFF0000',
             'appBarColor': '#FF0000FF',
             'textColor': '#FF00FF00',
-          }
+          },
         };
 
         // Verify structure
         expect(userData.containsKey('colors'), isTrue);
-        final colors = userData['colors'] as Map<String, dynamic>;
+        final colors = userData['colors']! as Map<String, dynamic>;
         expect(colors.containsKey('backgroundColor'), isTrue);
         expect(colors.containsKey('appBarColor'), isTrue);
         expect(colors.containsKey('textColor'), isTrue);
@@ -92,8 +101,8 @@ void main() {
               'backgroundColor': '#FFFF0000',
               'appBarColor': '#FF0000FF',
               'textColor': '#FF00FF00',
-            }
-          }
+            },
+          },
         };
 
         // Encode to JSON
@@ -135,7 +144,10 @@ void main() {
         // Invalid hex formats
         final invalidHexes = ['FF0000', '#FF000', '#FF00000', 'invalid'];
         for (final hex in invalidHexes) {
-          expect(hex.startsWith('#') && (hex.length == 7 || hex.length == 9), isFalse);
+          expect(
+            hex.startsWith('#') && (hex.length == 7 || hex.length == 9),
+            isFalse,
+          );
         }
       });
 
@@ -172,7 +184,12 @@ void main() {
         const textColor = Colors.green;
 
         // Convert colors to hex
-        colorToHex(color) => '#${color.value.toRadixString(16).padLeft(8, '0').substring(2)}';
+        String colorToHex(Color color) {
+          final hexValue = color.toARGB32().toRadixString(16);
+          final paddedHex = hexValue.padLeft(8, '0');
+          return '#${paddedHex.substring(2)}';
+        }
+
         final backgroundColorHex = colorToHex(backgroundColor);
         final appBarColorHex = colorToHex(appBarColor);
         final textColorHex = colorToHex(textColor);
@@ -183,7 +200,7 @@ void main() {
             'backgroundColor': backgroundColorHex,
             'appBarColor': appBarColorHex,
             'textColor': textColorHex,
-          }
+          },
         };
 
         // Verify the structure
@@ -199,9 +216,12 @@ void main() {
           return Color(int.parse(buffer.toString(), radix: 16));
         }
 
-        final retrievedBackgroundColor = colorFromHex(userData['colors']!['backgroundColor']!);
-        final retrievedAppBarColor = colorFromHex(userData['colors']!['appBarColor']!);
-        final retrievedTextColor = colorFromHex(userData['colors']!['textColor']!);
+        final retrievedBackgroundColor =
+            colorFromHex(userData['colors']!['backgroundColor']!);
+        final retrievedAppBarColor =
+            colorFromHex(userData['colors']!['appBarColor']!);
+        final retrievedTextColor =
+            colorFromHex(userData['colors']!['textColor']!);
 
         // Verify colors match
         // ignore: deprecated_member_use
@@ -220,23 +240,25 @@ void main() {
               'backgroundColor': '#FFFF0000',
               'appBarColor': '#FF0000FF',
               'textColor': '#FF00FF00',
-            }
+            },
           },
           'user2@gmail.com': {
             'colors': {
               'backgroundColor': '#FFFFFF00',
               'appBarColor': '#FF800080',
               'textColor': '#FFFF8000',
-            }
-          }
+            },
+          },
         };
 
         // Verify structure
         expect(usersMap.containsKey('user1@gmail.com'), isTrue);
         expect(usersMap.containsKey('user2@gmail.com'), isTrue);
 
-        final user1Colors = usersMap['user1@gmail.com']!['colors'] as Map<String, dynamic>;
-        final user2Colors = usersMap['user2@gmail.com']!['colors'] as Map<String, dynamic>;
+        final user1Colors =
+            usersMap['user1@gmail.com']!['colors']! as Map<String, dynamic>;
+        final user2Colors =
+            usersMap['user2@gmail.com']!['colors']! as Map<String, dynamic>;
 
         expect(user1Colors['backgroundColor'], equals('#FFFF0000'));
         expect(user2Colors['backgroundColor'], equals('#FFFFFF00'));

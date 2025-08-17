@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class Registration extends StatelessWidget {
   const Registration({
-    super.key,
     required this.subText,
     required this.textButtonText,
     required this.onToggle,
+    super.key,
   });
 
   final String subText;
@@ -23,11 +23,12 @@ class Registration extends StatelessWidget {
             style: const TextStyle(color: Colors.grey),
           ),
           TextButton(
-              onPressed: onToggle,
-              child: Text(
-                textButtonText,
-                style: const TextStyle(color: Colors.deepPurple, fontSize: 14),
-              ))
+            onPressed: onToggle,
+            child: Text(
+              textButtonText,
+              style: const TextStyle(color: Colors.deepPurple, fontSize: 14),
+            ),
+          ),
         ],
       ),
     );

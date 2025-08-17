@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 
 class LoginButtons extends StatelessWidget {
   const LoginButtons({
-    super.key,
     required this.onLoginPressed,
     required this.isLogin,
     required this.onToggle,
+    super.key,
   });
   final VoidCallback onToggle;
   final VoidCallback onLoginPressed;
@@ -26,7 +26,9 @@ class LoginButtons extends StatelessWidget {
         const IconButtons(),
         const SizedBox(height: 10),
         Registration(
-          subText: isLogin ? S.of(context).dontHaveAccount : S.of(context).alreadyHaveAccount,
+          subText: isLogin
+              ? S.of(context).dontHaveAccount
+              : S.of(context).alreadyHaveAccount,
           textButtonText: isLogin ? S.of(context).signUp : S.of(context).login,
           onToggle: onToggle,
         ),

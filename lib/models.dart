@@ -12,7 +12,7 @@ class ColorConverter implements JsonConverter<Color, int> {
   Color fromJson(int json) => Color(json);
 
   @override
-  int toJson(Color color) => color.value;
+  int toJson(Color color) => color.toARGB32();
 }
 
 @freezed
@@ -23,7 +23,8 @@ class UserColors with _$UserColors {
     @ColorConverter() required Color textColor,
   }) = _UserColors;
 
-  factory UserColors.fromJson(Map<String, Object?> json) => _$UserColorsFromJson(json);
+  factory UserColors.fromJson(Map<String, Object?> json) =>
+      _$UserColorsFromJson(json);
 }
 
 @freezed
@@ -34,7 +35,8 @@ class UserData with _$UserData {
     required String password,
   }) = _UserData;
 
-  factory UserData.fromJson(Map<String, dynamic> json) => _$UserDataFromJson(json);
+  factory UserData.fromJson(Map<String, dynamic> json) =>
+      _$UserDataFromJson(json);
 }
 
 @freezed
@@ -43,5 +45,6 @@ class UsersMap with _$UsersMap {
     required Map<String, UserData> users,
   }) = _UsersMap;
 
-  factory UsersMap.fromJson(Map<String, dynamic> json) => _$UsersMapFromJson(json);
+  factory UsersMap.fromJson(Map<String, dynamic> json) =>
+      _$UsersMapFromJson(json);
 }

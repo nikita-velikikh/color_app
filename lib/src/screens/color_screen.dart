@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:color_aap/generated/l10n.dart';
 import 'package:color_aap/local_storage_service.dart';
 import 'package:color_aap/models.dart';
@@ -5,11 +7,10 @@ import 'package:color_aap/src/screens_login/auth_screen.dart';
 import 'package:color_aap/src/widgets/custom_app_bar.dart';
 import 'package:color_aap/src/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
 
 class ColorScreen extends StatefulWidget {
   final String email;
-  const ColorScreen({super.key, required this.email});
+  const ColorScreen({required this.email, super.key});
 
   @override
   State<ColorScreen> createState() => _ColorScreenState();
@@ -19,6 +20,7 @@ class _ColorScreenState extends State<ColorScreen> {
   Color backgroundColor = Colors.black;
   Color appBarColor = Colors.white;
   Color textColor = Colors.white;
+  int counter = 0;
 
   @override
   void initState() {
@@ -26,19 +28,19 @@ class _ColorScreenState extends State<ColorScreen> {
     _loadAndShowUserColors();
   }
 
-  void _loadAndShowUserColors() async {
-    try{
-    final localStorageService = LocalStorageService();
-    final userColors = await localStorageService.getUserColors(widget.email);
-    setState(() {
-      backgroundColor = userColors.backgroundColor;
-      appBarColor = userColors.appBarColor;
+  Future<void> _loadAndShowUserColors() async {
+    try {
+      final localStorageService = LocalStorageService();
+      final userColors = await localStorageService.getUserColors(widget.email);
+      setState(() {
+        backgroundColor = userColors.backgroundColor;
+        appBarColor = userColors.appBarColor;
         textColor = userColors.textColor;
       });
     } catch (e) {
       debugPrint('Error in _loadAndShowUserColors: $e');
-      if (context.mounted) {
-      Navigator.pushReplacement(
+      if (mounted) {
+        await Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const AuthScreen()),
         );
@@ -51,7 +53,7 @@ class _ColorScreenState extends State<ColorScreen> {
     fontSize: 25,
   );
   static const Size buttonSize = Size(200, 50);
-  int counter = 0;
+
   void _changeColor(Color color) {
     setState(() => backgroundColor = color);
     saveColor();
@@ -82,9 +84,9 @@ class _ColorScreenState extends State<ColorScreen> {
 
   void onTapCounterReset() => setState(() => counter = 0);
 
-  void onTapCounterIncrement() => counter++;
+  void onTapCounterIncrement() => setState(() => counter++);
 
-  void saveColor() async {
+  Future<void> saveColor() async {
     final localStorageService = LocalStorageService();
 
     final userColors = UserColors(
@@ -125,7 +127,6 @@ class _ColorScreenState extends State<ColorScreen> {
             ),
           ),
         ),
-        // backgroundColor: _backgroundColor,
         body: Center(
           child: AnimatedContainer(
             duration: const Duration(seconds: 1),

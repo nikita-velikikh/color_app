@@ -13,7 +13,7 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  var isLogin = true;
+  bool isLogin = true;
   final formKey = GlobalKey<FormState>();
   final service = LocalStorageService();
 
@@ -21,40 +21,43 @@ class _AuthScreenState extends State<AuthScreen> {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
-  void onLoginPressed() async {
+  Future<void> onLoginPressed() async {
     if (formKey.currentState!.validate()) {
       if (isLogin) {
-        _handleLogin();
+        await _handleLogin();
       } else {
-        _handleCreateUser();
+        await _handleCreateUser();
       }
     }
   }
 
-  void _handleLogin() async {
+  Future<void> _handleLogin() async {
     final exists = await service.checkUserExists(emailController.text);
     if (exists) {
-      saveLastEmailAndNavigate(emailController.text);
+      await saveLastEmailAndNavigate(emailController.text);
     } else {
       handleError("User not found");
     }
   }
 
-  void _handleCreateUser() async {
-    final success = await service.createUser(emailController.text, passwordController.text);
+  Future<void> _handleCreateUser() async {
+    final success =
+        await service.createUser(emailController.text, passwordController.text);
     if (success) {
-      saveLastEmailAndNavigate(emailController.text);
+      await saveLastEmailAndNavigate(emailController.text);
     } else {
       handleError("User with this email already exists");
     }
   }
 
-  void saveLastEmailAndNavigate(String email) async {
+  Future<void> saveLastEmailAndNavigate(String email) async {
     await service.saveLastEmail(email);
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => ColorScreen(email: email)),
-    );
+    if (mounted) {
+      await Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => ColorScreen(email: email)),
+      );
+    }
   }
 
   void handleError(String message) {

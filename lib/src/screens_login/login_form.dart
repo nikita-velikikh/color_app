@@ -1,20 +1,21 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:flutter/material.dart';
+
+import 'package:color_aap/generated/l10n.dart';
 import 'package:color_aap/src/screens_login/custom_field.dart';
 import 'package:color_aap/src/screens_login/logo_text.dart';
 import 'package:color_aap/src/screens_login/password_info.dart';
-import 'package:color_aap/src/screens_login/validation.dart';
 import 'package:color_aap/src/screens_login/sing_up_password_field.dart';
-import 'package:color_aap/generated/l10n.dart';
+import 'package:color_aap/src/screens_login/validation.dart';
+import 'package:flutter/material.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({
-    super.key,
     required this.formKey,
     required this.isLogin,
     required this.emailController,
     required this.passwordController,
     required this.repeatPasswordController,
+    super.key,
   });
 
   final GlobalKey<FormState> formKey;
@@ -78,13 +79,13 @@ class _LoginFormState extends State<LoginForm> {
                   controller: widget.repeatPasswordController,
                   onChanged: (password) {},
                   validator: (value) => validateRepeatPassword(
-                      value, widget.passwordController.text),
-                )
+                      value, widget.passwordController.text,),
+                ),
               ],
               const SizedBox(height: 7),
               const PasswordInfo(),
             ],
           ),
-        ));
+        ),);
   }
 }

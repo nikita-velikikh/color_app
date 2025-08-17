@@ -9,12 +9,10 @@ class CustomField extends StatefulWidget {
   final String? Function(String?)? validator;
 
   const CustomField({
-    super.key,
+    required this.hintText, required this.onChanged, super.key,
     this.label,
-    required this.hintText,
     this.isPassword = false,
     this.controller,
-    required this.onChanged,
     this.validator,
   });
 
@@ -54,7 +52,6 @@ class _CustomFieldState extends State<CustomField> {
                 borderRadius: BorderRadius.circular(5),
                 borderSide: const BorderSide(
                   color: Colors.grey,
-                  width: 1.0,
                 ),
               ),
               errorStyle: const TextStyle(color: Colors.red),

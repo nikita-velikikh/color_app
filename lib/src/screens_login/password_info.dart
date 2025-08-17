@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:color_aap/generated/l10n.dart';
+import 'package:flutter/material.dart';
 
 class PasswordInfo extends StatefulWidget {
   const PasswordInfo({super.key});
@@ -33,7 +33,7 @@ class PasswordInfoState extends State<PasswordInfo> {
                 ),
               ),
               const SizedBox(width: 7),
-               Text(
+              Text(
                 S.of(context).rememberMe,
                 style: const TextStyle(fontSize: 14),
               ),
@@ -41,9 +41,9 @@ class PasswordInfoState extends State<PasswordInfo> {
           ),
           TextButton(
             onPressed: () {},
-            child:  Text(
-            S.of(context).forgotPassword,
-              style:const TextStyle(fontSize: 14, color: Colors.grey),
+            child: Text(
+              S.of(context).forgotPassword,
+              style: const TextStyle(fontSize: 14, color: Colors.grey),
             ),
           ),
         ],
