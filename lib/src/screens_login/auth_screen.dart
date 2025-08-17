@@ -20,6 +20,7 @@ class _AuthScreenState extends State<AuthScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  String? currentError;
 
   Future<void> onLoginPressed() async {
     if (formKey.currentState!.validate()) {
@@ -61,16 +62,15 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   void handleError(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-      ),
-    );
+    setState(() {
+      currentError = message;
+    });
   }
 
   void onChangeLogin() {
     setState(() {
       isLogin = !isLogin;
+      currentError = null;
 
       passwordController.clear();
       confirmPasswordController.clear();
@@ -93,6 +93,7 @@ class _AuthScreenState extends State<AuthScreen> {
               emailController: emailController,
               passwordController: passwordController,
               repeatPasswordController: confirmPasswordController,
+              currentError: currentError,
             ),
             LoginButtons(
               isLogin: isLogin,

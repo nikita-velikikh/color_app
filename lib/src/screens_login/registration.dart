@@ -18,10 +18,10 @@ class Registration extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            subText,
-            style: const TextStyle(color: Colors.grey),
-          ),
+          // Text(
+          //   subText,
+          //   style: const TextStyle(color: Colors.grey),
+          // ),
           TextButton(
             onPressed: onToggle,
             child: Text(
