@@ -64,12 +64,8 @@ class _LoginFormState extends State<LoginForm> {
               controller: widget.emailController,
               validator: validateEmail,
               onChanged: (email) {},
+              currentError: widget.currentError,
             ),
-            if (widget.currentError != null)
-              Text(
-                widget.currentError!,
-                style: const TextStyle(color: Colors.red),
-              ),
             const SizedBox(height: 12),
             CustomField(
               controller: widget.passwordController,
