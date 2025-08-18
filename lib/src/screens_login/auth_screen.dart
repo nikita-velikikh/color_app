@@ -1,8 +1,8 @@
+import 'package:color_aap/hashing.service.dart';
 import 'package:color_aap/local_storage_service.dart';
 import 'package:color_aap/src/screens/color_screen.dart';
 import 'package:color_aap/src/screens_login/login_buttons.dart';
 import 'package:color_aap/src/screens_login/login_form.dart';
-
 import 'package:flutter/material.dart';
 
 class AuthScreen extends StatefulWidget {
@@ -35,7 +35,18 @@ class _AuthScreenState extends State<AuthScreen> {
   Future<void> _handleLogin() async {
     final exists = await service.checkUserExists(emailController.text);
     if (exists) {
-      await saveLastEmailAndNavigate(emailController.text);
+      final userData = await service.getUserData(emailController.text);
+      final passwordValid = await HashingService.verifyPassword(
+        passwordController.text,
+        userData.password,
+      );
+
+      if (passwordValid) {
+        await saveLastEmailAndNavigate(emailController.text);
+      }
+      else{
+        handleError("Invalid password");
+      }
     } else {
       handleError("User not found");
     }
