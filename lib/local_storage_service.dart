@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:color_aap/hashing.service.dart';
 import 'package:color_aap/models.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,8 +39,11 @@ class LocalStorageService {
       appBarColor: Colors.white,
       textColor: Colors.black,
     );
+
+    final hashedPassword = HashingService.hashPassword(password);
+
     final userData =
-        UserData(password: password, email: email, colors: defaultColors);
+        UserData(password: hashedPassword, email: email, colors: defaultColors);
 
     final updatedUsersMap = usersMap.copyWith(
       users: Map.from(usersMap.users)..[email] = userData,
