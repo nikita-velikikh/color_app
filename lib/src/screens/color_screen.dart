@@ -149,6 +149,15 @@ class _ColorScreenState extends State<ColorScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                   Text(
+                    'Hello',
+                    style: TextStyle(
+                      color: textColor,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
                   GestureDetector(
                     child: AnimatedDefaultTextStyle(
                       duration: const Duration(milliseconds: 500),
