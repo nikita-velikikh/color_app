@@ -3,6 +3,8 @@ import 'package:color_aap/local_storage_service.dart';
 import 'package:color_aap/src/screens_login/auth_screen.dart';
 import 'package:flutter/material.dart';
 
+/// Custom app bar widget with user management actions 
+/// and customizable appearance
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
     required this.appBarText,
@@ -19,6 +21,7 @@ class CustomAppBar extends StatelessWidget {
   final bool isCenterTirtle;
   final String userEmail;
 
+  /// Navigates to the authentication screen, replacing the current route
   Future<void> navigateToAuthScreen(BuildContext context) async {
     await Navigator.pushReplacement(
       context,
@@ -26,10 +29,12 @@ class CustomAppBar extends StatelessWidget {
     );
   }
 
+  /// Closes the current dialog or navigates back
   void navigatePop(BuildContext context) {
     Navigator.pop(context);
   }
 
+  /// Shows a confirmation dialog for deleting user account
   void showDeleteDialog(BuildContext context) {
     showDialog(
       context: context,

@@ -8,6 +8,7 @@ import 'package:color_aap/src/screens_login/sing_up_password_field.dart';
 import 'package:color_aap/src/screens_login/validation.dart';
 import 'package:flutter/material.dart';
 
+/// Form widget for user authentication with email and password fields
 class LoginForm extends StatefulWidget {
   const LoginForm({
     required this.formKey,
@@ -30,7 +31,9 @@ class LoginForm extends StatefulWidget {
   State<LoginForm> createState() => _LoginFormState();
 }
 
+/// State class for LoginForm that manages form controllers and UI layout
 class _LoginFormState extends State<LoginForm> {
+  /// Properly disposes of all text controllers to prevent memory leaks
   @override
   void dispose() {
     widget.passwordController.dispose();

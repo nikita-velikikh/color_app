@@ -4,31 +4,37 @@ import 'package:color_aap/models.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Service for managing local storage operations 
+/// including user data and preferences
 class LocalStorageService {
   static const String _usersKey = 'users';
   static const String _lastEmailKey = "last_email";
 
-  /// Saves the last email used to login.
+  /// Saves the last email used for login to persistent storage
   Future<void> saveLastEmail(String email) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_lastEmailKey, email);
   }
 
+  /// Removes the last email from persistent storage
   Future<void> deleteLastEmail() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_lastEmailKey);
   }
 
+  /// Retrieves the last email used for login from persistent storage
   Future<String?> getLastEmail() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString(_lastEmailKey);
   }
 
+  /// Checks if a user with the given email already exists in the system
   Future<bool> checkUserExists(String email) async {
     final usersMap = await getUsersMap();
     return usersMap.users.containsKey(email);
   }
 
+  /// Creates a new user account with default color preferences
   Future<bool> createUser(String email, String password) async {
     final usersMap = await getUsersMap();
     if (usersMap.users.containsKey(email)) {
@@ -53,11 +59,13 @@ class LocalStorageService {
     return result;
   }
 
+  /// Retrieves the color preferences for a specific user
   Future<UserColors> getUserColors(String email) async {
     final userData = await getUserData(email);
     return userData.colors;
   }
 
+  /// Updates the color preferences for a specific user
   Future<bool> saveUserColors(String email, UserColors colors) async {
     final usersMap = await getUsersMap();
     final userData = await getUserData(email);
@@ -85,6 +93,7 @@ class LocalStorageService {
     return userData;
   }
 
+  /// Retrieves the complete users map from persistent storage
   Future<UsersMap> getUsersMap() async {
     final prefs = await SharedPreferences.getInstance();
     final usersMapJson = prefs.getString(_usersKey);
@@ -96,6 +105,7 @@ class LocalStorageService {
     return UsersMap.fromJson(usersMapJsonDecoded as Map<String, dynamic>);
   }
 
+  /// Saves the complete users map to persistent storage
   Future<bool> saveUsersMap(UsersMap usersMap) async {
     final prefs = await SharedPreferences.getInstance();
     final usersMapJson = usersMap.toJson();
@@ -104,6 +114,7 @@ class LocalStorageService {
     return result;
   }
 
+  /// Removes user data for the specified email from the system
   Future<void> deleteUserData(String email) async {
     final usersMap = await getUsersMap();
 

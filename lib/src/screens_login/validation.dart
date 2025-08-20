@@ -1,3 +1,4 @@
+/// Validates email format using regex pattern
 String? validateEmail(String? input) {
   const emailRegex = r'^[^@]+@[^@]+\.[^@]+$';
   if (input == null || input.trim().isEmpty) {
@@ -11,6 +12,7 @@ String? validateEmail(String? input) {
   return null;
 }
 
+/// Validates password strength and complexity requirements
 String? validatePassword(String? input) {
   if (input == null || input.isEmpty) {
     return 'Please enter your password';
@@ -28,6 +30,7 @@ String? validatePassword(String? input) {
   return null;
 }
 
+/// Validates that repeated password matches the original password
 String? validateRepeatPassword(String? value, String originalPassword) {
   if (value == null || value.isEmpty) {
     return "Please repeat the password";

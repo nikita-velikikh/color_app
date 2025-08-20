@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Widget that displays social login buttons for GitHub and GitLab
 class IconButtons extends StatelessWidget {
   const IconButtons({super.key});
 

@@ -5,6 +5,7 @@ import 'package:color_aap/src/screens_login/login_buttons.dart';
 import 'package:color_aap/src/screens_login/login_form.dart';
 import 'package:flutter/material.dart';
 
+/// Main authentication screen that handles both login and registration
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
 
@@ -12,6 +13,7 @@ class AuthScreen extends StatefulWidget {
   State<AuthScreen> createState() => _AuthScreenState();
 }
 
+/// State class for AuthScreen that manages authentication logic and form state
 class _AuthScreenState extends State<AuthScreen> {
   bool isLogin = true;
   final formKey = GlobalKey<FormState>();
@@ -22,6 +24,7 @@ class _AuthScreenState extends State<AuthScreen> {
   final confirmPasswordController = TextEditingController();
   String? currentError;
 
+  /// Handles form submission for both login and registration
   Future<void> onLoginPressed() async {
     if (formKey.currentState!.validate()) {
       if (isLogin) {
@@ -32,6 +35,7 @@ class _AuthScreenState extends State<AuthScreen> {
     }
   }
 
+  /// Authenticates existing user with email and password
   Future<void> _handleLogin() async {
     final exists = await service.checkUserExists(emailController.text);
     if (exists) {
@@ -43,8 +47,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
       if (passwordValid) {
         await saveLastEmailAndNavigate(emailController.text);
-      }
-      else{
+      } else {
         handleError("Invalid password");
       }
     } else {
@@ -52,6 +55,7 @@ class _AuthScreenState extends State<AuthScreen> {
     }
   }
 
+  /// Creates a new user account with the provided credentials
   Future<void> _handleCreateUser() async {
     final success =
         await service.createUser(emailController.text, passwordController.text);
@@ -62,6 +66,7 @@ class _AuthScreenState extends State<AuthScreen> {
     }
   }
 
+  /// Saves the authenticated user's email and navigates to the color screen
   Future<void> saveLastEmailAndNavigate(String email) async {
     await service.saveLastEmail(email);
     if (mounted) {
@@ -72,12 +77,14 @@ class _AuthScreenState extends State<AuthScreen> {
     }
   }
 
+  /// Displays error messages to the user
   void handleError(String message) {
     setState(() {
       currentError = message;
     });
   }
 
+  /// Toggles between login and registration modes
   void onChangeLogin() {
     setState(() {
       isLogin = !isLogin;

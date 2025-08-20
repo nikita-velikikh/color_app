@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Customizable elevated button widget with configurable styling and padding
 class CustomElevatedButton extends StatelessWidget {
   const CustomElevatedButton({
     required this.buttonTitle,

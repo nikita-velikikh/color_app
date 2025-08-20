@@ -8,6 +8,8 @@ import 'package:color_aap/src/widgets/custom_app_bar.dart';
 import 'package:color_aap/src/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 
+/// Main screen where users can customize app colors and
+/// interact with color-changing elements
 class ColorScreen extends StatefulWidget {
   final String email;
   const ColorScreen({required this.email, super.key});
@@ -16,6 +18,8 @@ class ColorScreen extends StatefulWidget {
   State<ColorScreen> createState() => _ColorScreenState();
 }
 
+/// State class for ColorScreen that manages color states, counter,
+///  and user interactions
 class _ColorScreenState extends State<ColorScreen> {
   Color backgroundColor = Colors.black;
   Color appBarColor = Colors.white;
@@ -28,6 +32,7 @@ class _ColorScreenState extends State<ColorScreen> {
     _loadAndShowUserColors();
   }
 
+  /// Loads user's saved color preferences from local storage
   Future<void> _loadAndShowUserColors() async {
     try {
       final localStorageService = LocalStorageService();
@@ -54,21 +59,25 @@ class _ColorScreenState extends State<ColorScreen> {
   );
   static const Size buttonSize = Size(200, 50);
 
+  /// Changes the background color and saves the change
   void _changeColor(Color color) {
     setState(() => backgroundColor = color);
     saveColor();
   }
 
+  /// Changes the app bar color and saves the change
   void _changeColorAppBar(Color color) {
     setState(() => appBarColor = color);
     saveColor();
   }
 
+  /// Changes the text color and saves the change
   void _changeColorText(Color color) {
     setState(() => textColor = color);
     saveColor();
   }
 
+  /// Generates a random color using ARGB values
   Color _generateColorRandom() {
     final Random random = Random();
     final color = Color.fromARGB(
@@ -80,12 +89,16 @@ class _ColorScreenState extends State<ColorScreen> {
     return color;
   }
 
+  /// Button action handler that changes the background color
   void buttonAction(Color color) => _changeColor(color);
 
+  /// Resets the counter to zero
   void onTapCounterReset() => setState(() => counter = 0);
 
+  /// Increments the counter by one
   void onTapCounterIncrement() => setState(() => counter++);
 
+  /// Saves the current color preferences to local storage
   Future<void> saveColor() async {
     final localStorageService = LocalStorageService();
 

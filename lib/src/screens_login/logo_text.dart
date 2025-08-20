@@ -2,6 +2,7 @@
 import 'package:color_aap/src/screens_login/logo_image.dart';
 import 'package:flutter/material.dart';
 
+/// Widget that displays the app logo image and customizable title/subtitle text
 class LogoText extends StatelessWidget {
   const LogoText({
     required this.title,
