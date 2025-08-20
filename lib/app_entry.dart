@@ -5,6 +5,7 @@ import 'package:color_aap/src/screens_login/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+/// Main application widget that handles authentication state and routing
 class AppEntry extends StatefulWidget {
   const AppEntry({super.key});
 
@@ -12,6 +13,8 @@ class AppEntry extends StatefulWidget {
   State<AppEntry> createState() => _AppEntryState();
 }
 
+/// State class for AppEntry that manages authentication
+///  flow and app initialization
 class _AppEntryState extends State<AppEntry> {
   String? lastEmail;
   bool isLoading = true;
@@ -22,6 +25,8 @@ class _AppEntryState extends State<AppEntry> {
     _checkLastEmail();
   }
 
+  /// Checks if user is already logged in by retrieving 
+  /// the last email from storage
   Future<void> _checkLastEmail() async {
     final service = LocalStorageService();
     final email = await service.getLastEmail();

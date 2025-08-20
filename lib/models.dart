@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'models.freezed.dart';
 part 'models.g.dart';
 
-// Color converter for serialization
+/// Converts Color objects to/from JSON for serialization purposes
 class ColorConverter implements JsonConverter<Color, int> {
   const ColorConverter();
 
@@ -16,6 +16,8 @@ class ColorConverter implements JsonConverter<Color, int> {
 }
 
 @freezed
+
+/// Data model representing user's color preferences for the app
 class UserColors with _$UserColors {
   const factory UserColors({
     @ColorConverter() required Color backgroundColor,
@@ -28,6 +30,8 @@ class UserColors with _$UserColors {
 }
 
 @freezed
+
+/// Data model representing user account information and preferences
 class UserData with _$UserData {
   const factory UserData({
     required UserColors colors,
@@ -40,6 +44,8 @@ class UserData with _$UserData {
 }
 
 @freezed
+
+/// Container model that holds a map of all users and their data
 class UsersMap with _$UsersMap {
   const factory UsersMap({
     required Map<String, UserData> users,

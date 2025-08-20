@@ -1,6 +1,7 @@
 import 'package:color_aap/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
+/// Widget that displays the main action button and decorative divider lines
 class ButtonsAndLines extends StatelessWidget {
   const ButtonsAndLines({
     required this.onTap,

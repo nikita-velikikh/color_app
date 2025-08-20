@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Widget that displays a registration/login toggle button with customizable text
 class Registration extends StatelessWidget {
   const Registration({
     required this.subText,

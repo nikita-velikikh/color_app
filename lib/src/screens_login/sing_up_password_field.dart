@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// Password input field specifically designed for sign-up 
+/// forms with visibility toggle
 class SingUpPasswordField extends StatefulWidget {
   final String? label;
   final String hintText;
@@ -19,6 +21,7 @@ class SingUpPasswordField extends StatefulWidget {
   State<SingUpPasswordField> createState() => _SingUpPasswordField();
 }
 
+/// State class for SingUpPasswordField that manages password visibility state
 class _SingUpPasswordField extends State<SingUpPasswordField> {
   bool _isObscure = true;
 

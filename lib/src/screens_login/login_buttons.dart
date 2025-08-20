@@ -4,6 +4,8 @@ import 'package:color_aap/src/screens_login/icon_buttons.dart';
 import 'package:color_aap/src/screens_login/registration.dart';
 import 'package:flutter/material.dart';
 
+/// Container widget that displays all authentication-related
+///  buttons and controls
 class LoginButtons extends StatelessWidget {
   const LoginButtons({
     required this.onLoginPressed,
