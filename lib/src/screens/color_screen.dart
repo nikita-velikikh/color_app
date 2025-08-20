@@ -150,7 +150,7 @@ class _ColorScreenState extends State<ColorScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                    Text(
-                    'Hello',
+                    'Hello there',
                     style: TextStyle(
                       color: textColor,
                       fontSize: 24,
