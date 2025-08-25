@@ -1,5 +1,6 @@
 import 'package:color_aap/hashing.service.dart';
 import 'package:color_aap/local_storage_service.dart';
+import 'package:color_aap/logic/auth_logic.dart';
 import 'package:color_aap/src/screens/color_screen.dart';
 import 'package:color_aap/src/screens_login/login_buttons.dart';
 import 'package:color_aap/src/screens_login/login_form.dart';
@@ -17,12 +18,19 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   bool isLogin = true;
   final formKey = GlobalKey<FormState>();
-  final service = LocalStorageService();
+  final _storageService = LocalStorageService();
+  late AuthLogic _authLogic;
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   String? currentError;
+
+  @override
+  void initState() {
+    super.initState();
+    _authLogic = AuthLogic(storageService: _storageService);
+  }
 
   /// Handles form submission for both login and registration
   Future<void> onLoginPressed() async {
@@ -37,18 +45,22 @@ class _AuthScreenState extends State<AuthScreen> {
 
   /// Authenticates existing user with email and password
   Future<void> _handleLogin() async {
-    final exists = await service.checkUserExists(emailController.text);
+    final exists = await _authLogic.userExists(emailController.text);
     if (exists) {
-      final userData = await service.getUserData(emailController.text);
-      final passwordValid = await HashingService.verifyPassword(
-        passwordController.text,
-        userData.password,
-      );
+      final userData = await _authLogic.getUserData(emailController.text);
+      if (userData != null) {
+        final passwordValid = await HashingService.verifyPassword(
+          passwordController.text,
+          userData.password,
+        );
 
-      if (passwordValid) {
-        await saveLastEmailAndNavigate(emailController.text);
+        if (passwordValid) {
+          await saveLastEmailAndNavigate(emailController.text);
+        } else {
+          handleError("Invalid password");
+        }
       } else {
-        handleError("Invalid password");
+        handleError("User data not found");
       }
     } else {
       handleError("User not found");
@@ -57,8 +69,11 @@ class _AuthScreenState extends State<AuthScreen> {
 
   /// Creates a new user account with the provided credentials
   Future<void> _handleCreateUser() async {
-    final success =
-        await service.createUser(emailController.text, passwordController.text);
+    final success = await _authLogic.createUser(
+      emailController.text,
+      passwordController.text,
+    );
+
     if (success) {
       await saveLastEmailAndNavigate(emailController.text);
     } else {
@@ -68,7 +83,8 @@ class _AuthScreenState extends State<AuthScreen> {
 
   /// Saves the authenticated user's email and navigates to the color screen
   Future<void> saveLastEmailAndNavigate(String email) async {
-    await service.saveLastEmail(email);
+    await _authLogic.saveLastEmail(email);
+
     if (mounted) {
       await Navigator.pushReplacement(
         context,

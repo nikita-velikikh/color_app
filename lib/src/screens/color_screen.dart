@@ -83,9 +83,6 @@ class _ColorScreenState extends State<ColorScreen> {
     );
   }
 
-  /// Generates a random color using ColorLogic
-  Color _generateColorRandom() => _colorLogic.generateRandomColor();
-
   /// Button action handler that changes the background color
   void buttonAction(Color color) => _changeColor(color);
 
@@ -183,7 +180,8 @@ class _ColorScreenState extends State<ColorScreen> {
                   ),
                   const SizedBox(height: 40),
                   GestureDetector(
-                    onTap: () => _changeColorText(_generateColorRandom()),
+                    onTap: () =>
+                        _changeColorText(_colorLogic.generateRandomColor()),
                     child: Text(
                       S.of(context).colorChangedTimes(counter),
                       style: TextStyle(color: textColor, fontSize: 18),
