@@ -48,48 +48,35 @@ class _AuthScreenState extends State<AuthScreen> {
 
   /// Authenticates existing user with email and password
   Future<void> _handleLogin() async {
-    final exists = await _authLogic.userExists(emailController.text);
-    if (exists) {
-      final userData = await _authLogic.getUserData(emailController.text);
-      if (userData != null) {
-        final passwordValid = await HashingService.verifyPassword(
-          passwordController.text,
-          userData.password,
-        );
-
-        if (passwordValid) {
-          await saveLastEmailAndNavigate(emailController.text);
-        } else {
-          handleError("Invalid password");
-        }
-      } else {
-        handleError("User data not found");
-      }
+    final email = emailController.text;
+    final password = passwordController.text;
+    final loginError = await _authLogic.handleLogin(email, password);
+    if (loginError != null) {
+      handleError(loginError);
     } else {
-      handleError("User not found");
+      navigate(email);
     }
   }
 
   /// Creates a new user account with the provided credentials
   Future<void> _handleCreateUser() async {
+    final email = emailController.text;
+    final password = passwordController.text;
     final success = await _authLogic.createUser(
-      emailController.text,
-      passwordController.text,
+      email,
+      password,
     );
 
     if (success) {
-      await saveLastEmailAndNavigate(emailController.text);
+      navigate(email);
     } else {
       handleError("User with this email already exists");
     }
   }
 
-  /// Saves the authenticated user's email and navigates to the color screen
-  Future<void> saveLastEmailAndNavigate(String email) async {
-    await _authLogic.saveLastEmail(email);
-
+  void navigate(String email) {
     if (mounted) {
-      await Navigator.pushReplacement(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => ColorScreen(email: email)),
       );

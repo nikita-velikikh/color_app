@@ -15,6 +15,31 @@ class AuthLogic {
     await storageService.saveLastEmail(email);
   }
 
+  /// Handles login
+  Future<String?> handleLogin(String email, String password) async {
+    final exists = await userExists(email);
+    if (exists) {
+      final userData = await getUserData(email);
+      if (userData != null) {
+        final passwordValid = await hashingService.verifyPassword(
+          password,
+          userData.password,
+        );
+
+        if (passwordValid) {
+          await saveLastEmail(email);
+        } else {
+          return "Invalid password";
+        }
+      } else {
+        return "User data not found";
+      }
+    } else {
+      return "User not found";
+    }
+    return null;
+  }
+
   /// Gets the last saved email
   Future<String?> getLastEmail() async {
     return storageService.getLastEmail();
@@ -28,7 +53,11 @@ class AuthLogic {
   /// Creates a new user
   Future<bool> createUser(String email, String password) async {
     final hashedPassword = hashingService.hashPassword(password);
-    return storageService.createUser(email, hashedPassword);
+    final success = await storageService.createUser(email, hashedPassword);
+    if (success) {
+      await saveLastEmail(email);
+    }
+    return success;
   }
 
   /// Gets user data
