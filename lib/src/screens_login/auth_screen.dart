@@ -29,7 +29,10 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   void initState() {
     super.initState();
-    _authLogic = AuthLogic(storageService: _storageService);
+    _authLogic = AuthLogic(
+      storageService: _storageService,
+      hashingService: HashingService(),
+    );
   }
 
   /// Handles form submission for both login and registration

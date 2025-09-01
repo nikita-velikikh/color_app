@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 
 class ColorLogic {
   final String email;
-  final LocalStorageService _storageService;
+  final LocalStorageService storageService;
 
   ColorLogic({
     required this.email,
-    required LocalStorageService storageService,
-  }) : _storageService = storageService;
+    required this.storageService,
+  });
 
   /// Generates a random color using ARGB values
   Color generateRandomColor() {
@@ -26,7 +26,7 @@ class ColorLogic {
   /// Loads user's saved color preferences from local storage
   Future<UserColors?> loadUserColors() async {
     try {
-      return await _storageService.getUserColors(email);
+      return await storageService.getUserColors(email);
     } catch (e) {
       debugPrint('Error in loadUserColors: $e');
       return null;
@@ -45,6 +45,6 @@ class ColorLogic {
       textColor: textColor,
     );
 
-    await _storageService.saveUserColors(email, userColors);
+    await storageService.saveUserColors(email, userColors);
   }
 }
