@@ -1,14 +1,15 @@
 import 'dart:convert';
-import 'package:color_aap/hashing.service.dart';
 import 'package:color_aap/models.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Service for managing local storage operations 
+/// Service for managing local storage operations
 /// including user data and preferences
 class LocalStorageService {
   static const String _usersKey = 'users';
   static const String _lastEmailKey = "last_email";
+
+  LocalStorageService();
 
   /// Saves the last email used for login to persistent storage
   Future<void> saveLastEmail(String email) async {
@@ -35,7 +36,7 @@ class LocalStorageService {
   }
 
   /// Creates a new user account with default color preferences
-  Future<bool> createUser(String email, String password) async {
+  Future<bool> createUser(String email, String hashedPassword) async {
     final usersMap = await getUsersMap();
     if (usersMap.users.containsKey(email)) {
       return false;
@@ -45,8 +46,6 @@ class LocalStorageService {
       appBarColor: Colors.white,
       textColor: Colors.black,
     );
-
-    final hashedPassword = HashingService.hashPassword(password);
 
     final userData =
         UserData(password: hashedPassword, email: email, colors: defaultColors);

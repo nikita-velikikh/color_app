@@ -1,9 +1,6 @@
-import 'dart:math';
-
 import 'package:color_aap/generated/l10n.dart';
 import 'package:color_aap/local_storage_service.dart';
-import 'package:color_aap/models.dart';
-import 'package:color_aap/src/screens_login/auth_screen.dart';
+import 'package:color_aap/logic/color_logic.dart';
 import 'package:color_aap/src/widgets/custom_app_bar.dart';
 import 'package:color_aap/src/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
@@ -25,31 +22,28 @@ class _ColorScreenState extends State<ColorScreen> {
   Color appBarColor = Colors.white;
   Color textColor = Colors.white;
   int counter = 0;
+  late ColorLogic _colorLogic;
+  final _storageService = LocalStorageService();
 
   @override
   void initState() {
     super.initState();
+    _colorLogic = ColorLogic(
+      email: widget.email,
+      storageService: _storageService,
+    );
     _loadAndShowUserColors();
   }
 
   /// Loads user's saved color preferences from local storage
   Future<void> _loadAndShowUserColors() async {
-    try {
-      final localStorageService = LocalStorageService();
-      final userColors = await localStorageService.getUserColors(widget.email);
+    final userColors = await _colorLogic.loadUserColors();
+    if (userColors != null) {
       setState(() {
         backgroundColor = userColors.backgroundColor;
         appBarColor = userColors.appBarColor;
         textColor = userColors.textColor;
       });
-    } catch (e) {
-      debugPrint('Error in _loadAndShowUserColors: $e');
-      if (mounted) {
-        await Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const AuthScreen()),
-        );
-      }
     }
   }
 
@@ -62,31 +56,31 @@ class _ColorScreenState extends State<ColorScreen> {
   /// Changes the background color and saves the change
   void _changeColor(Color color) {
     setState(() => backgroundColor = color);
-    saveColor();
+    _colorLogic.saveColor(
+      backgroundColor: backgroundColor,
+      appBarColor: appBarColor,
+      textColor: textColor,
+    );
   }
 
   /// Changes the app bar color and saves the change
   void _changeColorAppBar(Color color) {
     setState(() => appBarColor = color);
-    saveColor();
+    _colorLogic.saveColor(
+      backgroundColor: backgroundColor,
+      appBarColor: appBarColor,
+      textColor: textColor,
+    );
   }
 
   /// Changes the text color and saves the change
   void _changeColorText(Color color) {
     setState(() => textColor = color);
-    saveColor();
-  }
-
-  /// Generates a random color using ARGB values
-  Color _generateColorRandom() {
-    final Random random = Random();
-    final color = Color.fromARGB(
-      255,
-      random.nextInt(256),
-      random.nextInt(256),
-      random.nextInt(256),
+    _colorLogic.saveColor(
+      backgroundColor: backgroundColor,
+      appBarColor: appBarColor,
+      textColor: textColor,
     );
-    return color;
   }
 
   /// Button action handler that changes the background color
@@ -98,30 +92,14 @@ class _ColorScreenState extends State<ColorScreen> {
   /// Increments the counter by one
   void onTapCounterIncrement() => setState(() => counter++);
 
-  /// Saves the current color preferences to local storage
-  Future<void> saveColor() async {
-    final localStorageService = LocalStorageService();
-
-    final userColors = UserColors(
-      backgroundColor: backgroundColor,
-      appBarColor: appBarColor,
-      textColor: textColor,
-    );
-
-    await localStorageService.saveUserColors(
-      widget.email,
-      userColors,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _changeColor(_generateColorRandom());
+        _changeColor(_colorLogic.generateRandomColor());
         onTapCounterIncrement();
-        _changeColorText(_generateColorRandom());
-        _changeColorText(_generateColorRandom());
+        _changeColorText(_colorLogic.generateRandomColor());
+        _changeColorText(_colorLogic.generateRandomColor());
       },
       child: Scaffold(
         appBar: PreferredSize(
@@ -129,7 +107,7 @@ class _ColorScreenState extends State<ColorScreen> {
           child: GestureDetector(
             onTap: () {
               onTapCounterReset();
-              _changeColorAppBar(_generateColorRandom());
+              _changeColorAppBar(_colorLogic.generateRandomColor());
             },
             child: CustomAppBar(
               appBarText: "Color App",
@@ -149,7 +127,7 @@ class _ColorScreenState extends State<ColorScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                   Text(
+                  Text(
                     'Hello there',
                     style: TextStyle(
                       color: textColor,
@@ -202,7 +180,8 @@ class _ColorScreenState extends State<ColorScreen> {
                   ),
                   const SizedBox(height: 40),
                   GestureDetector(
-                    onTap: () => _changeColorText(_generateColorRandom()),
+                    onTap: () =>
+                        _changeColorText(_colorLogic.generateRandomColor()),
                     child: Text(
                       S.of(context).colorChangedTimes(counter),
                       style: TextStyle(color: textColor, fontSize: 18),

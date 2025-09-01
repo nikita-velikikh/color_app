@@ -1,5 +1,6 @@
-import 'package:color_aap/hashing.service.dart';
+import 'package:color_aap/hashing_service.dart';
 import 'package:color_aap/local_storage_service.dart';
+import 'package:color_aap/logic/auth_logic.dart';
 import 'package:color_aap/src/screens/color_screen.dart';
 import 'package:color_aap/src/screens_login/login_buttons.dart';
 import 'package:color_aap/src/screens_login/login_form.dart';
@@ -17,12 +18,22 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   bool isLogin = true;
   final formKey = GlobalKey<FormState>();
-  final service = LocalStorageService();
+  final _storageService = LocalStorageService();
+  late AuthLogic _authLogic;
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   String? currentError;
+
+  @override
+  void initState() {
+    super.initState();
+    _authLogic = AuthLogic(
+      storageService: _storageService,
+      hashingService: HashingService(),
+    );
+  }
 
   /// Handles form submission for both login and registration
   Future<void> onLoginPressed() async {
@@ -37,40 +48,35 @@ class _AuthScreenState extends State<AuthScreen> {
 
   /// Authenticates existing user with email and password
   Future<void> _handleLogin() async {
-    final exists = await service.checkUserExists(emailController.text);
-    if (exists) {
-      final userData = await service.getUserData(emailController.text);
-      final passwordValid = await HashingService.verifyPassword(
-        passwordController.text,
-        userData.password,
-      );
-
-      if (passwordValid) {
-        await saveLastEmailAndNavigate(emailController.text);
-      } else {
-        handleError("Invalid password");
-      }
+    final email = emailController.text;
+    final password = passwordController.text;
+    final loginError = await _authLogic.handleLogin(email, password);
+    if (loginError != null) {
+      handleError(loginError);
     } else {
-      handleError("User not found");
+      navigate(email);
     }
   }
 
   /// Creates a new user account with the provided credentials
   Future<void> _handleCreateUser() async {
-    final success =
-        await service.createUser(emailController.text, passwordController.text);
+    final email = emailController.text;
+    final password = passwordController.text;
+    final success = await _authLogic.createUser(
+      email,
+      password,
+    );
+
     if (success) {
-      await saveLastEmailAndNavigate(emailController.text);
+      navigate(email);
     } else {
       handleError("User with this email already exists");
     }
   }
 
-  /// Saves the authenticated user's email and navigates to the color screen
-  Future<void> saveLastEmailAndNavigate(String email) async {
-    await service.saveLastEmail(email);
+  void navigate(String email) {
     if (mounted) {
-      await Navigator.pushReplacement(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => ColorScreen(email: email)),
       );
