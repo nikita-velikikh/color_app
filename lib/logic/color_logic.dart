@@ -6,15 +6,17 @@ import 'package:flutter/material.dart';
 class ColorLogic {
   final String email;
   final LocalStorageService storageService;
+  late final Random random;
 
   ColorLogic({
     required this.email,
     required this.storageService,
-  });
+  }) {
+    random = Random();
+  }
 
   /// Generates a random color using ARGB values
   Color generateRandomColor() {
-    final Random random = Random();
     return Color.fromARGB(
       255,
       random.nextInt(256),
