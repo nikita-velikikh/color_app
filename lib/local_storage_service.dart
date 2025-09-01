@@ -1,10 +1,10 @@
 import 'dart:convert';
-import 'package:color_aap/hashing.service.dart';
+import 'package:color_aap/hashing_service.dart';
 import 'package:color_aap/models.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Service for managing local storage operations 
+/// Service for managing local storage operations
 /// including user data and preferences
 class LocalStorageService {
   static const String _usersKey = 'users';

@@ -1,4 +1,4 @@
-import 'package:color_aap/hashing.service.dart';
+import 'package:color_aap/hashing_service.dart';
 import 'package:color_aap/local_storage_service.dart';
 import 'package:color_aap/logic/auth_logic.dart';
 import 'package:color_aap/src/screens/color_screen.dart';
