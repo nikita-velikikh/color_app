@@ -1,9 +1,9 @@
 import 'package:color_aap/hashing_service.dart';
-import 'package:color_aap/local_storage_service.dart';
 import 'package:color_aap/logic/auth_logic.dart';
 import 'package:color_aap/src/screens/color_screen.dart';
 import 'package:color_aap/src/screens_login/login_buttons.dart';
 import 'package:color_aap/src/screens_login/login_form.dart';
+import 'package:color_aap/src/services/shared_prefs_storage.dart';
 import 'package:flutter/material.dart';
 
 /// Main authentication screen that handles both login and registration
@@ -18,7 +18,7 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   bool isLogin = true;
   final formKey = GlobalKey<FormState>();
-  final _storageService = LocalStorageService();
+  final _storageService = SharedPrefsStorage();
   late AuthLogic _authLogic;
 
   final emailController = TextEditingController();

@@ -1,6 +1,6 @@
 import 'package:color_aap/generated/l10n.dart';
-import 'package:color_aap/local_storage_service.dart';
 import 'package:color_aap/src/screens_login/auth_screen.dart';
+import 'package:color_aap/src/services/shared_prefs_storage.dart';
 import 'package:flutter/material.dart';
 
 /// Custom app bar widget with user management actions 
@@ -58,7 +58,7 @@ class CustomAppBar extends StatelessWidget {
             TextButton(
               onPressed: () async {
                 navigatePop(context);
-                final service = LocalStorageService();
+                final service = SharedPrefsStorage();
                 await service.deleteUserData(userEmail);
 
                 if (context.mounted) {
@@ -94,7 +94,7 @@ class CustomAppBar extends StatelessWidget {
         IconButton(
           icon: const Icon(Icons.logout, color: Colors.black),
           onPressed: () async {
-            final service = LocalStorageService();
+            final service = SharedPrefsStorage();
             await service.deleteLastEmail();
 
             if (context.mounted) {

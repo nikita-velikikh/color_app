@@ -1,7 +1,7 @@
 import 'package:color_aap/generated/l10n.dart';
-import 'package:color_aap/local_storage_service.dart';
 import 'package:color_aap/src/screens/color_screen.dart';
 import 'package:color_aap/src/screens_login/auth_screen.dart';
+import 'package:color_aap/src/services/shared_prefs_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -28,7 +28,7 @@ class _AppEntryState extends State<AppEntry> {
   /// Checks if user is already logged in by retrieving 
   /// the last email from storage
   Future<void> _checkLastEmail() async {
-    final service = LocalStorageService();
+    final service = SharedPrefsStorage();
     final email = await service.getLastEmail();
     setState(() {
       lastEmail = email;

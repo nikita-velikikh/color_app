@@ -1,6 +1,6 @@
 import 'package:color_aap/generated/l10n.dart';
-import 'package:color_aap/local_storage_service.dart';
 import 'package:color_aap/logic/color_logic.dart';
+import 'package:color_aap/src/services/shared_prefs_storage.dart';
 import 'package:color_aap/src/widgets/custom_app_bar.dart';
 import 'package:color_aap/src/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,7 @@ class _ColorScreenState extends State<ColorScreen> {
   Color textColor = Colors.white;
   int counter = 0;
   late ColorLogic _colorLogic;
-  final _storageService = LocalStorageService();
+  final _storageService = SharedPrefsStorage();
 
   @override
   void initState() {
