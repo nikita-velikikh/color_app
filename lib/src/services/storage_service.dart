@@ -2,7 +2,7 @@ import 'package:color_aap/models.dart';
 
 /// Abstract interface for storage operations
 /// Defines contract for different storage implementations
-abstract class StorageService {
+abstract interface class StorageService {
   /// Saves the last email used for login
   Future<void> saveLastEmail(String email);
 

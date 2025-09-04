@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Implementation of StorageService using SharedPreferences
-class SharedPrefsStorage implements StorageService {
+interface class SharedPrefsStorage implements StorageService {
   final String _usersKey = 'users';
   final String _lastEmailKey = "last_email";
 
