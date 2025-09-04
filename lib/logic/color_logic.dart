@@ -1,11 +1,11 @@
 import 'dart:math';
-import 'package:color_aap/local_storage_service.dart';
 import 'package:color_aap/models.dart';
+import 'package:color_aap/src/services/shared_prefs_storage.dart';
 import 'package:flutter/material.dart';
 
 class ColorLogic {
   final String email;
-  final LocalStorageService storageService;
+  final SharedPrefsStorage storageService;
   late final Random random;
 
   ColorLogic({

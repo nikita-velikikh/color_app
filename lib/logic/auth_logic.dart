@@ -1,9 +1,9 @@
 import 'package:color_aap/hashing_service.dart';
-import 'package:color_aap/local_storage_service.dart';
 import 'package:color_aap/models.dart';
+import 'package:color_aap/src/services/shared_prefs_storage.dart';
 
 class AuthLogic {
-  final LocalStorageService storageService;
+  final SharedPrefsStorage storageService;
   final HashingService hashingService;
   AuthLogic({
     required this.storageService,

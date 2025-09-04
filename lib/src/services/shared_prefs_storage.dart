@@ -1,41 +1,39 @@
 import 'dart:convert';
 import 'package:color_aap/models.dart';
+import 'package:color_aap/src/services/storage_service.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Service for managing local storage operations
-/// including user data and preferences
-class LocalStorageService {
-  static const String _usersKey = 'users';
-  static const String _lastEmailKey = "last_email";
+/// Implementation of StorageService using SharedPreferences
+class SharedPrefsStorage implements StorageService {
+  final String _usersKey = 'users';
+  final String _lastEmailKey = "last_email";
 
-  LocalStorageService();
-
-  /// Saves the last email used for login to persistent storage
+  @override
   Future<void> saveLastEmail(String email) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_lastEmailKey, email);
   }
 
-  /// Removes the last email from persistent storage
+  @override
   Future<void> deleteLastEmail() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_lastEmailKey);
   }
 
-  /// Retrieves the last email used for login from persistent storage
+  @override
   Future<String?> getLastEmail() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString(_lastEmailKey);
   }
 
-  /// Checks if a user with the given email already exists in the system
+  @override
   Future<bool> checkUserExists(String email) async {
     final usersMap = await getUsersMap();
     return usersMap.users.containsKey(email);
   }
 
-  /// Creates a new user account with default color preferences
+  @override
   Future<bool> createUser(String email, String hashedPassword) async {
     final usersMap = await getUsersMap();
     if (usersMap.users.containsKey(email)) {
@@ -58,13 +56,13 @@ class LocalStorageService {
     return result;
   }
 
-  /// Retrieves the color preferences for a specific user
+  @override
   Future<UserColors> getUserColors(String email) async {
     final userData = await getUserData(email);
     return userData.colors;
   }
 
-  /// Updates the color preferences for a specific user
+  @override
   Future<bool> saveUserColors(String email, UserColors colors) async {
     final usersMap = await getUsersMap();
     final userData = await getUserData(email);
@@ -79,8 +77,7 @@ class LocalStorageService {
     return result;
   }
 
-  /// Returns the user data for the given email.
-  /// Throws an [ArgumentError] if the user data is not found.
+  @override
   Future<UserData> getUserData(String email) async {
     final usersMap = await getUsersMap();
     final userData = usersMap.users[email];
@@ -113,7 +110,7 @@ class LocalStorageService {
     return result;
   }
 
-  /// Removes user data for the specified email from the system
+  @override
   Future<void> deleteUserData(String email) async {
     final usersMap = await getUsersMap();
 
@@ -123,5 +120,11 @@ class LocalStorageService {
       );
       await saveUsersMap(newUsersMap);
     }
+  }
+
+  @override
+  Future<void> clear() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
   }
 }
