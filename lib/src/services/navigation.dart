@@ -30,4 +30,7 @@ class SplashPage extends SplashScreen {}
 class AuthPage extends AuthScreen {}
 
 @RoutePage()
-class ColorPage extends ColorScreen {}
+class ColorPage extends ColorScreen {
+  final String email;
+  ColorPage({required this.email});
+}
