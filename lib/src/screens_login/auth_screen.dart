@@ -1,8 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:color_aap/hashing_service.dart';
 import 'package:color_aap/logic/auth_logic.dart';
-import 'package:color_aap/src/screens/color_screen.dart';
 import 'package:color_aap/src/screens_login/login_buttons.dart';
 import 'package:color_aap/src/screens_login/login_form.dart';
+import 'package:color_aap/src/services/navigation.gr.dart';
 import 'package:color_aap/src/services/shared_prefs_storage.dart';
 import 'package:flutter/material.dart';
 
@@ -76,9 +77,9 @@ class _AuthScreenState extends State<AuthScreen> {
 
   void navigate(String email) {
     if (mounted) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => ColorScreen(email: email)),
+      context.router.pushAndPopUntil(
+        ColorRoute(email: email),
+        predicate: (route) => false,
       );
     }
   }

@@ -1,6 +1,5 @@
 import 'package:color_aap/generated/l10n.dart';
-import 'package:color_aap/src/screens/color_screen.dart';
-import 'package:color_aap/src/screens_login/auth_screen.dart';
+import 'package:color_aap/src/services/navigation.dart';
 import 'package:color_aap/src/services/shared_prefs_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -18,6 +17,8 @@ class AppEntry extends StatefulWidget {
 class _AppEntryState extends State<AppEntry> {
   String? lastEmail;
   bool isLoading = true;
+  final _appRouter = AppRouter();
+  late final Widget home;
 
   @override
   void initState() {
@@ -25,7 +26,8 @@ class _AppEntryState extends State<AppEntry> {
     _checkLastEmail();
   }
 
-  /// Checks if user is already logged in by retrieving 
+
+  /// Checks if user is already logged in by retrieving
   /// the last email from storage
   Future<void> _checkLastEmail() async {
     final service = SharedPrefsStorage();
@@ -35,26 +37,12 @@ class _AppEntryState extends State<AppEntry> {
       isLoading = false;
     });
   }
+  
 
   @override
   Widget build(BuildContext context) {
-    late final Widget home;
-
-    if (isLoading) {
-      home = const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-    } else {
-      if (lastEmail == null) {
-        home = const AuthScreen();
-      } else {
-        home = ColorScreen(email: lastEmail!);
-      }
-    }
-
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: _appRouter.config(),
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
         S.delegate,
@@ -63,7 +51,6 @@ class _AppEntryState extends State<AppEntry> {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      home: home,
     );
   }
 }
