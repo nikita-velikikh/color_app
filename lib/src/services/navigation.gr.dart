@@ -33,6 +33,12 @@ abstract class $AppRouter extends _i2.RootStackRouter {
         ),
       );
     },
+    SplashRoute.name: (routeData) {
+      return _i2.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: _i1.SplashPage(),
+      );
+    },
   };
 }
 
@@ -86,4 +92,18 @@ class ColorRouteArgs {
   String toString() {
     return 'ColorRouteArgs{email: $email, key: $key}';
   }
+}
+
+/// generated route for
+/// [_i1.SplashPage]
+class SplashRoute extends _i2.PageRouteInfo<void> {
+  const SplashRoute({List<_i2.PageRouteInfo>? children})
+      : super(
+          SplashRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SplashRoute';
+
+  static const _i2.PageInfo<void> page = _i2.PageInfo<void>(name);
 }

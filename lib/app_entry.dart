@@ -1,5 +1,6 @@
 import 'package:color_aap/generated/l10n.dart';
 import 'package:color_aap/src/services/navigation.dart';
+import 'package:color_aap/src/services/navigation.gr.dart';
 import 'package:color_aap/src/services/shared_prefs_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -26,7 +27,6 @@ class _AppEntryState extends State<AppEntry> {
     _checkLastEmail();
   }
 
-
   /// Checks if user is already logged in by retrieving
   /// the last email from storage
   Future<void> _checkLastEmail() async {
@@ -36,8 +36,20 @@ class _AppEntryState extends State<AppEntry> {
       lastEmail = email;
       isLoading = false;
     });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (lastEmail == null) {
+        _appRouter.pushAndPopUntil(
+          const AuthRoute(),
+          predicate: (route) => false,
+        );
+      } else {
+        _appRouter.pushAndPopUntil(
+          ColorRoute(email: lastEmail!),
+          predicate: (route) => false,
+        );
+      }
+    });
   }
-  
 
   @override
   Widget build(BuildContext context) {

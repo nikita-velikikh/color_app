@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:color_aap/src/screens/color_screen.dart';
+import 'package:color_aap/src/screens/splash_screen.dart';
 import 'package:color_aap/src/screens_login/auth_screen.dart';
 import 'package:color_aap/src/services/navigation.gr.dart';
 
@@ -10,11 +11,15 @@ class AppRouter extends $AppRouter {
         AutoRoute(
           page: AuthRoute.page,
           path: '/auth',
-          initial: true,
         ),
         AutoRoute(
           page: ColorRoute.page,
           path: '/color/:email',
+        ),
+        AutoRoute(
+          page: SplashRoute.page,
+          path: '/splash',
+          initial: true,
         ),
       ];
 }
@@ -26,3 +31,6 @@ class AuthPage extends AuthScreen {}
 class ColorPage extends ColorScreen {
   const ColorPage({required super.email, super.key});
 }
+
+@RoutePage()
+class SplashPage extends SplashScreen {}
