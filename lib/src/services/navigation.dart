@@ -23,14 +23,3 @@ class AppRouter extends $AppRouter {
         ),
       ];
 }
-
-@RoutePage()
-class AuthPage extends AuthScreen {}
-
-@RoutePage()
-class ColorPage extends ColorScreen {
-  const ColorPage({required super.email, super.key});
-}
-
-@RoutePage()
-class SplashPage extends SplashScreen {}
