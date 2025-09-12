@@ -1,9 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:color_aap/generated/l10n.dart';
-import 'package:color_aap/src/screens_login/auth_screen.dart';
+import 'package:color_aap/src/services/navigation.gr.dart';
 import 'package:color_aap/src/services/shared_prefs_storage.dart';
 import 'package:flutter/material.dart';
 
-/// Custom app bar widget with user management actions 
+/// Custom app bar widget with user management actions
 /// and customizable appearance
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
@@ -23,10 +24,8 @@ class CustomAppBar extends StatelessWidget {
 
   /// Navigates to the authentication screen, replacing the current route
   Future<void> navigateToAuthScreen(BuildContext context) async {
-    await Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const AuthScreen()),
-    );
+    await context.router
+        .pushAndPopUntil(const AuthRoute(), predicate: (route) => false);
   }
 
   /// Closes the current dialog or navigates back
