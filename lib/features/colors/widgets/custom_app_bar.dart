@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:color_aap/core/navigation/navigation.gr.dart';
+import 'package:color_aap/core/navigation/app_router.gr.dart';
 import 'package:color_aap/core/services/shared_prefs_storage.dart';
 import 'package:color_aap/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +25,7 @@ class CustomAppBar extends StatelessWidget {
   /// Navigates to the authentication screen, replacing the current route
   Future<void> navigateToAuthScreen(BuildContext context) async {
     await context.router
-        .pushAndPopUntil(const AuthRoute(), predicate: (route) => false);
+        .pushAndPopUntil(const AuthRoute(), predicate: (_) => false);
   }
 
   /// Closes the current dialog or navigates back

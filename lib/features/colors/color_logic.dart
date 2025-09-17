@@ -1,27 +1,30 @@
 import 'dart:math';
 import 'package:color_aap/core/models/models.dart';
 import 'package:color_aap/core/services/shared_prefs_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ColorLogic {
   final String email;
   final SharedPrefsStorage storageService;
-  late final Random random;
+  final Random random = Random();
 
   ColorLogic({
     required this.email,
     required this.storageService,
-  }) {
-    random = Random();
-  }
+  });
 
   /// Generates a random color using ARGB values
+  /// Constants for color generation
+  static const maxColorValue = 255; // alpha channel and max color value
+  static const maxRandomValue = 256; // nextInt is exclusive
+
   Color generateRandomColor() {
     return Color.fromARGB(
-      255,
-      random.nextInt(256),
-      random.nextInt(256),
-      random.nextInt(256),
+      maxColorValue, // alpha channel
+      random.nextInt(maxRandomValue),
+      random.nextInt(maxRandomValue),
+      random.nextInt(maxRandomValue),
     );
   }
 
@@ -30,7 +33,9 @@ class ColorLogic {
     try {
       return await storageService.getUserColors(email);
     } catch (e) {
-      debugPrint('Error in loadUserColors: $e');
+      if (!kReleaseMode) {
+        debugPrint('Error in loadUserColors: $e');
+      }
       return null;
     }
   }

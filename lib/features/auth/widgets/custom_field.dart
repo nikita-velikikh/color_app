@@ -6,13 +6,13 @@ class CustomField extends StatefulWidget {
   final String hintText;
   final bool isPassword;
   final TextEditingController? controller;
-  final void Function(String) onChanged;
+  final void Function(String)? onChanged;
   final String? Function(String?)? validator;
   final String? currentError;
 
   const CustomField({
     required this.hintText,
-    required this.onChanged,
+    this.onChanged,
     super.key,
     this.label,
     this.isPassword = false,
@@ -39,15 +39,14 @@ class _CustomFieldState extends State<CustomField> {
         children: [
           if (widget.label != null) ...[
             Text(
-              widget.label!,
+              widget.label ??
+                  '', // Safe to use ! here as we check for null above
               style: const TextStyle(fontSize: 14),
             ),
             const SizedBox(height: 7),
           ],
           TextFormField(
-            onChanged: (email) {
-              widget.onChanged(email);
-            },
+            onChanged: widget.onChanged,
             controller: widget.controller,
             obscureText: widget.isPassword && _isObscure,
             validator: widget.validator,

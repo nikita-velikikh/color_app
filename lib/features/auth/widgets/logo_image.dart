@@ -8,6 +8,7 @@ class LogoImage extends StatelessWidget {
   Widget build(BuildContext context) {
     const image = AssetImage('assets/images/logo.png');
     const size = 144.0;
+
     return const Image(
       image: image,
       width: size,

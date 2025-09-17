@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:color_aap/core/navigation/navigation.gr.dart';
+import 'package:color_aap/core/navigation/app_router.gr.dart';
 import 'package:color_aap/core/services/hashing_service.dart';
 import 'package:color_aap/core/services/shared_prefs_storage.dart';
 import 'package:color_aap/features/auth/auth_logic.dart';
@@ -8,7 +8,7 @@ import 'package:color_aap/features/auth/widgets/login_form.dart';
 import 'package:flutter/material.dart';
 
 /// Main authentication screen that handles both login and registration
-/// 
+///
 @RoutePage()
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -21,26 +21,22 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   bool isLogin = true;
   final formKey = GlobalKey<FormState>();
-  final _storageService = SharedPrefsStorage();
-  late AuthLogic _authLogic;
+
+  final AuthLogic _authLogic = AuthLogic(
+    storageService: SharedPrefsStorage(),
+    hashingService: HashingService(),
+  );
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   String? currentError;
 
-  @override
-  void initState() {
-    super.initState();
-    _authLogic = AuthLogic(
-      storageService: _storageService,
-      hashingService: HashingService(),
-    );
-  }
-
   /// Handles form submission for both login and registration
   Future<void> onLoginPressed() async {
-    if (formKey.currentState!.validate()) {
+    final currentState = formKey.currentState;
+    if (currentState == null) return;
+    if (currentState.validate()) {
       if (isLogin) {
         await _handleLogin();
       } else {
@@ -78,12 +74,11 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   void navigate(String email) {
-    if (mounted) {
-      context.router.pushAndPopUntil(
-        ColorRoute(email: email),
-        predicate: (route) => false,
-      );
-    }
+    if (!mounted) return;
+    context.router.pushAndPopUntil(
+      ColorRoute(email: email),
+      predicate: (_) => false,
+    );
   }
 
   /// Displays error messages to the user

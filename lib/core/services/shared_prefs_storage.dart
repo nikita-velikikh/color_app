@@ -24,12 +24,14 @@ interface class SharedPrefsStorage implements StorageService {
   @override
   Future<String?> getLastEmail() async {
     final prefs = await SharedPreferences.getInstance();
+
     return prefs.getString(_lastEmailKey);
   }
 
   @override
   Future<bool> checkUserExists(String email) async {
     final usersMap = await getUsersMap();
+
     return usersMap.users.containsKey(email);
   }
 

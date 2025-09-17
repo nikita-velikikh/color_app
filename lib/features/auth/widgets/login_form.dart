@@ -1,11 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'package:color_aap/core/utils/validation.dart';
 import 'package:color_aap/features/auth/widgets/custom_field.dart';
 import 'package:color_aap/features/auth/widgets/logo_text.dart';
 import 'package:color_aap/features/auth/widgets/password_info.dart';
 import 'package:color_aap/features/auth/widgets/sing_up_password_field.dart';
 import 'package:color_aap/generated/l10n.dart';
-import 'package:color_aap/core/utils/validation.dart';
 import 'package:flutter/material.dart';
 
 /// Form widget for user authentication with email and password fields
@@ -33,14 +33,7 @@ class LoginForm extends StatefulWidget {
 
 /// State class for LoginForm that manages form controllers and UI layout
 class _LoginFormState extends State<LoginForm> {
-  /// Properly disposes of all text controllers to prevent memory leaks
-  @override
-  void dispose() {
-    widget.passwordController.dispose();
-    widget.repeatPasswordController.dispose();
-    widget.emailController.dispose();
-    super.dispose();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +59,6 @@ class _LoginFormState extends State<LoginForm> {
               hintText: S.of(context).enterYourEmail,
               controller: widget.emailController,
               validator: validateEmail,
-              onChanged: (email) {},
               currentError: widget.currentError,
             ),
             const SizedBox(height: 12),
@@ -75,7 +67,6 @@ class _LoginFormState extends State<LoginForm> {
               hintText: S.of(context).enterYourPassword,
               isPassword: true,
               validator: validatePassword,
-              onChanged: (password) {},
             ),
             if (!widget.isLogin) ...[
               const SizedBox(height: 12),
@@ -83,7 +74,6 @@ class _LoginFormState extends State<LoginForm> {
                 hintText: S.of(context).repeatYourPassword,
                 isPassword: true,
                 controller: widget.repeatPasswordController,
-                onChanged: (password) {},
                 validator: (value) => validateRepeatPassword(
                   value,
                   widget.passwordController.text,
@@ -96,5 +86,15 @@ class _LoginFormState extends State<LoginForm> {
         ),
       ),
     );
+  }
+
+
+    /// Properly disposes of all text controllers to prevent memory leaks
+  @override
+  void dispose() {
+    widget.passwordController.dispose();
+    widget.repeatPasswordController.dispose();
+    widget.emailController.dispose();
+    super.dispose();
   }
 }
