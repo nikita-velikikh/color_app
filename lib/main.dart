@@ -1,4 +1,4 @@
-import 'package:color_aap/app_entry.dart';
+import 'package:color_aap/core/app_entry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 

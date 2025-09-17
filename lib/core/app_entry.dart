@@ -1,7 +1,7 @@
+import 'package:color_aap/core/navigation/navigation.dart';
+import 'package:color_aap/core/navigation/navigation.gr.dart';
+import 'package:color_aap/core/services/shared_prefs_storage.dart';
 import 'package:color_aap/generated/l10n.dart';
-import 'package:color_aap/src/services/navigation.dart';
-import 'package:color_aap/src/services/navigation.gr.dart';
-import 'package:color_aap/src/services/shared_prefs_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 

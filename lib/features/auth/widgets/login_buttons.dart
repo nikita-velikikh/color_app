@@ -1,8 +1,9 @@
 import 'package:color_aap/generated/l10n.dart';
-import 'package:color_aap/src/screens_login/buttons_and_lines.dart';
-import 'package:color_aap/src/screens_login/icon_buttons.dart';
-import 'package:color_aap/src/screens_login/registration.dart';
+import 'package:color_aap/features/auth/widgets/buttons_and_lines.dart';
+import 'package:color_aap/features/auth/widgets/icon_buttons.dart';
+import 'package:color_aap/features/auth/widgets/registration.dart';
 import 'package:flutter/material.dart';
+
 
 /// Container widget that displays all authentication-related
 ///  buttons and controls

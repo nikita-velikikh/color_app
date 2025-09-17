@@ -1,6 +1,6 @@
 import 'dart:math';
-import 'package:color_aap/models.dart';
-import 'package:color_aap/src/services/shared_prefs_storage.dart';
+import 'package:color_aap/core/models/models.dart';
+import 'package:color_aap/core/services/shared_prefs_storage.dart';
 import 'package:flutter/material.dart';
 
 class ColorLogic {

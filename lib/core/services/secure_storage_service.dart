@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:color_aap/models.dart';
-import 'package:color_aap/src/services/storage_service.dart';
+import 'package:color_aap/core/models/models.dart';
+import 'package:color_aap/core/services/storage_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 

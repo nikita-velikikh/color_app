@@ -1,6 +1,7 @@
-import 'package:color_aap/hashing_service.dart';
-import 'package:color_aap/models.dart';
-import 'package:color_aap/src/services/shared_prefs_storage.dart';
+import 'package:color_aap/core/models/models.dart';
+import 'package:color_aap/core/services/hashing_service.dart';
+import 'package:color_aap/core/services/shared_prefs_storage.dart';
+ 
 
 class AuthLogic {
   final SharedPrefsStorage storageService;

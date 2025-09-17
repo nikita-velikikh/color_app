@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:color_aap/src/screens_login/logo_image.dart';
+import 'package:color_aap/features/auth/widgets/logo_image.dart';
 import 'package:flutter/material.dart';
 
 /// Widget that displays the app logo image and customizable title/subtitle text

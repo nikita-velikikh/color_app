@@ -1,4 +1,4 @@
-import 'package:color_aap/models.dart';
+import 'package:color_aap/core/models/models.dart';
 
 /// Abstract interface for storage operations
 /// Defines contract for different storage implementations

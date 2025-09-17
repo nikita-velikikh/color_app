@@ -9,9 +9,9 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i4;
-import 'package:color_aap/src/screens/color_screen.dart' as _i2;
-import 'package:color_aap/src/screens/splash_screen.dart' as _i3;
-import 'package:color_aap/src/screens_login/auth_screen.dart' as _i1;
+import 'package:color_aap/core/widgets/splash_screen.dart' as _i3;
+import 'package:color_aap/features/auth/auth_screen.dart' as _i1;
+import 'package:color_aap/features/colors/color_screen.dart' as _i2;
 import 'package:flutter/material.dart' as _i5;
 
 abstract class $AppRouter extends _i4.RootStackRouter {
