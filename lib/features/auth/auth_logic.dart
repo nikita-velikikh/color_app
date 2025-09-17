@@ -1,7 +1,6 @@
 import 'package:color_aap/core/models/models.dart';
 import 'package:color_aap/core/services/hashing_service.dart';
 import 'package:color_aap/core/services/shared_prefs_storage.dart';
- 
 
 class AuthLogic {
   final SharedPrefsStorage storageService;
@@ -38,6 +37,7 @@ class AuthLogic {
     } else {
       return "User not found";
     }
+
     return null;
   }
 

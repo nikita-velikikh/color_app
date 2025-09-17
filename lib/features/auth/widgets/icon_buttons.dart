@@ -10,7 +10,7 @@ class IconButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ElevatedButton.icon(
-          onPressed: () {},
+          onPressed: null, // Social login not implemented yet
           icon: Image.asset('assets/images/github.png', width: 24),
           label: const Text(
             "GitHub",
@@ -26,7 +26,7 @@ class IconButtons extends StatelessWidget {
         ),
         const SizedBox(width: 13),
         ElevatedButton.icon(
-          onPressed: () {},
+          onPressed: null, // Social login not implemented yet
           icon: Image.asset('assets/images/gitlab.png', width: 24),
           label: const Text(
             "GitLab",

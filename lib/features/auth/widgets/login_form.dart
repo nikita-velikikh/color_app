@@ -66,7 +66,6 @@ class _LoginFormState extends State<LoginForm> {
               hintText: S.of(context).enterYourEmail,
               controller: widget.emailController,
               validator: validateEmail,
-              onChanged: (email) {},
               currentError: widget.currentError,
             ),
             const SizedBox(height: 12),
@@ -75,7 +74,6 @@ class _LoginFormState extends State<LoginForm> {
               hintText: S.of(context).enterYourPassword,
               isPassword: true,
               validator: validatePassword,
-              onChanged: (password) {},
             ),
             if (!widget.isLogin) ...[
               const SizedBox(height: 12),
@@ -83,7 +81,6 @@ class _LoginFormState extends State<LoginForm> {
                 hintText: S.of(context).repeatYourPassword,
                 isPassword: true,
                 controller: widget.repeatPasswordController,
-                onChanged: (password) {},
                 validator: (value) => validateRepeatPassword(
                   value,
                   widget.passwordController.text,

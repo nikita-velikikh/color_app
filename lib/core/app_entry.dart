@@ -19,7 +19,6 @@ class _AppEntryState extends State<AppEntry> {
   String? lastEmail;
   bool isLoading = true;
   final _appRouter = AppRouter();
-  late final Widget home;
 
   @override
   void initState() {
@@ -40,12 +39,14 @@ class _AppEntryState extends State<AppEntry> {
       if (lastEmail == null) {
         _appRouter.pushAndPopUntil(
           const AuthRoute(),
-          predicate: (route) => false,
+          predicate: (_) => false,
         );
       } else {
         _appRouter.pushAndPopUntil(
-          ColorRoute(email: lastEmail!),
-          predicate: (route) => false,
+          ColorRoute(
+              email: lastEmail ??
+                  ''), // This should never happen as we check lastEmail != null
+          predicate: (_) => false,
         );
       }
     });

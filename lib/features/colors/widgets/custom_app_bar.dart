@@ -25,7 +25,7 @@ class CustomAppBar extends StatelessWidget {
   /// Navigates to the authentication screen, replacing the current route
   Future<void> navigateToAuthScreen(BuildContext context) async {
     await context.router
-        .pushAndPopUntil(const AuthRoute(), predicate: (route) => false);
+        .pushAndPopUntil(const AuthRoute(), predicate: (_) => false);
   }
 
   /// Closes the current dialog or navigates back

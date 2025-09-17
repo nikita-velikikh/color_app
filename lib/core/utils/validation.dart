@@ -9,6 +9,7 @@ String? validateEmail(String? input) {
   if (!isValidEmail) {
     return "Please enter valid email";
   }
+
   return null;
 }
 
@@ -17,15 +18,14 @@ String? validatePassword(String? input) {
   if (input == null || input.isEmpty) {
     return 'Please enter your password';
   }
-  if (input.length < 8) {
+  const minPasswordLength = 8;
+  if (input.length < minPasswordLength) {
     return 'Password must be at least 8 characters long';
   }
   const pattern =
       r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%^&*()_+{}\[\]:;<>,.?~\\/-]).+$';
   if (!RegExp(pattern).hasMatch(input)) {
-    return 
-    'Password should contain at least 1 capital letter,\n 1 sign and 1 number';
-
+    return 'Password should contain at least 1 capital letter,\n 1 sign and 1 number';
   }
   return null;
 }
@@ -38,5 +38,6 @@ String? validateRepeatPassword(String? value, String originalPassword) {
   if (value != originalPassword) {
     return "Passwords do not match";
   }
+
   return null;
 }
