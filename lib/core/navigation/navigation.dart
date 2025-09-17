@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:color_aap/src/screens/color_screen.dart';
-import 'package:color_aap/src/screens/splash_screen.dart';
-import 'package:color_aap/src/screens_login/auth_screen.dart';
-import 'package:color_aap/src/services/navigation.gr.dart';
+import 'package:color_aap/core/navigation/navigation.gr.dart';
+import 'package:color_aap/core/widgets/splash_screen.dart';
+import 'package:color_aap/features/auth/auth_screen.dart';
+import 'package:color_aap/features/colors/color_screen.dart';
 
 @AutoRouterConfig()
 class AppRouter extends $AppRouter {

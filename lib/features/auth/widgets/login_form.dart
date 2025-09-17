@@ -1,11 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'package:color_aap/features/auth/widgets/custom_field.dart';
+import 'package:color_aap/features/auth/widgets/logo_text.dart';
+import 'package:color_aap/features/auth/widgets/password_info.dart';
+import 'package:color_aap/features/auth/widgets/sing_up_password_field.dart';
 import 'package:color_aap/generated/l10n.dart';
-import 'package:color_aap/src/screens_login/custom_field.dart';
-import 'package:color_aap/src/screens_login/logo_text.dart';
-import 'package:color_aap/src/screens_login/password_info.dart';
-import 'package:color_aap/src/screens_login/sing_up_password_field.dart';
-import 'package:color_aap/src/screens_login/validation.dart';
+import 'package:color_aap/core/utils/validation.dart';
 import 'package:flutter/material.dart';
 
 /// Form widget for user authentication with email and password fields

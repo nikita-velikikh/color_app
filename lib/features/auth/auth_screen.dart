@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:color_aap/hashing_service.dart';
-import 'package:color_aap/logic/auth_logic.dart';
-import 'package:color_aap/src/screens_login/login_buttons.dart';
-import 'package:color_aap/src/screens_login/login_form.dart';
-import 'package:color_aap/src/services/navigation.gr.dart';
-import 'package:color_aap/src/services/shared_prefs_storage.dart';
+import 'package:color_aap/core/navigation/navigation.gr.dart';
+import 'package:color_aap/core/services/hashing_service.dart';
+import 'package:color_aap/core/services/shared_prefs_storage.dart';
+import 'package:color_aap/features/auth/auth_logic.dart';
+import 'package:color_aap/features/auth/widgets/login_buttons.dart';
+import 'package:color_aap/features/auth/widgets/login_form.dart';
 import 'package:flutter/material.dart';
 
 /// Main authentication screen that handles both login and registration
