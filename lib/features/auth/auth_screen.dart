@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:color_aap/core/navigation/navigation.gr.dart';
+import 'package:color_aap/core/navigation/app_router.gr.dart';
 import 'package:color_aap/core/services/hashing_service.dart';
 import 'package:color_aap/core/services/shared_prefs_storage.dart';
 import 'package:color_aap/features/auth/auth_logic.dart';

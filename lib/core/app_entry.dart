@@ -1,5 +1,5 @@
 import 'package:color_aap/core/navigation/app_router.dart';
-import 'package:color_aap/core/navigation/navigation.gr.dart';
+import 'package:color_aap/core/navigation/app_router.gr.dart';
 import 'package:color_aap/core/services/shared_prefs_storage.dart';
 import 'package:color_aap/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -44,8 +44,8 @@ class _AppEntryState extends State<AppEntry> {
       } else {
         _appRouter.pushAndPopUntil(
           ColorRoute(
-              email: lastEmail ??
-                  '',), // This should never happen as we check lastEmail != null
+            email: lastEmail ?? '',
+          ), // This should never happen as we check lastEmail != null
           predicate: (_) => false,
         );
       }
