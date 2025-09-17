@@ -26,9 +26,10 @@ class _ColorScreenState extends State<ColorScreen> {
   int counter = 0;
   final ColorLogic _colorLogic;
 
-  _ColorScreenState() : _colorLogic = ColorLogic(
-    email: '',  // Will be updated in initState
-    storageService: SharedPrefsStorage(),
+  _ColorScreenState()
+      : _colorLogic = ColorLogic(
+          email: '', // Will be updated in initState
+          storageService: SharedPrefsStorage(),
         );
 
   @override

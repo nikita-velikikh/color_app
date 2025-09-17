@@ -43,14 +43,18 @@ class ButtonsAndLines extends StatelessWidget {
           Row(
             children: [
               const Expanded(
-                  child: Divider(color: Colors.black, thickness: 0.5),),
+                child: Divider(color: Colors.black, thickness: 0.5),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 19),
-                child: Text(S.of(context).orWith,
-                    style: const TextStyle(fontSize: 14),),
+                child: Text(
+                  S.of(context).orWith,
+                  style: const TextStyle(fontSize: 14),
+                ),
               ),
               const Expanded(
-                  child: Divider(color: Colors.black, thickness: 0.5),),
+                child: Divider(color: Colors.black, thickness: 0.5),
+              ),
             ],
           ),
         ],

@@ -25,7 +25,8 @@ String? validatePassword(String? input) {
   const pattern =
       r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%^&*()_+{}\[\]:;<>,.?~\\/-]).+$';
   if (!RegExp(pattern).hasMatch(input)) {
-    return 'Password should contain at least 1 capital letter,\n 1 sign and 1 number';
+    return 'Password should contain at least '
+    '1 capital letter,\n 1 sign and 1 number';
   }
   return null;
 }

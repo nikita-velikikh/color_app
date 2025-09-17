@@ -28,6 +28,7 @@ linter:
 analyzer:
   exclude:
     - lib/generated/** 
+    - test/**
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

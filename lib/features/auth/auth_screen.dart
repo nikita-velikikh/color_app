@@ -21,7 +21,7 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   bool isLogin = true;
   final formKey = GlobalKey<FormState>();
-  
+
   final AuthLogic _authLogic = AuthLogic(
     storageService: SharedPrefsStorage(),
     hashingService: HashingService(),
@@ -31,8 +31,6 @@ class _AuthScreenState extends State<AuthScreen> {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   String? currentError;
-
-
 
   /// Handles form submission for both login and registration
   Future<void> onLoginPressed() async {
