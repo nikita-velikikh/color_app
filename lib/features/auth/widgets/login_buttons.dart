@@ -1,7 +1,7 @@
-import 'package:color_aap/generated/l10n.dart';
 import 'package:color_aap/features/auth/widgets/buttons_and_lines.dart';
 import 'package:color_aap/features/auth/widgets/icon_buttons.dart';
 import 'package:color_aap/features/auth/widgets/registration.dart';
+import 'package:color_aap/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 

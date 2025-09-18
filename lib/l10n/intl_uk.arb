@@ -21,7 +21,7 @@
   "greenColorColorScreen": "Зелений",
   "colorChangedTimes": "Колір змінювався {count} разів",
   "@colorChangedTimes": {
-    "description": "Shows how many times the color was changed",
+    "description": "Показує, скільки разів змінювався колір",
     "placeholders": {
       "count": {
         "type": "int"
@@ -31,5 +31,15 @@
   "titleSnowDialog": "Ваші дані будуть видалені",
   "cancelDialog": "Скасувати",
   "yesDialog": "Так",
-  "descriptionSnowDialog": "Ваші дані будуть видалені"
+  "descriptionSnowDialog": "Ваші дані будуть видалені",
+  "downloading": "Завантаження...",
+  "invalidPassword": "Неправильний пароль",
+  "userDataNotFound": "Дані користувача не знайдені",
+  "userNotFound": "Користувача не знайдені",
+  "hello": "Привіт!",
+  "userExists": "Користувач з такою електронною поштою вже існує",
+  "pleaseEnterYourEmail": "Введіть вашу електронну пошту",
+  "passwordLong": "Пароль повинен бути не менше 8 символів",
+  "passwordShould": "Пароль повинен містити принаймні 1 велику літеру, 1 знак і 1 число",
+  "passwordMatch": "Паролі не збігаються"
 }
