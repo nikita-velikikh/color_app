@@ -5,6 +5,7 @@ import 'package:color_aap/core/services/shared_prefs_storage.dart';
 import 'package:color_aap/features/auth/auth_logic.dart';
 import 'package:color_aap/features/auth/widgets/login_buttons.dart';
 import 'package:color_aap/features/auth/widgets/login_form.dart';
+import 'package:color_aap/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 /// Main authentication screen that handles both login and registration
@@ -49,7 +50,11 @@ class _AuthScreenState extends State<AuthScreen> {
   Future<void> _handleLogin() async {
     final email = emailController.text;
     final password = passwordController.text;
-    final loginError = await _authLogic.handleLogin(email, password);
+    final loginError = await _authLogic.handleLogin(
+      email,
+      password,
+      context,
+    );
     if (loginError != null) {
       handleError(loginError);
     } else {
@@ -69,7 +74,7 @@ class _AuthScreenState extends State<AuthScreen> {
     if (success) {
       navigate(email);
     } else {
-      handleError("User with this email already exists");
+      handleError(S.of(context).userExists);
     }
   }
 

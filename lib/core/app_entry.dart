@@ -64,6 +64,16 @@ class _AppEntryState extends State<AppEntry> {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
+      localeResolutionCallback: (locale, supportedLocales) {
+        if (locale != null) {
+          for (var supportedLocale in supportedLocales) {
+            if (supportedLocale.languageCode == locale.languageCode) {
+              return supportedLocale;
+            }
+          }
+        }
+        return supportedLocales.first;
+      },
     );
   }
 }

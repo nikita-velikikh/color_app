@@ -58,7 +58,8 @@ class _LoginFormState extends State<LoginForm> {
             CustomField(
               hintText: S.of(context).enterYourEmail,
               controller: widget.emailController,
-              validator: validateEmail,
+              validator: (value) => validateEmail(value, context),
+              onChanged: (email) {},
               currentError: widget.currentError,
             ),
             const SizedBox(height: 12),
@@ -66,7 +67,8 @@ class _LoginFormState extends State<LoginForm> {
               controller: widget.passwordController,
               hintText: S.of(context).enterYourPassword,
               isPassword: true,
-              validator: validatePassword,
+              validator: (value) => validatePassword(value, context),
+              onChanged: (password) {},
             ),
             if (!widget.isLogin) ...[
               const SizedBox(height: 12),
@@ -77,6 +79,7 @@ class _LoginFormState extends State<LoginForm> {
                 validator: (value) => validateRepeatPassword(
                   value,
                   widget.passwordController.text,
+                  context,
                 ),
               ),
             ],

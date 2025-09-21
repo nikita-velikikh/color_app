@@ -199,7 +199,7 @@ class _HeaderText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      'Hello there',
+      S.of(context).hello,
       style: TextStyle(
         color: textColor,
         fontSize: 24,
