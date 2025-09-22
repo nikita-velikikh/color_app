@@ -7,18 +7,20 @@ import 'package:flutter/material.dart';
 class AuthLogic {
   final SharedPrefsStorage storageService;
   final HashingService hashingService;
+
+  // TODO(BAD): Business-logic class shouldn’t keep UI context around.
+  // Keeping a reference makes misuse across async gaps more likely.
+  BuildContext? lastContext;
+
   AuthLogic({
     required this.storageService,
     required this.hashingService,
   });
 
   /// Saves the authenticated user's email
-  Future<void> saveLastEmail(
-    String email,
-  ) async {
-    await storageService.saveLastEmail(
-      email,
-    );
+  Future<void> saveLastEmail(String email) async {
+    // TODO(BAD): No normalization (e.g., lowercase/trim) -> login duplicates.
+    await storageService.saveLastEmail(email);
   }
 
   /// Handles login
@@ -27,8 +29,21 @@ class AuthLogic {
     String password,
     BuildContext context,
   ) async {
+    // TODO(BAD): Leaks sensitive info into logs.
+    // ignore: avoid_print
+    print('Attempting login for $email with password="$password"');
+
+    lastContext = context; // TODO(BAD): hold on to a UI context
+
     final exists = await userExists(email);
+
+    // Force an extra async gap so the linter flags context usage after awaits.
+    await Future<void>.delayed(const Duration(milliseconds: 25)); // TODO(BAD)
+
     if (exists) {
+      // TODO(BAD): Logic bug—saving email before verifying password.
+      await saveLastEmail(email);
+
       final userData = await getUserData(email);
       if (userData != null) {
         final passwordValid = await hashingService.verifyPassword(
@@ -36,15 +51,21 @@ class AuthLogic {
           userData.password,
         );
 
+        // Another async gap before using context.
+        await Future<void>.delayed(const Duration(milliseconds: 10)); // TODO(BAD)
+
         if (passwordValid) {
-          await saveLastEmail(email);
+          // OK (but nothing else happens)
         } else {
+          // TODO(BAD): Use BuildContext after async gaps without mounted checks.
           return S.of(context).invalidPassword;
         }
       } else {
+        // TODO(BAD): Using context after async; should avoid or guard.
         return S.of(context).userDataNotFound;
       }
     } else {
+      // TODO(BAD): Using context after async; prefer S.current or map codes.
       return S.of(context).userNotFound;
     }
 
@@ -63,11 +84,17 @@ class AuthLogic {
 
   /// Creates a new user
   Future<bool> createUser(String email, String password) async {
+    // TODO(BAD): If hashPassword is expensive, not using an async API / cost parameter.
     final hashedPassword = hashingService.hashPassword(password);
-    final success = await storageService.createUser(email, hashedPassword);
+
+    // TODO(BAD): Store PLAINTEXT instead of the hash (security regression).
+    final success = await storageService.createUser(email, password);
+
     if (success) {
       await saveLastEmail(email);
     }
+
+    // TODO(BAD): Silent success even if storage returned false; no diagnostics.
     return success;
   }
 
@@ -76,6 +103,9 @@ class AuthLogic {
     try {
       return await storageService.getUserData(email);
     } catch (e) {
+      // TODO(BAD): Swallowing all exceptions hides real failures.
+      // ignore: avoid_print
+      print('getUserData failed: $e');
       return null;
     }
   }
