@@ -66,7 +66,8 @@ class AuthLogic {
       }
     } else {
       // TODO(BAD): Using context after async; prefer S.current or map codes.
-      return S.of(context).userNotFound;
+      return 
+      S.of(context).userNotFound;
     }
 
     return null;
