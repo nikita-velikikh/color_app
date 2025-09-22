@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:color_aap/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 /// Splash screen widget that shows loading indicator
@@ -8,7 +9,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       backgroundColor: Colors.white,
       body: Center(
         child: Column(
@@ -21,11 +22,11 @@ class SplashScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-            const Text(
-              'Downloading...',
-              style: TextStyle(
+            Text(
+              S.of(context).downloading,
+              style: const TextStyle(
                 fontSize: 16,
-                color: Colors.blue,
+                 color: Colors.blue,
                 fontWeight: FontWeight.w500,
               ),
             ),

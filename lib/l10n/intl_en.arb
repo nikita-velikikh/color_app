@@ -32,5 +32,17 @@
     "descriptionSnowDialog": "Your data will be deleted",
     "cancelDialog": "Cancel",
     "yesDialog": "Yes",
-    "titleSnowDialog": "Are you sure?"
+    "titleSnowDialog": "Are you sure?",
+    "downloading": "Downloading...",
+    "invalidPassword": "Invalid password",
+    "userDataNotFound": "User data not found",
+    "userNotFound": "User not found",
+    "hello": "Hello!",
+    "userExists": "User with this email already exists",
+    "passwordLong": "Password must be at least 8 characters long",
+    "passwordShould": "Password should contain at least 1 capital letter, 1 sign and 1 number",
+    "passwordMatch": "Passwords do not match"
+    
+
+
 }

@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:color_aap/core/services/shared_prefs_storage.dart';
-import 'package:color_aap/generated/l10n.dart';
 import 'package:color_aap/features/auth/widgets/custom_elevated_button.dart';
 import 'package:color_aap/features/colors/color_logic.dart';
 import 'package:color_aap/features/colors/widgets/custom_app_bar.dart';
+import 'package:color_aap/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 /// Main screen where users can customize app colors and
@@ -198,7 +198,7 @@ class _HeaderText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      'Hello there',
+      S.of(context).hello,
       style: TextStyle(
         color: textColor,
         fontSize: 24,
