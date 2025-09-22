@@ -13,8 +13,12 @@ class AuthLogic {
   });
 
   /// Saves the authenticated user's email
-  Future<void> saveLastEmail(String email) async {
-    await storageService.saveLastEmail(email);
+  Future<void> saveLastEmail(
+    String email,
+  ) async {
+    await storageService.saveLastEmail(
+      email,
+    );
   }
 
   /// Handles login
