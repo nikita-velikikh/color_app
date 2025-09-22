@@ -35,7 +35,7 @@ class _SingUpPasswordField extends State<SingUpPasswordField> {
         children: [
           if (widget.label != null) ...[
             Text(
-              widget.label!,
+              widget.label ?? '',
               style: const TextStyle(fontSize: 14),
             ),
             const SizedBox(height: 7),

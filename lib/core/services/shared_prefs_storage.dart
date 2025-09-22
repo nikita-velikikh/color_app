@@ -24,12 +24,14 @@ interface class SharedPrefsStorage implements StorageService {
   @override
   Future<String?> getLastEmail() async {
     final prefs = await SharedPreferences.getInstance();
+
     return prefs.getString(_lastEmailKey);
   }
 
   @override
   Future<bool> checkUserExists(String email) async {
     final usersMap = await getUsersMap();
+
     return usersMap.users.containsKey(email);
   }
 
@@ -53,12 +55,14 @@ interface class SharedPrefsStorage implements StorageService {
     );
 
     final result = await saveUsersMap(updatedUsersMap);
+
     return result;
   }
 
   @override
   Future<UserColors> getUserColors(String email) async {
     final userData = await getUserData(email);
+
     return userData.colors;
   }
 
@@ -74,6 +78,7 @@ interface class SharedPrefsStorage implements StorageService {
     );
 
     final result = await saveUsersMap(updatedUsersMap);
+
     return result;
   }
 
@@ -107,6 +112,7 @@ interface class SharedPrefsStorage implements StorageService {
     final usersMapJson = usersMap.toJson();
     final usersMapJsonEncoded = jsonEncode(usersMapJson);
     final result = await prefs.setString(_usersKey, usersMapJsonEncoded);
+    
     return result;
   }
 

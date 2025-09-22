@@ -7,6 +7,8 @@ class ColorLogic {
   final String email;
   final SharedPrefsStorage storageService;
   late final Random random;
+  final int clarity = 255;
+  final int generateRangeColor = 256;
 
   ColorLogic({
     required this.email,
@@ -18,10 +20,10 @@ class ColorLogic {
   /// Generates a random color using ARGB values
   Color generateRandomColor() {
     return Color.fromARGB(
-      255,
-      random.nextInt(256),
-      random.nextInt(256),
-      random.nextInt(256),
+      clarity,
+      random.nextInt(generateRangeColor),
+      random.nextInt(generateRangeColor),
+      random.nextInt(generateRangeColor),
     );
   }
 
@@ -31,6 +33,7 @@ class ColorLogic {
       return await storageService.getUserColors(email);
     } catch (e) {
       debugPrint('Error in loadUserColors: $e');
+
       return null;
     }
   }

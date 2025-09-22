@@ -70,6 +70,7 @@ class _AuthScreenState extends State<AuthScreen> {
   Future<void> _handleCreateUser() async {
     final email = emailController.text;
     final password = passwordController.text;
+    final userExists = S.of(context).userExists;
     final success = await _authLogic.createUser(
       email,
       password,
@@ -78,7 +79,7 @@ class _AuthScreenState extends State<AuthScreen> {
     if (success) {
       navigate(email);
     } else {
-      handleError(S.of(context).userExists);
+      handleError(userExists);
     }
   }
 

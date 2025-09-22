@@ -39,7 +39,7 @@ class _CustomFieldState extends State<CustomField> {
         children: [
           if (widget.label != null) ...[
             Text(
-              widget.label!,
+              widget.label ?? '',
               style: const TextStyle(fontSize: 14),
             ),
             const SizedBox(height: 7),

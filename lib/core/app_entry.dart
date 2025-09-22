@@ -44,7 +44,7 @@ class _AppEntryState extends State<AppEntry> {
         );
       } else {
         _appRouter.pushAndPopUntil(
-          ColorRoute(email: lastEmail!),
+          ColorRoute(email: lastEmail ?? ''),
           predicate: (route) => false,
         );
       }
@@ -65,12 +65,13 @@ class _AppEntryState extends State<AppEntry> {
       supportedLocales: S.delegate.supportedLocales,
       localeResolutionCallback: (locale, supportedLocales) {
         if (locale != null) {
-          for (var supportedLocale in supportedLocales) {
+          for (final supportedLocale in supportedLocales) {
             if (supportedLocale.languageCode == locale.languageCode) {
               return supportedLocale;
             }
           }
         }
+
         return supportedLocales.first;
       },
     );

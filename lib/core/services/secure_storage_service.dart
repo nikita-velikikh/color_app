@@ -28,6 +28,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
   @override
   Future<bool> checkUserExists(String email) async {
     final usersMap = await getUsersMap();
+
     return usersMap.users.containsKey(email);
   }
 
@@ -69,6 +70,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
   @override
   Future<UserColors> getUserColors(String email) async {
     final userData = await getUserData(email);
+
     return userData.colors;
   }
 
@@ -111,6 +113,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
     }
 
     final usersMapJsonDecoded = jsonDecode(usersMapJson);
+
     return UsersMap.fromJson(usersMapJsonDecoded as Map<String, dynamic>);
   }
 
@@ -119,6 +122,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
     final usersMapJson = usersMap.toJson();
     final usersMapJsonEncoded = jsonEncode(usersMapJson);
     await storage.write(key: _usersKey, value: usersMapJsonEncoded);
+    
     return true;
   }
 }

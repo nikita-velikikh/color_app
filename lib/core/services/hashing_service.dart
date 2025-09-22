@@ -10,6 +10,7 @@ class HashingService {
     final salt = '${random.nextInt(1000000)}!@#\$%^&*ABCxyz';
     final bytes = utf8.encode(password + salt);
     final hash = sha256.convert(bytes);
+    
 
     return '$salt:$hash';
   }
@@ -21,13 +22,16 @@ class HashingService {
   ) async {
     try {
       final parts = hashedPassword.split(':');
-      if (parts.length != 2) return false;
+      const int two = 2;
+      if (parts.length != two) return false;
 
-      final salt = parts[0];
+      const int zero = 0;
+      final salt = parts[zero];
       final storedHash = parts[1];
 
       final bytes = utf8.encode(password + salt);
       final hash = sha256.convert(bytes);
+
       return hash.toString() == storedHash;
     } catch (e) {
       return false;

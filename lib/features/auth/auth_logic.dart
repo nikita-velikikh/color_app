@@ -4,7 +4,6 @@ import 'package:color_aap/core/services/shared_prefs_storage.dart';
 import 'package:color_aap/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
-
 class AuthLogic {
   final SharedPrefsStorage storageService;
   final HashingService hashingService;
@@ -24,6 +23,9 @@ class AuthLogic {
     String password,
     BuildContext context,
   ) async {
+    final userNotFound = S.of(context).userNotFound;
+    final invalidPassword = S.of(context).invalidPassword;
+    final userDataNotFound = S.of(context).userDataNotFound;
     final exists = await userExists(email);
     if (exists) {
       final userData = await getUserData(email);
@@ -32,18 +34,18 @@ class AuthLogic {
           password,
           userData.password,
         );
-
         if (passwordValid) {
           await saveLastEmail(email);
         } else {
-          return S.of(context).invalidPassword;
+          return invalidPassword;
         }
       } else {
-        return S.of(context).userDataNotFound;
+        return userDataNotFound;
       }
     } else {
-      return S.of(context).userNotFound;
+      return userNotFound;
     }
+
     return null;
   }
 
@@ -64,6 +66,7 @@ class AuthLogic {
     if (success) {
       await saveLastEmail(email);
     }
+
     return success;
   }
 
@@ -84,6 +87,7 @@ class AuthLogic {
   /// Checks if user is logged in
   Future<bool> isLoggedIn() async {
     final email = await getLastEmail();
+
     return email != null && email.isNotEmpty;
   }
 }
