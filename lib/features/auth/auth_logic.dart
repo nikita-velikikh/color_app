@@ -4,7 +4,6 @@ import 'package:color_aap/core/services/shared_prefs_storage.dart';
 import 'package:color_aap/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
-
 class AuthLogic {
   final SharedPrefsStorage storageService;
   final HashingService hashingService;
@@ -15,9 +14,6 @@ class AuthLogic {
 
   /// Saves the authenticated user's email
   Future<void> saveLastEmail(String email) async {
-
-
-    
     await storageService.saveLastEmail(email);
   }
 

@@ -9,7 +9,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
         child: Column(
@@ -26,7 +26,7 @@ class SplashScreen extends StatelessWidget {
               S.of(context).downloading,
               style: const TextStyle(
                 fontSize: 16,
-                 color: Colors.blue,
+                color: Colors.blue,
                 fontWeight: FontWeight.w500,
               ),
             ),

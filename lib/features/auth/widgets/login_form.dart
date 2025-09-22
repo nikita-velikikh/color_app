@@ -33,8 +33,6 @@ class LoginForm extends StatefulWidget {
 
 /// State class for LoginForm that manages form controllers and UI layout
 class _LoginFormState extends State<LoginForm> {
-
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -91,8 +89,7 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-
-    /// Properly disposes of all text controllers to prevent memory leaks
+  /// Properly disposes of all text controllers to prevent memory leaks
   @override
   void dispose() {
     widget.passwordController.dispose();
