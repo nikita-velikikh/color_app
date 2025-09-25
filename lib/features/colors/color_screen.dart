@@ -165,6 +165,8 @@ class _ColorBody extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(seconds: 1),
         color: backgroundColor,
+        width: double.infinity,
+        height: double.infinity,
         child: Padding(
           padding: const EdgeInsets.all(32.0),
           child: Column(
