@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:color_aap/core/navigation/navigation.gr.dart';
-import 'package:color_aap/core/services/hashing_service.dart';
-import 'package:color_aap/core/services/shared_prefs_storage.dart';
+import 'package:color_aap/core/services/service_locator.dart';
 import 'package:color_aap/features/auth/auth_logic.dart';
 import 'package:color_aap/features/auth/widgets/login_buttons.dart';
 import 'package:color_aap/features/auth/widgets/login_form.dart';
@@ -23,12 +22,7 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   bool isLogin = true;
   final formKey = GlobalKey<FormState>();
-  final _storageService = SharedPrefsStorage();
-  late final AuthLogic _authLogic = AuthLogic(
-    storageService: _storageService,
-    hashingService: HashingService(),
-  );
-
+  late final AuthLogic _authLogic = serviceLocator.get<AuthLogic>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();

@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:color_aap/core/services/shared_prefs_storage.dart';
+import 'package:color_aap/core/services/service_locator.dart';
 import 'package:color_aap/features/auth/widgets/custom_elevated_button.dart';
 import 'package:color_aap/features/colors/color_logic.dart';
 import 'package:color_aap/features/colors/widgets/custom_app_bar.dart';
@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 class ColorScreen extends StatefulWidget {
   /// Constructor for ColorScreen
   final String email;
+
   /// Constructor for ColorScreen
   const ColorScreen({required this.email, super.key});
 
@@ -26,11 +27,8 @@ class _ColorScreenState extends State<ColorScreen> {
   Color appBarColor = Colors.white;
   Color textColor = Colors.white;
   int counter = 0;
-  late final ColorLogic _colorLogic = ColorLogic(
-    email: widget.email,
-    storageService: _storageService,
-  );
-  final _storageService = SharedPrefsStorage();
+  late final ColorLogic _colorLogic =
+      serviceLocator.get<ColorLogic>(param1: widget.email);
 
   @override
   void initState() {
