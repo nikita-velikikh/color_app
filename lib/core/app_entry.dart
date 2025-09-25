@@ -37,14 +37,14 @@ class _AppEntryState extends State<AppEntry> {
       isLoading = false;
     });
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (lastEmail == null) {
+      if (email == null || email.isEmpty) {
         _appRouter.pushAndPopUntil(
           const AuthRoute(),
           predicate: (route) => false,
         );
       } else {
         _appRouter.pushAndPopUntil(
-          ColorRoute(email: lastEmail ?? ''),
+          ColorRoute(email: email),
           predicate: (route) => false,
         );
       }

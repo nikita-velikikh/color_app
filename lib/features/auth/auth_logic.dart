@@ -17,7 +17,8 @@ class AuthLogic {
     required this.storageService,
     required this.hashingService,
   });
-
+  /// Minimum number of password characters
+   static const int minNumberPassword = 8;
   /// Saves the authenticated user's email
   Future<void> saveLastEmail(String email) async {
     await storageService.saveLastEmail(email);

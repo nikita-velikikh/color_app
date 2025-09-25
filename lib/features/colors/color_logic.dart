@@ -12,7 +12,7 @@ class ColorLogic {
   late  Random random = Random();
   /// Clarity of the color
   /// Generate range color
-  final int clarity = 255;
+  final int transparencyValue = 255;
   /// Generate range color
   final int generateRangeColor = 256;
 
@@ -27,7 +27,7 @@ class ColorLogic {
   /// Generates a random color using ARGB values
   Color generateRandomColor() {
     return Color.fromARGB(
-      clarity,
+      transparencyValue,
       random.nextInt(generateRangeColor),
       random.nextInt(generateRangeColor),
       random.nextInt(generateRangeColor),
