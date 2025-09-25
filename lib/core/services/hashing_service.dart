@@ -21,13 +21,15 @@ class HashingService {
   ) async {
     try {
       final parts = hashedPassword.split(':');
-      if (parts.length != 2) return false;
+      const int numberOfParts = 2;
+      if (parts.length != numberOfParts) return false;
 
       final salt = parts[0];
       final storedHash = parts[1];
 
       final bytes = utf8.encode(password + salt);
       final hash = sha256.convert(bytes);
+
       return hash.toString() == storedHash;
     } catch (e) {
       return false;

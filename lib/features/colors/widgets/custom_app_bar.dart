@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 /// Custom app bar widget with user management actions
 /// and customizable appearance
 class CustomAppBar extends StatelessWidget {
+  /// Constructor for CustomAppBar
   const CustomAppBar({
     required this.appBarText,
     required this.textColor,
@@ -16,10 +17,15 @@ class CustomAppBar extends StatelessWidget {
     super.key,
   });
 
+  /// Text for the app bar
   final String appBarText;
+  /// Text color for the app bar
   final Color textColor;
+  /// Background color for the app bar
   final Color backgroundColor;
+  /// Whether the title is centered
   final bool isCenterTirtle;
+  /// Email of the user
   final String userEmail;
 
   /// Navigates to the authentication screen, replacing the current route

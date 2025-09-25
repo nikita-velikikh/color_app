@@ -1,5 +1,6 @@
 import 'package:color_aap/generated/l10n.dart';
 import 'package:flutter/material.dart';
+
 /// Validates email format using regex pattern
 String? validateEmail(
   String? input,
@@ -14,18 +15,20 @@ String? validateEmail(
   if (!isValidEmail) {
     return S.of(context).enterYourEmail;
   }
+
   return null;
 }
 
 /// Validates password strength and complexity requirements
 String? validatePassword(
   String? input,
-  BuildContext context,
-) {
+  BuildContext context, {
+  int minNumberPassword = 8,
+}) {
   if (input == null || input.isEmpty) {
     return S.of(context).enterYourPassword;
   }
-  if (input.length < 8) {
+  if (input.length < minNumberPassword) {
     return S.of(context).passwordLong;
   }
   const pattern =
@@ -33,6 +36,7 @@ String? validatePassword(
   if (!RegExp(pattern).hasMatch(input)) {
     return S.of(context).passwordShould;
   }
+
   return null;
 }
 
@@ -48,5 +52,6 @@ String? validateRepeatPassword(
   if (value != originalPassword) {
     return S.of(context).passwordMatch;
   }
+
   return null;
 }

@@ -3,13 +3,19 @@ import 'package:flutter/material.dart';
 /// Password input field specifically designed for sign-up 
 /// forms with visibility toggle
 class SingUpPasswordField extends StatefulWidget {
+  /// Constructor for SingUpPasswordField
   final String? label;
+  /// Hint text for the field
   final String hintText;
+  /// Whether the field is a password field
   final bool isPassword;
+  /// Controller for the field
   final TextEditingController? controller;
+  /// Callback for the field
   final void Function(String) onChanged;
+  /// Validator for the field
   final String? Function(String?)? validator;
-
+  /// Constructor for SingUpPasswordField
   const SingUpPasswordField({
     required this.hintText, required this.onChanged, super.key,
     this.label,
@@ -35,7 +41,7 @@ class _SingUpPasswordField extends State<SingUpPasswordField> {
         children: [
           if (widget.label != null) ...[
             Text(
-              widget.label!,
+              widget.label ?? '',
               style: const TextStyle(fontSize: 14),
             ),
             const SizedBox(height: 7),

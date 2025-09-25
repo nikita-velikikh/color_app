@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 /// Widget that displays social login buttons for GitHub and GitLab
 class IconButtons extends StatelessWidget {
+  /// Constructor for IconButtons
   const IconButtons({super.key});
 
   @override
@@ -10,7 +11,7 @@ class IconButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ElevatedButton.icon(
-          onPressed: () {},
+          onPressed: null,
           icon: Image.asset('assets/images/github.png', width: 24),
           label: const Text(
             "GitHub",
@@ -26,7 +27,7 @@ class IconButtons extends StatelessWidget {
         ),
         const SizedBox(width: 13),
         ElevatedButton.icon(
-          onPressed: () {},
+          onPressed: null,
           icon: Image.asset('assets/images/gitlab.png', width: 24),
           label: const Text(
             "GitLab",

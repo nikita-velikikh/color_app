@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:color_aap/core/navigation/navigation.gr.dart';
-import 'package:color_aap/core/services/hashing_service.dart';
-import 'package:color_aap/core/services/shared_prefs_storage.dart';
+import 'package:color_aap/core/services/service_locator.dart';
 import 'package:color_aap/features/auth/auth_logic.dart';
 import 'package:color_aap/features/auth/widgets/login_buttons.dart';
 import 'package:color_aap/features/auth/widgets/login_form.dart';
@@ -12,6 +11,7 @@ import 'package:flutter/material.dart';
 ///
 @RoutePage()
 class AuthScreen extends StatefulWidget {
+  /// Constructor for AuthScreen
   const AuthScreen({super.key});
 
   @override
@@ -22,9 +22,7 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   bool isLogin = true;
   final formKey = GlobalKey<FormState>();
-  final _storageService = SharedPrefsStorage();
-  late AuthLogic _authLogic;
-
+  late final AuthLogic _authLogic = serviceLocator.get<AuthLogic>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -33,15 +31,11 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   void initState() {
     super.initState();
-    _authLogic = AuthLogic(
-      storageService: _storageService,
-      hashingService: HashingService(),
-    );
   }
 
   /// Handles form submission for both login and registration
   Future<void> onLoginPressed() async {
-    if (formKey.currentState!.validate()) {
+    if (formKey.currentState?.validate() ?? false) {
       if (isLogin) {
         await _handleLogin();
       } else {
@@ -70,6 +64,7 @@ class _AuthScreenState extends State<AuthScreen> {
   Future<void> _handleCreateUser() async {
     final email = emailController.text;
     final password = passwordController.text;
+    final userExists = S.of(context).userExists;
     final success = await _authLogic.createUser(
       email,
       password,
@@ -78,7 +73,7 @@ class _AuthScreenState extends State<AuthScreen> {
     if (success) {
       navigate(email);
     } else {
-      handleError(S.of(context).userExists);
+      handleError(userExists);
     }
   }
 

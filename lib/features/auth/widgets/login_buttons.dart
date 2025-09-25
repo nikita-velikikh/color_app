@@ -8,14 +8,18 @@ import 'package:flutter/material.dart';
 /// Container widget that displays all authentication-related
 ///  buttons and controls
 class LoginButtons extends StatelessWidget {
+  /// Constructor for LoginButtons
   const LoginButtons({
     required this.onLoginPressed,
     required this.isLogin,
     required this.onToggle,
     super.key,
   });
+  /// Callback for the toggle button
   final VoidCallback onToggle;
+  /// Callback for the login button
   final VoidCallback onLoginPressed;
+  /// Whether the login is active
   final bool isLogin;
   @override
   Widget build(BuildContext context) {

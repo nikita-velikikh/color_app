@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 /// Splash screen widget that shows loading indicator
 @RoutePage()
 class SplashScreen extends StatelessWidget {
+  /// Constructor for SplashScreen
   const SplashScreen({super.key});
 
   @override

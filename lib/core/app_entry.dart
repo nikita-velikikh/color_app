@@ -1,4 +1,4 @@
-import 'package:color_aap/core/navigation/navigation.dart';
+import 'package:color_aap/core/navigation/app_router.dart';
 import 'package:color_aap/core/navigation/navigation.gr.dart';
 import 'package:color_aap/core/services/shared_prefs_storage.dart';
 import 'package:color_aap/generated/l10n.dart';
@@ -7,6 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 /// Main application widget that handles authentication state and routing
 class AppEntry extends StatefulWidget {
+  /// Constructor for AppEntry
   const AppEntry({super.key});
 
   @override
@@ -19,7 +20,6 @@ class _AppEntryState extends State<AppEntry> {
   String? lastEmail;
   bool isLoading = true;
   final _appRouter = AppRouter();
-  late final Widget home;
 
   @override
   void initState() {
@@ -37,14 +37,14 @@ class _AppEntryState extends State<AppEntry> {
       isLoading = false;
     });
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (lastEmail == null) {
+      if (email == null || email.isEmpty) {
         _appRouter.pushAndPopUntil(
           const AuthRoute(),
           predicate: (route) => false,
         );
       } else {
         _appRouter.pushAndPopUntil(
-          ColorRoute(email: lastEmail!),
+          ColorRoute(email: email),
           predicate: (route) => false,
         );
       }
@@ -65,12 +65,13 @@ class _AppEntryState extends State<AppEntry> {
       supportedLocales: S.delegate.supportedLocales,
       localeResolutionCallback: (locale, supportedLocales) {
         if (locale != null) {
-          for (var supportedLocale in supportedLocales) {
+          for (final supportedLocale in supportedLocales) {
             if (supportedLocale.languageCode == locale.languageCode) {
               return supportedLocale;
             }
           }
         }
+
         return supportedLocales.first;
       },
     );
