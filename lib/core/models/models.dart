@@ -17,9 +17,9 @@ class ColorConverter implements JsonConverter<Color, int> {
   int toJson(Color color) => color.toARGB32();
 }
 
-@freezed
 
 /// Data model representing user's color preferences for the app
+@freezed
 class UserColors with _$UserColors {
   const factory UserColors({
     @ColorConverter() required Color backgroundColor,
@@ -31,9 +31,10 @@ class UserColors with _$UserColors {
       _$UserColorsFromJson(json);
 }
 
-@freezed
+
 
 /// Data model representing user account information and preferences
+@freezed
 class UserData with _$UserData {
   const factory UserData({
     required UserColors colors,
@@ -45,9 +46,10 @@ class UserData with _$UserData {
       _$UserDataFromJson(json);
 }
 
-@freezed
+
 
 /// Container model that holds a map of all users and their data
+ @freezed
 class UsersMap with _$UsersMap {
   const factory UsersMap({
     required Map<String, UserData> users,

@@ -33,15 +33,6 @@ class LoginForm extends StatefulWidget {
 
 /// State class for LoginForm that manages form controllers and UI layout
 class _LoginFormState extends State<LoginForm> {
-  /// Properly disposes of all text controllers to prevent memory leaks
-  @override
-  void dispose() {
-    widget.passwordController.dispose();
-    widget.repeatPasswordController.dispose();
-    widget.emailController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -66,7 +57,7 @@ class _LoginFormState extends State<LoginForm> {
               hintText: S.of(context).enterYourEmail,
               controller: widget.emailController,
               validator: (value) => validateEmail(value, context),
-              onChanged: (email) {},
+              onChanged: (email) => {},
               currentError: widget.currentError,
             ),
             const SizedBox(height: 12),
@@ -75,7 +66,7 @@ class _LoginFormState extends State<LoginForm> {
               hintText: S.of(context).enterYourPassword,
               isPassword: true,
               validator: (value) => validatePassword(value, context),
-              onChanged: (password) {},
+              onChanged: (password) => {},
             ),
             if (!widget.isLogin) ...[
               const SizedBox(height: 12),
@@ -83,7 +74,7 @@ class _LoginFormState extends State<LoginForm> {
                 hintText: S.of(context).repeatYourPassword,
                 isPassword: true,
                 controller: widget.repeatPasswordController,
-                onChanged: (password) {},
+                onChanged: (password) => {},
                 validator: (value) => validateRepeatPassword(
                   value,
                   widget.passwordController.text,
@@ -97,5 +88,14 @@ class _LoginFormState extends State<LoginForm> {
         ),
       ),
     );
+  }
+
+  /// Properly disposes of all text controllers to prevent memory leaks
+  @override
+  void dispose() {
+    widget.passwordController.dispose();
+    widget.repeatPasswordController.dispose();
+    widget.emailController.dispose();
+    super.dispose();
   }
 }

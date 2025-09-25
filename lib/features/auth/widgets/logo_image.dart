@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 /// Simple widget that displays the app logo image with fixed dimensions
 class LogoImage extends StatelessWidget {
+  /// Constructor for LogoImage
   const LogoImage({super.key});
 
   @override

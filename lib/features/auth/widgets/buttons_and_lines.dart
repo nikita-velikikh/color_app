@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 
 /// Widget that displays the main action button and decorative divider lines
 class ButtonsAndLines extends StatelessWidget {
+  /// Constructor for ButtonsAndLines
   const ButtonsAndLines({
     required this.onTap,
     required this.textLoginButton,
     super.key,
   });
-
+  /// Callback for the main action button
   final VoidCallback onTap;
-
+  /// Text for the main action button
   final String textLoginButton;
 
   @override
@@ -43,14 +44,18 @@ class ButtonsAndLines extends StatelessWidget {
           Row(
             children: [
               const Expanded(
-                  child: Divider(color: Colors.black, thickness: 0.5),),
+                child: Divider(color: Colors.black, thickness: 0.5),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 19),
-                child: Text(S.of(context).orWith,
-                    style: const TextStyle(fontSize: 14),),
+                child: Text(
+                  S.of(context).orWith,
+                  style: const TextStyle(fontSize: 14),
+                ),
               ),
               const Expanded(
-                  child: Divider(color: Colors.black, thickness: 0.5),),
+                child: Divider(color: Colors.black, thickness: 0.5),
+              ),
             ],
           ),
         ],

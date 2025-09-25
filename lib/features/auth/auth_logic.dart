@@ -4,9 +4,15 @@ import 'package:color_aap/core/services/shared_prefs_storage.dart';
 import 'package:color_aap/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
+/// Logic for authentication
 class AuthLogic {
+  /// Storage service for storing user data
   final SharedPrefsStorage storageService;
+
+  /// Hashing service for password hashing
   final HashingService hashingService;
+
+  /// Constructor for AuthLogic
   AuthLogic({
     required this.storageService,
     required this.hashingService,

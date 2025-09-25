@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 /// Widget that displays a registration/login toggle button with customizable text
 class Registration extends StatelessWidget {
+  /// Constructor for Registration
   const Registration({
     required this.subText,
     required this.textButtonText,
@@ -9,8 +10,11 @@ class Registration extends StatelessWidget {
     super.key,
   });
 
+  /// Subtext for the button
   final String subText;
+  /// Text for the button
   final String textButtonText;
+  /// Callback for the toggle button
   final VoidCallback onToggle;
 
   @override

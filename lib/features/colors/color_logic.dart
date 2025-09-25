@@ -2,14 +2,21 @@ import 'dart:math';
 import 'package:color_aap/core/models/models.dart';
 import 'package:color_aap/core/services/shared_prefs_storage.dart';
 import 'package:flutter/material.dart';
-
+/// Logic for color management
 class ColorLogic {
+  /// Email of the user
   final String email;
+  /// Storage service for storing user data
   final SharedPrefsStorage storageService;
-  late final Random random;
+  /// Random number generator
+  late  Random random = Random();
+  /// Clarity of the color
+  /// Generate range color
   final int clarity = 255;
+  /// Generate range color
   final int generateRangeColor = 256;
 
+  /// Constructor for ColorLogic
   ColorLogic({
     required this.email,
     required this.storageService,

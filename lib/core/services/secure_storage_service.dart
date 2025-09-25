@@ -6,6 +6,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 /// Secure implementation of StorageService using flutter_secure_storage
  interface class SecureStorageService implements StorageService {
+  /// Constructor for SecureStorageService
   final FlutterSecureStorage storage = const FlutterSecureStorage();
   final String _usersKey = 'secure_users';
   final String _lastEmailKey = "secure_last_email";

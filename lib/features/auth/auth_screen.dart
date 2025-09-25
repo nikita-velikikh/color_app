@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 ///
 @RoutePage()
 class AuthScreen extends StatefulWidget {
+  /// Constructor for AuthScreen
   const AuthScreen({super.key});
 
   @override
@@ -23,7 +24,10 @@ class _AuthScreenState extends State<AuthScreen> {
   bool isLogin = true;
   final formKey = GlobalKey<FormState>();
   final _storageService = SharedPrefsStorage();
-  late AuthLogic _authLogic;
+  late final AuthLogic _authLogic = AuthLogic(
+    storageService: _storageService,
+    hashingService: HashingService(),
+  );
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -33,15 +37,11 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   void initState() {
     super.initState();
-    _authLogic = AuthLogic(
-      storageService: _storageService,
-      hashingService: HashingService(),
-    );
   }
 
   /// Handles form submission for both login and registration
   Future<void> onLoginPressed() async {
-    if (formKey.currentState!.validate()) {
+    if (formKey.currentState?.validate() ?? false) {
       if (isLogin) {
         await _handleLogin();
       } else {

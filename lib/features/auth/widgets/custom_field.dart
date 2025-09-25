@@ -2,14 +2,28 @@ import 'package:flutter/material.dart';
 
 /// Customizable text input field with optional password visibility toggle
 class CustomField extends StatefulWidget {
+  /// Constructor for CustomField
   final String? label;
+
+  /// Hint text for the field
   final String hintText;
+
+  /// Whether the field is a password field
   final bool isPassword;
+
+  /// Controller for the field
   final TextEditingController? controller;
+
+  /// Callback for the field
   final void Function(String) onChanged;
+
+  /// Validator for the field
   final String? Function(String?)? validator;
+
+  /// Current error for the field
   final String? currentError;
 
+  /// Constructor for CustomField
   const CustomField({
     required this.hintText,
     required this.onChanged,

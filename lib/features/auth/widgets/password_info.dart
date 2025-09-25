@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 /// Widget that displays a "Remember Me" checkbox for user convenience
 class PasswordInfo extends StatefulWidget {
+  /// Constructor for PasswordInfo
   const PasswordInfo({super.key});
   @override
   PasswordInfoState createState() => PasswordInfoState();
@@ -10,6 +11,7 @@ class PasswordInfo extends StatefulWidget {
 
 /// State class for PasswordInfo that manages the checkbox state
 class PasswordInfoState extends State<PasswordInfo> {
+  /// Whether the checkbox is checked
   bool isChecked = false;
 
   @override

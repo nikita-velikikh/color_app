@@ -10,7 +10,9 @@ import 'package:flutter/material.dart';
 /// interact with color-changing elements
 @RoutePage()
 class ColorScreen extends StatefulWidget {
+  /// Constructor for ColorScreen
   final String email;
+  /// Constructor for ColorScreen
   const ColorScreen({required this.email, super.key});
 
   @override
@@ -24,16 +26,16 @@ class _ColorScreenState extends State<ColorScreen> {
   Color appBarColor = Colors.white;
   Color textColor = Colors.white;
   int counter = 0;
-  late ColorLogic _colorLogic;
+  late final ColorLogic _colorLogic = ColorLogic(
+    email: widget.email,
+    storageService: _storageService,
+  );
   final _storageService = SharedPrefsStorage();
 
   @override
   void initState() {
     super.initState();
-    _colorLogic = ColorLogic(
-      email: widget.email,
-      storageService: _storageService,
-    );
+
     _loadAndShowUserColors();
   }
 
