@@ -94,19 +94,19 @@ class ColorLogic extends ChangeNotifier {
   }
 
   /// Changes the background color
-  void changeColorBackground(Color color) {
+  void handleBackgroundTap(Color color) {
     _backgroundColor = color;
     _saveAndNotify();
   }
 
   /// Changes the app bar color 
-  void changeColorAppBar(Color color) {
+  void handleAppBarTap(Color color) {
     _appBarColor = color;
     _saveAndNotify();
   }
 
   /// Changes the text color
-  void changeColorText(Color color) {
+  void handleTextTap(Color color) {
     _textColor = color;
     _saveAndNotify();
   }
@@ -135,9 +135,9 @@ class ColorLogic extends ChangeNotifier {
 
   /// Changes all colors and saves the change
   void changeAllColors() {
-    changeColorBackground(generateRandomColor());
-    changeColorAppBar(generateRandomColor());
-    changeColorText(generateRandomColor());
+    handleBackgroundTap(generateRandomColor());
+    handleAppBarTap(generateRandomColor());
+    handleTextTap(generateRandomColor());
     changeCounter();
   }
 }

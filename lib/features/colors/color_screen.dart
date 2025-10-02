@@ -13,7 +13,7 @@ class ColorScreen extends StatelessWidget {
   /// Constructor for ColorScreen
   final String email;
 
-  ///
+  /// Receive data
   late final colorLogic = serviceLocator.get<ColorLogic>(param1: email);
 
   /// Constructor for ColorScreen
@@ -31,16 +31,16 @@ class ColorScreen extends StatelessWidget {
             email: email,
             onTap: () {
               colorLogic.resetCounter();
-              colorLogic.changeColorAppBar(colorLogic.generateRandomColor());
+              colorLogic.handleAppBarTap(colorLogic.generateRandomColor());
             },
           ),
           body: _ColorBody(
             backgroundColor: colorLogic.backgroundColor,
             textColor: colorLogic.textColor,
             counter: colorLogic.counter,
-            onColorButtonPressed: colorLogic.changeColorBackground,
+            onColorButtonPressed: colorLogic.handleBackgroundTap,
             onCounterTextTap: () =>
-                colorLogic.changeColorText(colorLogic.generateRandomColor()),
+                colorLogic.handleTextTap(colorLogic.generateRandomColor()),
           ),
         ),
       ),
