@@ -9,101 +9,39 @@ import 'package:flutter/material.dart';
 /// Main screen where users can customize app colors and
 /// interact with color-changing elements
 @RoutePage()
-class ColorScreen extends StatefulWidget {
+class ColorScreen extends StatelessWidget {
   /// Constructor for ColorScreen
   final String email;
 
+  ///
+  late final colorLogic = serviceLocator.get<ColorLogic>(param1: email);
+
   /// Constructor for ColorScreen
-  const ColorScreen({required this.email, super.key});
-
-  @override
-  State<ColorScreen> createState() => _ColorScreenState();
-}
-
-/// State class for ColorScreen that manages color states, counter,
-///  and user interactions
-class _ColorScreenState extends State<ColorScreen> {
-  Color backgroundColor = Colors.black;
-  Color appBarColor = Colors.white;
-  Color textColor = Colors.white;
-  int counter = 0;
-  late final ColorLogic _colorLogic =
-      serviceLocator.get<ColorLogic>(param1: widget.email);
-
-  @override
-  void initState() {
-    super.initState();
-
-    _loadAndShowUserColors();
-  }
-
-  /// Loads user's saved color preferences from local storage
-  Future<void> _loadAndShowUserColors() async {
-    final userColors = await _colorLogic.loadUserColors();
-    if (userColors != null) {
-      setState(() {
-        backgroundColor = userColors.backgroundColor;
-        appBarColor = userColors.appBarColor;
-        textColor = userColors.textColor;
-      });
-    }
-  }
-
-  /// Changes the background color and saves the change
-  void _changeColor(Color color) {
-    setState(() => backgroundColor = color);
-    _colorLogic.saveColor(
-      backgroundColor: backgroundColor,
-      appBarColor: appBarColor,
-      textColor: textColor,
-    );
-  }
-
-  /// Changes the app bar color and saves the change
-  void _changeColorAppBar(Color color) {
-    setState(() => appBarColor = color);
-    _colorLogic.saveColor(
-      backgroundColor: backgroundColor,
-      appBarColor: appBarColor,
-      textColor: textColor,
-    );
-  }
-
-  /// Changes the text color and saves the change
-  void _changeColorText(Color color) {
-    setState(() => textColor = color);
-    _colorLogic.saveColor(
-      backgroundColor: backgroundColor,
-      appBarColor: appBarColor,
-      textColor: textColor,
-    );
-  }
+  ColorScreen({required this.email, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        _changeColor(_colorLogic.generateRandomColor());
-        setState(() => counter++);
-        _changeColorText(_colorLogic.generateRandomColor());
-        _changeColorText(_colorLogic.generateRandomColor());
-      },
-      child: Scaffold(
-        appBar: _ColorAppBar(
-          appBarColor: appBarColor,
-          email: widget.email,
-          onTap: () {
-            setState(() => counter = 0);
-            _changeColorAppBar(_colorLogic.generateRandomColor());
-          },
-        ),
-        body: _ColorBody(
-          backgroundColor: backgroundColor,
-          textColor: textColor,
-          counter: counter,
-          onColorButtonPressed: _changeColor,
-          onCounterTextTap: () =>
-              _changeColorText(_colorLogic.generateRandomColor()),
+    return ListenableBuilder(
+      listenable: colorLogic,
+      builder: (context, child) => GestureDetector(
+        onTap: colorLogic.changeAllColors,
+        child: Scaffold(
+          appBar: _ColorAppBar(
+            appBarColor: colorLogic.appBarColor,
+            email: email,
+            onTap: () {
+              colorLogic.resetCounter();
+              colorLogic.changeColorAppBar(colorLogic.generateRandomColor());
+            },
+          ),
+          body: _ColorBody(
+            backgroundColor: colorLogic.backgroundColor,
+            textColor: colorLogic.textColor,
+            counter: colorLogic.counter,
+            onColorButtonPressed: colorLogic.changeColorBackground,
+            onCounterTextTap: () =>
+                colorLogic.changeColorText(colorLogic.generateRandomColor()),
+          ),
         ),
       ),
     );

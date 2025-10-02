@@ -9,6 +9,9 @@ class AuthLogic {
   /// Storage service for storing user data
   final SharedPrefsStorage storageService;
 
+  /// Minimum number of password characters
+  static const int minNumberPassword = 8;
+
   /// Hashing service for password hashing
   final HashingService hashingService;
 
@@ -17,8 +20,7 @@ class AuthLogic {
     required this.storageService,
     required this.hashingService,
   });
-  /// Minimum number of password characters
-   static const int minNumberPassword = 8;
+
   /// Saves the authenticated user's email
   Future<void> saveLastEmail(String email) async {
     await storageService.saveLastEmail(email);

@@ -20,11 +20,12 @@ class HashingService {
     String hashedPassword,
   ) async {
     try {
+      const int firstIndex = 0;
       final parts = hashedPassword.split(':');
       const int numberOfParts = 2;
       if (parts.length != numberOfParts) return false;
 
-      final salt = parts[0];
+      final salt = parts[firstIndex];
       final storedHash = parts[1];
 
       final bytes = utf8.encode(password + salt);
