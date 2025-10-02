@@ -5,6 +5,7 @@ import 'package:color_aap/features/colors/color_logic.dart';
 import 'package:color_aap/features/colors/widgets/custom_app_bar.dart';
 import 'package:color_aap/generated/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 /// Main screen where users can customize app colors and
 /// interact with color-changing elements
@@ -13,34 +14,33 @@ class ColorScreen extends StatelessWidget {
   /// Constructor for ColorScreen
   final String email;
 
-  /// Receive data
-  late final colorLogic = serviceLocator.get<ColorLogic>(param1: email);
-
   /// Constructor for ColorScreen
-  ColorScreen({required this.email, super.key});
+ const ColorScreen({required this.email, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ListenableBuilder(
-      listenable: colorLogic,
-      builder: (context, child) => GestureDetector(
-        onTap: colorLogic.changeAllColors,
-        child: Scaffold(
-          appBar: _ColorAppBar(
-            appBarColor: colorLogic.appBarColor,
-            email: email,
-            onTap: () {
-              colorLogic.resetCounter();
-              colorLogic.handleAppBarTap(colorLogic.generateRandomColor());
-            },
-          ),
-          body: _ColorBody(
-            backgroundColor: colorLogic.backgroundColor,
-            textColor: colorLogic.textColor,
-            counter: colorLogic.counter,
-            onColorButtonPressed: colorLogic.handleBackgroundTap,
-            onCounterTextTap: () =>
-                colorLogic.handleTextTap(colorLogic.generateRandomColor()),
+    return ChangeNotifierProvider<ColorLogic>(
+      create: (context) => serviceLocator.get<ColorLogic>(param1: email),
+      child: Consumer<ColorLogic>(
+        builder: (context,colorLogic, child) => GestureDetector(
+          onTap: colorLogic.changeAllColors,
+          child: Scaffold(
+            appBar: _ColorAppBar(
+              appBarColor: colorLogic.appBarColor,
+              email: email,
+              onTap: () {
+                colorLogic.resetCounter();
+                colorLogic.handleAppBarTap(colorLogic.generateRandomColor());
+              },
+            ),
+            body: _ColorBody(
+              backgroundColor: colorLogic.backgroundColor,
+              textColor: colorLogic.textColor,
+              counter: colorLogic.counter,
+              onColorButtonPressed: colorLogic.handleBackgroundTap,
+              onCounterTextTap: () =>
+                  colorLogic.handleTextTap(colorLogic.generateRandomColor()),
+            ),
           ),
         ),
       ),
