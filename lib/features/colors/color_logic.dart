@@ -159,4 +159,7 @@ extension ColorScreenUseCase on ColorLogic {
 
   /// Getter for the counter
   int get counter => _counter;
+
+  /// Getter for the email
+  String get email => _email;
 }
