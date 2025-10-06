@@ -29,16 +29,15 @@ class ColorScreen extends StatelessWidget {
               appBarColor: colorLogic.appBarColor,
               email: email,
               onTap: () {
-                colorLogic.handleAppBarTap(colorLogic.generateRandomColor());
+                colorLogic.handleAppBarTap();
               },
             ),
             body: _ColorBody(
               backgroundColor: colorLogic.backgroundColor,
               textColor: colorLogic.textColor,
               counter: colorLogic.counter,
-              onColorButtonPressed: colorLogic.changeBackgroundColor,
-              onCounterTextTap: () =>
-                  colorLogic.handleTextTap(colorLogic.generateRandomColor()),
+              onColorButtonPressed: colorLogic.handleButtonTap,
+              onCounterTextTap: () => colorLogic.handleTextTap(),
             ),
           ),
         ),
