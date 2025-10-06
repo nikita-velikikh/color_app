@@ -93,22 +93,33 @@ class ColorLogic extends ChangeNotifier {
     await storageService.saveUserColors(email, userColors);
   }
 
-  /// Changes the background color
-  void handleBackgroundTap(Color color) {
+  /// Changes the background color and increment counter
+  void changeBackgroundColor(Color color) {
     _backgroundColor = color;
     _saveAndNotify();
   }
 
-  /// Changes the app bar color 
-  void handleAppBarTap(Color color) {
+  /// Changes the app bar color
+  void changeAppBarColor(Color color) {
     _appBarColor = color;
     _saveAndNotify();
   }
 
   /// Changes the text color
-  void handleTextTap(Color color) {
+  void changeTextColor(Color color) {
     _textColor = color;
     _saveAndNotify();
+  }
+
+  /// change color and reset counter on click
+  void handleAppBarTap(Color color) {
+    changeAppBarColor(color);
+    resetCounter();
+  }
+
+  /// change color on click
+  void handleTextTap(Color color) {
+    changeTextColor(color);
   }
 
   /// Resets the counter
@@ -118,7 +129,7 @@ class ColorLogic extends ChangeNotifier {
   }
 
   /// Changes the counter
-  void changeCounter() {
+  void incrementCounter() {
     _counter++;
     notifyListeners();
   }
@@ -134,10 +145,10 @@ class ColorLogic extends ChangeNotifier {
   }
 
   /// Changes all colors and saves the change
-  void changeAllColors() {
-    handleBackgroundTap(generateRandomColor());
-    handleAppBarTap(generateRandomColor());
-    handleTextTap(generateRandomColor());
-    changeCounter();
+  void handleBackgroundTap() {
+    changeBackgroundColor(generateRandomColor());
+    changeAppBarColor(generateRandomColor());
+    changeTextColor(generateRandomColor());
+    incrementCounter();
   }
 }

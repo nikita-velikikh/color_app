@@ -15,21 +15,20 @@ class ColorScreen extends StatelessWidget {
   final String email;
 
   /// Constructor for ColorScreen
- const ColorScreen({required this.email, super.key});
+  const ColorScreen({required this.email, super.key});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ColorLogic>(
       create: (context) => serviceLocator.get<ColorLogic>(param1: email),
       child: Consumer<ColorLogic>(
-        builder: (context,colorLogic, child) => GestureDetector(
-          onTap: colorLogic.changeAllColors,
+        builder: (context, colorLogic, child) => GestureDetector(
+          onTap: colorLogic.handleBackgroundTap,
           child: Scaffold(
             appBar: _ColorAppBar(
               appBarColor: colorLogic.appBarColor,
               email: email,
               onTap: () {
-                colorLogic.resetCounter();
                 colorLogic.handleAppBarTap(colorLogic.generateRandomColor());
               },
             ),
@@ -37,7 +36,7 @@ class ColorScreen extends StatelessWidget {
               backgroundColor: colorLogic.backgroundColor,
               textColor: colorLogic.textColor,
               counter: colorLogic.counter,
-              onColorButtonPressed: colorLogic.handleBackgroundTap,
+              onColorButtonPressed: colorLogic.changeBackgroundColor,
               onCounterTextTap: () =>
                   colorLogic.handleTextTap(colorLogic.generateRandomColor()),
             ),
