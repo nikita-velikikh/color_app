@@ -17,7 +17,7 @@ Future<void> registerDependencies() async {
   serviceLocator
       .registerLazySingleton<SharedPrefsStorage>(SharedPrefsStorage.new);
 
-  serviceLocator.registerLazySingleton<AuthLogic>(
+  serviceLocator.registerFactory<AuthLogic>(
     () => AuthLogic(
       storageService: serviceLocator<SharedPrefsStorage>(),
       hashingService: serviceLocator<HashingService>(),

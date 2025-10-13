@@ -89,13 +89,4 @@ class _LoginFormState extends State<LoginForm> {
       ),
     );
   }
-
-  /// Properly disposes of all text controllers to prevent memory leaks
-  @override
-  void dispose() {
-    widget.passwordController.dispose();
-    widget.repeatPasswordController.dispose();
-    widget.emailController.dispose();
-    super.dispose();
-  }
 }
