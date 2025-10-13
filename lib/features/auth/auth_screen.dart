@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:color_aap/core/navigation/navigation.gr.dart';
-import 'package:color_aap/core/services/hashing_service.dart';
 import 'package:color_aap/core/services/service_locator.dart';
-import 'package:color_aap/core/services/shared_prefs_storage.dart';
 import 'package:color_aap/features/auth/auth_logic.dart';
 import 'package:color_aap/features/auth/widgets/login_buttons.dart';
 import 'package:color_aap/features/auth/widgets/login_form.dart';
@@ -93,10 +91,12 @@ class _AuthScreenState extends State<AuthScreen> {
           password,
           context,
         );
-    if (loginError != null) {
-      context.read<AuthLogic>().setError(loginError);
-    } else {
-      navigate(context, email);
+    if (context.mounted) {
+      if (loginError != null) {
+        context.read<AuthLogic>().setError(loginError);
+      } else {
+        navigate(context, email);
+      }
     }
   }
 
@@ -115,11 +115,12 @@ class _AuthScreenState extends State<AuthScreen> {
           email,
           password,
         );
-
-    if (success) {
-      navigate(context, email);
-    } else {
-      context.read<AuthLogic>().setError(userExists);
+    if (context.mounted) {
+      if (success) {
+        navigate(context, email);
+      } else {
+        context.read<AuthLogic>().setError(userExists);
+      }
     }
   }
 

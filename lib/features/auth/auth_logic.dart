@@ -19,7 +19,10 @@ class AuthLogic extends ChangeNotifier {
 
   String? _currentError;
 
+  /// getter login page and register page
   bool get isLogin => _isLogin;
+
+  /// Current authentication error
   String? get currentError => _currentError;
 
   /// Constructor for AuthLogic
@@ -28,12 +31,14 @@ class AuthLogic extends ChangeNotifier {
     required this.hashingService,
   });
 
+  /// Toggles between login and registration modes, clears any current error
   void toggleAuthMode() {
     _isLogin = !_isLogin;
     _currentError = null;
     notifyListeners();
   }
 
+  /// Sets the current error message and notifies listeners
   void setError(String message) {
     _currentError = message;
     notifyListeners();
