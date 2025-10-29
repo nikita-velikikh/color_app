@@ -5,7 +5,7 @@ import 'package:color_aap/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 /// Logic for authentication
-class AuthLogic {
+class AuthLogic extends ChangeNotifier {
   /// Storage service for storing user data
   final SharedPrefsStorage storageService;
 
@@ -15,11 +15,34 @@ class AuthLogic {
   /// Hashing service for password hashing
   final HashingService hashingService;
 
+  bool _isLogin = true;
+
+  String? _currentError;
+
+  /// getter login page and register page
+  bool get isLogin => _isLogin;
+
+  /// Current authentication error
+  String? get currentError => _currentError;
+
   /// Constructor for AuthLogic
   AuthLogic({
     required this.storageService,
     required this.hashingService,
   });
+
+  /// Toggles between login and registration modes, clears any current error
+  void toggleAuthMode() {
+    _isLogin = !_isLogin;
+    _currentError = null;
+    notifyListeners();
+  }
+
+  /// Sets the current error message and notifies listeners
+  void setError(String message) {
+    _currentError = message;
+    notifyListeners();
+  }
 
   /// Saves the authenticated user's email
   Future<void> saveLastEmail(String email) async {

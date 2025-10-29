@@ -22,7 +22,7 @@ Future<void> registerDependencies() async {
     LanguageButtonLogic.new,
   );
 
-  serviceLocator.registerLazySingleton<AuthLogic>(
+  serviceLocator.registerFactory<AuthLogic>(
     () => AuthLogic(
       storageService: serviceLocator<SharedPrefsStorage>(),
       hashingService: serviceLocator<HashingService>(),

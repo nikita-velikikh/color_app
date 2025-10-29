@@ -42,7 +42,7 @@ class CustomAppBar extends StatelessWidget {
 
   /// Closes the current dialog or navigates back
   void navigatePop(BuildContext context) {
-    Navigator.pop(context);
+    context.router.maybePop();
   }
 
   /// Shows a confirmation dialog for deleting user account
