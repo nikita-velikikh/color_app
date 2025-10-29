@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:color_aap/core/navigation/navigation.gr.dart';
 import 'package:color_aap/core/services/service_locator.dart';
 import 'package:color_aap/features/auth/auth_logic.dart';
-import 'package:color_aap/features/auth/language_button_logic.dart';
 import 'package:color_aap/features/auth/widgets/language_selector.dart';
 import 'package:color_aap/features/auth/widgets/login_buttons.dart';
 import 'package:color_aap/features/auth/widgets/login_form.dart';
@@ -38,7 +37,6 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<LanguageButtonLogic>().loadLanguage();
 
     _emailController.addListener(() {
       setState(() {
@@ -57,15 +55,6 @@ class _AuthScreenState extends State<AuthScreen> {
         _confirmPasswordText = _confirmPasswordController.text;
       });
     });
-  }
-
-  /// Properly disposes of all text controllers to prevent memory leaks
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    _confirmPasswordController.dispose();
-    super.dispose();
   }
 
   /// Handles form submission for both login and registration
@@ -170,5 +159,14 @@ class _AuthScreenState extends State<AuthScreen> {
         ),
       ),
     );
+  }
+
+  /// Properly disposes of all text controllers to prevent memory leaks
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
   }
 }

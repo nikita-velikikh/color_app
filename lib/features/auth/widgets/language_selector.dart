@@ -25,51 +25,23 @@ class LanguageSelector extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    languageLogic.getCurrentLanguageFlag(),
+                    languageLogic.currentLanguage.flag(),
                     style: const TextStyle(fontSize: 30),
                   ),
                 ),
               ),
               onSelected: (String language) {
                 languageLogic.changeLanguage(language);
-                switch (language) {
-                  case 'en':
-                    // Change to English
-                    break;
-                  case 'uk':
-                    // Change to Ukrainian
-                    break;
-                }
               },
               itemBuilder: (BuildContext context) => [
-                PopupMenuItem<String>(
-                  value: 'en',
-                  child: Row(
-                    children: [
-                      const Text('🇬🇧', style: TextStyle(fontSize: 16)),
-                      const SizedBox(width: 8),
-                      const Text('English'),
-                      if (languageLogic.currentLanguage == 'en') ...[
-                        const Spacer(),
-                        const Icon(Icons.check, color: Colors.green, size: 16),
-                      ],
-                    ],
+                for (final lang in ColorsLocale.values)
+                  PopupMenuItem(
+                    value: lang.localeString(),
+                    child: _LanguageButton(
+                      locale: lang,
+                      isSelected: false,
+                    ),
                   ),
-                ),
-                PopupMenuItem<String>(
-                  value: 'uk',
-                  child: Row(
-                    children: [
-                      const Text('🇺🇦', style: TextStyle(fontSize: 16)),
-                      const SizedBox(width: 8),
-                      const Text('Українська'),
-                      if (languageLogic.currentLanguage == 'uk') ...[
-                        const Spacer(),
-                        const Icon(Icons.check, color: Colors.green, size: 16),
-                      ],
-                    ],
-                  ),
-                ),
               ],
             ),
             Text(
@@ -82,6 +54,29 @@ class LanguageSelector extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+}
+
+/// A language option for the dropdown, with flag, name, and check if selected.
+class _LanguageButton extends StatelessWidget {
+  final ColorsLocale locale;
+  final bool isSelected;
+
+  const _LanguageButton({required this.locale, required this.isSelected});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text(locale.flag(), style: const TextStyle(fontSize: 16)),
+        const SizedBox(width: 8),
+        Text(locale.fullString()),
+        if (isSelected) ...[
+          const Spacer(),
+          const Icon(Icons.check, color: Colors.green, size: 16),
+        ],
+      ],
     );
   }
 }

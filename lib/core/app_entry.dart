@@ -68,7 +68,7 @@ class _AppEntryState extends State<AppEntry> {
           return MaterialApp.router(
             routerConfig: _appRouter.config(),
             debugShowCheckedModeBanner: false,
-            locale: languageLogic.currentLocale,
+            locale: languageLogic.currentLanguage.getLocale(),
             localizationsDelegates: const [
               S.delegate,
               GlobalMaterialLocalizations.delegate,
