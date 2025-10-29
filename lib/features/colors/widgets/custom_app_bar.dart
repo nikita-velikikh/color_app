@@ -78,12 +78,6 @@ class CustomAppBar extends StatelessWidget {
       backgroundColor: backgroundColor,
       actions: [
         IconButton(
-          onPressed: () {
-            showDeleteDialog(context);
-          },
-          icon: const Icon(Icons.delete_forever, color: Colors.black),
-        ),
-        IconButton(
           icon: const Icon(Icons.logout, color: Colors.black),
           onPressed: () async {
             final authLogic = serviceLocator.get<AuthLogic>();
