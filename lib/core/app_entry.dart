@@ -1,9 +1,12 @@
 import 'package:color_aap/core/navigation/app_router.dart';
 import 'package:color_aap/core/navigation/navigation.gr.dart';
+import 'package:color_aap/core/services/service_locator.dart';
 import 'package:color_aap/core/services/shared_prefs_storage.dart';
+import 'package:color_aap/features/auth/language_button_logic.dart';
 import 'package:color_aap/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 
 /// Main application widget that handles authentication state and routing
 class AppEntry extends StatefulWidget {
@@ -30,7 +33,7 @@ class _AppEntryState extends State<AppEntry> {
   /// Checks if user is already logged in by retrieving
   /// the last email from storage
   Future<void> _checkLastEmail() async {
-    final service = SharedPrefsStorage();
+    final service = serviceLocator.get<SharedPrefsStorage>();
     final email = await service.getLastEmail();
     setState(() {
       lastEmail = email;
@@ -53,27 +56,40 @@ class _AppEntryState extends State<AppEntry> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: _appRouter.config(),
-      debugShowCheckedModeBanner: false,
-      localizationsDelegates: const [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: S.delegate.supportedLocales,
-      localeResolutionCallback: (locale, supportedLocales) {
-        if (locale != null) {
-          for (final supportedLocale in supportedLocales) {
-            if (supportedLocale.languageCode == locale.languageCode) {
-              return supportedLocale;
-            }
-          }
-        }
+    return ChangeNotifierProvider<LanguageButtonLogic>(
+      create: (context) {
+        final languageLogic = serviceLocator.get<LanguageButtonLogic>();
+        languageLogic.loadLanguage();
 
-        return supportedLocales.first;
+        return languageLogic;
       },
+      child: Consumer<LanguageButtonLogic>(
+        builder: (context, languageLogic, child) {
+          return MaterialApp.router(
+            routerConfig: _appRouter.config(),
+            debugShowCheckedModeBanner: false,
+            locale: languageLogic.currentLanguage.getLocale(),
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
+            localeResolutionCallback: (locale, supportedLocales) {
+              if (locale != null) {
+                for (final supportedLocale in supportedLocales) {
+                  if (supportedLocale.languageCode == locale.languageCode) {
+                    return supportedLocale;
+                  }
+                }
+              }
+
+              return supportedLocales.first;
+            },
+          );
+        },
+      ),
     );
   }
 }
