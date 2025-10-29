@@ -28,7 +28,7 @@
       }
     }
   },
-  "titleSnowDialog": "Ваші дані будуть видалені",
+  "titleSnowDialog": "Ви впевнені?",
   "cancelDialog": "Скасувати",
   "yesDialog": "Так",
   "descriptionSnowDialog": "Ваші дані будуть видалені",
@@ -41,5 +41,8 @@
   "pleaseEnterYourEmail": "Введіть вашу електронну пошту",
   "passwordLong": "Пароль повинен бути не менше 8 символів",
   "passwordShould": "Пароль повинен містити принаймні 1 велику літеру, 1 знак і 1 число",
-  "passwordMatch": "Паролі не збігаються"
+  "passwordMatch": "Паролі не збігаються",
+  "changeLanguage": "Змінити мову",
+  "cancel": "Назад",
+  "inDevelopment": "У Розробці.."
 }

@@ -41,7 +41,10 @@
     "userExists": "User with this email already exists",
     "passwordLong": "Password must be at least 8 characters long",
     "passwordShould": "Password should contain at least 1 capital letter, 1 sign and 1 number",
-    "passwordMatch": "Passwords do not match"
+    "passwordMatch": "Passwords do not match",
+    "changeLanguage": "Change Language",
+    "cancel" : "Cancel",
+    "inDevelopment" : "In Development.."
     
 
 

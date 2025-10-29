@@ -2,10 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:color_aap/core/navigation/navigation.gr.dart';
 import 'package:color_aap/core/services/service_locator.dart';
 import 'package:color_aap/features/auth/auth_logic.dart';
+import 'package:color_aap/features/auth/language_button_logic.dart';
+import 'package:color_aap/features/auth/widgets/language_selector.dart';
 import 'package:color_aap/features/auth/widgets/login_buttons.dart';
 import 'package:color_aap/features/auth/widgets/login_form.dart';
 import 'package:color_aap/generated/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 /// Main authentication screen that handles both login and registration
 ///
@@ -31,6 +34,7 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   void initState() {
     super.initState();
+    context.read<LanguageButtonLogic>().loadLanguage();
   }
 
   /// Handles form submission for both login and registration
@@ -114,6 +118,10 @@ class _AuthScreenState extends State<AuthScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            const Align(
+              alignment: Alignment.topRight,
+              child: LanguageSelector(),
+            ),
             LoginForm(
               formKey: formKey,
               isLogin: isLogin,

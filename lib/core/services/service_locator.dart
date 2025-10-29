@@ -1,6 +1,7 @@
 import 'package:color_aap/core/services/hashing_service.dart';
 import 'package:color_aap/core/services/shared_prefs_storage.dart';
 import 'package:color_aap/features/auth/auth_logic.dart';
+import 'package:color_aap/features/auth/language_button_logic.dart';
 import 'package:color_aap/features/colors/color_logic.dart';
 
 import 'package:get_it/get_it.dart';
@@ -16,6 +17,10 @@ Future<void> registerDependencies() async {
   /// Register shared prefs storage
   serviceLocator
       .registerLazySingleton<SharedPrefsStorage>(SharedPrefsStorage.new);
+
+  serviceLocator.registerFactory<LanguageButtonLogic>(
+    LanguageButtonLogic.new,
+  );
 
   serviceLocator.registerLazySingleton<AuthLogic>(
     () => AuthLogic(

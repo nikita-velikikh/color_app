@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:color_aap/core/navigation/navigation.gr.dart';
-import 'package:color_aap/core/services/shared_prefs_storage.dart';
+import 'package:color_aap/core/services/service_locator.dart';
+import 'package:color_aap/core/widgets/base_dialog.dart';
+import 'package:color_aap/features/auth/auth_logic.dart';
 import 'package:color_aap/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
@@ -19,12 +21,16 @@ class CustomAppBar extends StatelessWidget {
 
   /// Text for the app bar
   final String appBarText;
+
   /// Text color for the app bar
   final Color textColor;
+
   /// Background color for the app bar
   final Color backgroundColor;
+
   /// Whether the title is centered
   final bool isCenterTirtle;
+
   /// Email of the user
   final String userEmail;
 
@@ -40,43 +46,24 @@ class CustomAppBar extends StatelessWidget {
   }
 
   /// Shows a confirmation dialog for deleting user account
-  void showDeleteDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(
-            S.of(context).titleSnowDialog,
-            textAlign: TextAlign.center,
-          ),
-          content: Text(
-            S.of(context).descriptionSnowDialog,
-            textAlign: TextAlign.center,
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                navigatePop(context);
-              },
-              child: Text(S.of(context).cancelDialog),
-            ),
-            TextButton(
-              onPressed: () async {
-                navigatePop(context);
-                final service = SharedPrefsStorage();
-                await service.deleteUserData(userEmail);
 
-                if (context.mounted) {
-                  await navigateToAuthScreen(context);
-                }
-              },
-              style: TextButton.styleFrom(foregroundColor: Colors.red),
-              child: Text(S.of(context).yesDialog),
-            ),
-          ],
-          actionsAlignment: MainAxisAlignment.center,
-        );
-      },
+  void showDeleteDialog(BuildContext context) {
+    BaseDialog.show(
+      context,
+      DialogParams(
+        title: S.of(context).titleSnowDialog,
+        description: S.of(context).titleSnowDialog,
+        secondButtonText: S.of(context).cancelDialog,
+        buttonText: S.of(context).yesDialog,
+        onButtonPressed: () async {
+          final authLogic = serviceLocator.get<AuthLogic>();
+          await authLogic.logout();
+
+          if (context.mounted) {
+            await navigateToAuthScreen(context);
+          }
+        },
+      ),
     );
   }
 
@@ -99,8 +86,8 @@ class CustomAppBar extends StatelessWidget {
         IconButton(
           icon: const Icon(Icons.logout, color: Colors.black),
           onPressed: () async {
-            final service = SharedPrefsStorage();
-            await service.deleteLastEmail();
+            final authLogic = serviceLocator.get<AuthLogic>();
+            await authLogic.logout();
 
             if (context.mounted) {
               await navigateToAuthScreen(context);
